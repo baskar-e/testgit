@@ -5,11 +5,12 @@ import { Button } from '../all-components/controls/button'
 import { ButtonGroup } from '../all-components/controls/button-group'
 import { Input } from '../all-components/controls/input'
 import { InputGroup, InputGroupAddon } from '../all-components/controls/input-group'
-import { Search } from 'lucide-react'
+import { Moon, Search, Sun } from 'lucide-react'
 import { Checkbox } from '../all-components/controls/checkbox'
 import { Dropdown, DropdownButton, DropdownContent, DropdownItem } from '../all-components/controls/dropdown'
 import { Combobox, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList } from '../all-components/controls/combobox'
 import { RadioGroup, RadioItem } from '../all-components/controls/radio-group'
+import { Switch, SwitchIcon } from '../all-components/controls/switch'
 
 export default function ButtonPage() {
     const asd = useRef<HTMLDivElement>(null)
@@ -28,7 +29,7 @@ export default function ButtonPage() {
         { name: 'catsey', img: undefined },
     ];
     const [check, setCheck] = useState('1');
-
+    const [switchs, setSwitchs] = useState(false);
     return (
         <>
             <div id='as'></div>
@@ -48,6 +49,14 @@ export default function ButtonPage() {
                 <Input />
                 <Button className='border-non'>asdfsd</Button>
             </InputGroup>
+            <label htmlFor="ne">controller</label>
+            <Switch id='ne' className='w- h-6' >
+                <SwitchIcon>
+                    <Sun className='group-data-[state=checked]:hidden' />
+                    <Moon className='group-data-[state=unchecked]:hidden' />
+                </SwitchIcon>
+            </Switch>
+            <Switch />
             <Checkbox label='woeing' description='asdfasdf' className='bg-black h-8 w-8' />
             <Dropdown position='bottom'>
                 <DropdownButton ref={btnRef}>
@@ -65,10 +74,10 @@ export default function ButtonPage() {
                     </DropdownItem>
                 </DropdownContent>
             </Dropdown>
-            <Combobox position='top-start'>
+            <Combobox position='top-start' >
                 <ComboboxInput placeholder='sd' value={ci} onChange={(e) => { setCi(e), console.log(e) }} />
+                <ComboboxEmpty />
                 <ComboboxList>
-                    <ComboboxEmpty />
                     {users.map((user) => (
                         <ComboboxItem ref={asd} key={user.name} value={user.name}>
                             {user.name}
@@ -82,7 +91,7 @@ export default function ButtonPage() {
             <input type="text" onChange={(e) => setCi(e.target.value)} />
             <Button variant='secondary' onClick={han} >labe</Button>
             <RadioGroup value={check} onValueChange={setCheck}>
-                <RadioItem value='1' onChange={(e)=>console.log(e)}>Apple</RadioItem>
+                <RadioItem value='1' onChange={(e) => console.log(e)}>Apple</RadioItem>
                 <RadioItem value='2'>b</RadioItem>
                 <RadioItem value='3'>c</RadioItem>
             </RadioGroup>
