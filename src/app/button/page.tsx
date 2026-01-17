@@ -84,7 +84,9 @@ export default function ButtonPage() {
             <Switch id='ne' className='w- h-6 p-1' >
                 <SwitchIcon className=''>
                     <Sun className='group-has-checked:hidden' />
-                    <Moon className='group-not-has-checked:hidden text-white' />
+                    <Moon className='group-not-has-checked:hiddegit config user.name
+git config user.email
+n text-white' />
                 </SwitchIcon>
             </Switch>
             <Switch />
