@@ -5,12 +5,13 @@ import { Button } from '../all-components/controls/button'
 import { ButtonGroup } from '../all-components/controls/button-group'
 import { Input } from '../all-components/controls/input'
 import { InputGroup, InputGroupAddon } from '../all-components/controls/input-group'
-import { Moon, Search, Sun } from 'lucide-react'
+import { Heart, Moon, Search, Sun } from 'lucide-react'
 import { Checkbox } from '../all-components/controls/checkbox'
 import { Dropdown, DropdownButton, DropdownContent, DropdownItem } from '../all-components/controls/dropdown'
 import { Combobox, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList } from '../all-components/controls/combobox'
 import { RadioGroup, RadioItem } from '../all-components/controls/radio-group'
 import { Switch, SwitchIcon } from '../all-components/controls/switch'
+import { Card, CardAction, CardBody, CardDescription, CardFooter, CardHeader, CardImage, CardTitle } from '../all-components/controls/card'
 
 export default function ButtonPage() {
     const asd = useRef<HTMLDivElement>(null)
@@ -49,11 +50,41 @@ export default function ButtonPage() {
                 <Input />
                 <Button className='border-non'>asdfsd</Button>
             </InputGroup>
+            <div className="min-h-screen bg-cya">
+                <Card className='w-60'>
+                    <CardHeader>
+                        <CardTitle>Header</CardTitle>
+                        <CardDescription>Work</CardDescription>
+                    </CardHeader>
+                    <CardImage src='https://wallpapers.com/images/featured/hd-anime-prr1y1k5gqxfcgpv.jpg' alt='3' />
+                    <CardBody>
+                        <CardDescription>
+                            One final recommendation for the Composite Pattern: group these exports under a single object.
+                        </CardDescription>
+                        <CardAction>Button</CardAction>
+                    </CardBody>
+                </Card>
+                <Card className=''>
+                    <CardImage src='https://wallpapers.com/images/featured/hd-anime-prr1y1k5gqxfcgpv.jpg' alt='3' />
+                    <CardHeader>
+                        <CardTitle>Header</CardTitle>
+                    </CardHeader>
+                    <CardBody>
+                        <CardDescription>
+                            One final recommendation for the Composite Pattern: group these exports under a single object.
+                        </CardDescription>
+                    </CardBody>
+                    <CardFooter>
+                        <Heart />
+                        <CardAction>Button</CardAction>
+                    </CardFooter>
+                </Card>
+            </div>
             <label htmlFor="ne">controller</label>
-            <Switch id='ne' className='w- h-6' >
-                <SwitchIcon>
-                    <Sun className='group-data-[state=checked]:hidden' />
-                    <Moon className='group-data-[state=unchecked]:hidden' />
+            <Switch id='ne' className='w- h-6 p-1' >
+                <SwitchIcon className=''>
+                    <Sun className='group-has-checked:hidden' />
+                    <Moon className='group-not-has-checked:hidden text-white' />
                 </SwitchIcon>
             </Switch>
             <Switch />
