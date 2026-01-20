@@ -48,7 +48,8 @@
 
 @theme {
   --color-ash: #3e4b61;
-  --color-fade: #f4f6f7;
+  --color-fade: #EDF1F4;
+  --shadow-white: 2px 2px 4px 1px #8080804d, -2px -2px 4px 0px #fff
 }
 
 :root {

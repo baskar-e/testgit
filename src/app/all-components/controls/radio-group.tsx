@@ -18,7 +18,7 @@ type RadioGroupBaseProps = {
 } & Omit<ComponentProps<"div">, "value" | "defaultValue">;
 
 type ControlledRadioGroup = {
-    value?: string;
+    value: string;
     defaultValue?: never;
 };
 
@@ -27,7 +27,7 @@ type UncontrolledRadioGroup = {
     value?: never;
 };
 
-type RadioGroupProps = RadioGroupBaseProps & (ControlledRadioGroup | UncontrolledRadioGroup)
+type RadioGroupProps = RadioGroupBaseProps & (ControlledRadioGroup | UncontrolledRadioGroup);
 
 type RadioItemProps = {
     id?: string;

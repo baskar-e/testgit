@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} font-sans antialiased bg-fade`}
+        className={`${inter.variable} font-sans antialiased`}
       >
         <SidebarProvider>
           <AppSidebar />

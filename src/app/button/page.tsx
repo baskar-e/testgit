@@ -12,6 +12,7 @@ import { Combobox, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList } fr
 import { RadioGroup, RadioItem } from '../all-components/controls/radio-group'
 import { Switch, SwitchIcon } from '../all-components/controls/switch'
 import { Card, CardAction, CardBody, CardDescription, CardFooter, CardHeader, CardImage, CardTitle } from '../all-components/controls/card'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, AccordionValue } from '../all-components/controls/accordion'
 
 export default function ButtonPage() {
     const asd = useRef<HTMLDivElement>(null)
@@ -31,6 +32,8 @@ export default function ButtonPage() {
     ];
     const [check, setCheck] = useState('1');
     const [switchs, setSwitchs] = useState(false);
+    const [acc, setAcc] = useState<AccordionValue[]>([1]);
+    console.log(acc)
     return (
         <>
             <div id='as'></div>
@@ -50,7 +53,33 @@ export default function ButtonPage() {
                 <Input />
                 <Button className='border-non'>asdfsd</Button>
             </InputGroup>
-            <div className="min-h-screen bg-cya">
+            <Accordion type='multiple' value={acc} onValueChange={(e) => { setAcc(e) }}>
+                <AccordionItem value={1}>
+                    <AccordionTrigger >
+                        button
+                    </AccordionTrigger>
+                    <AccordionContent>
+                        as
+                    </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value={2}>
+                    <AccordionTrigger>
+                        bu1
+                    </AccordionTrigger>
+                    <AccordionContent>
+                        workd
+                    </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value={3}>
+                    <AccordionTrigger>
+                        bu12
+                    </AccordionTrigger>
+                    <AccordionContent>
+                        workd
+                    </AccordionContent>
+                </AccordionItem>
+            </Accordion>
+            <div className="min-h-screen bg-cyan-100 p-3">
                 <Card className='w-60'>
                     <CardHeader>
                         <CardTitle>Header</CardTitle>
@@ -84,9 +113,7 @@ export default function ButtonPage() {
             <Switch id='ne' className='w- h-6 p-1' >
                 <SwitchIcon className=''>
                     <Sun className='group-has-checked:hidden' />
-                    <Moon className='group-not-has-checked:hiddegit config user.name
-git config user.email
-n text-white' />
+                    <Moon className='group-not-has-checked:hidden text-white' />
                 </SwitchIcon>
             </Switch>
             <Switch />
@@ -109,8 +136,8 @@ n text-white' />
             </Dropdown>
             <Combobox position='top-start' >
                 <ComboboxInput placeholder='sd' value={ci} onChange={(e) => { setCi(e), console.log(e) }} />
-                <ComboboxEmpty />
                 <ComboboxList>
+                    <ComboboxEmpty />
                     {users.map((user) => (
                         <ComboboxItem ref={asd} key={user.name} value={user.name}>
                             {user.name}
