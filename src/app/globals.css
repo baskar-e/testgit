@@ -49,6 +49,7 @@
 @theme {
   --color-ash: #3e4b61;
   --color-fade: #EDF1F4;
+  --color-border: #d3dbe0;
   --shadow-white: 2px 2px 4px 1px #8080804d, -2px -2px 4px 0px #fff
 }
 

@@ -35,7 +35,7 @@ type DropdownProps = {
 }
 
 type DropdownContentProps = {
-    portalRoot?: HTMLElement | RefObject<HTMLElement | null> | null
+    portal?: HTMLElement | RefObject<HTMLElement | null> | null
 } & ComponentProps<"div">
 
 type DropdownItemProps = {
@@ -80,7 +80,7 @@ export function Dropdown({ open, onOpen, children, position, space = 8 }: Dropdo
     );
 }
 
-export function DropdownButton<T extends HTMLButtonElement>({ ref: externalRef, children, className, ...props }: ComponentProps<"button"> & { ref: Ref<T> }) {
+export function DropdownButton<T extends HTMLButtonElement>({ ref: externalRef, children, className, ...props }: ComponentProps<"button"> & { ref?: Ref<T> }) {
     const { isOpen, refs, getReferenceProps } = useDropdownContext();
     const mergedRef = useMergeRefs([refs.setReference, externalRef]);
 
@@ -98,7 +98,7 @@ export function DropdownButton<T extends HTMLButtonElement>({ ref: externalRef, 
     );
 }
 
-export function DropdownContent({ children, className, portalRoot, ...props }: DropdownContentProps) {
+export function DropdownContent({ children, className, portal, ...props }: DropdownContentProps) {
     const { refs, listRef, placement, floatingStyles, getFloatingProps, context } = useDropdownContext();
     const { isMounted, styles: transitionStyles } = useTransitionStyles(context, {
         duration: 200,
@@ -123,7 +123,7 @@ export function DropdownContent({ children, className, portalRoot, ...props }: D
     if (!isMounted) return null;
 
     return (
-        <FloatingPortal root={portalRoot ?? document.body}>
+        <FloatingPortal root={portal}>
             <FloatingFocusManager context={context} modal={false}>
                 <div
                     ref={refs.setFloating}
@@ -143,7 +143,7 @@ export function DropdownContent({ children, className, portalRoot, ...props }: D
                         </FloatingList>
                     </div>
                 </div>
-            </FloatingFocusManager >
+            </FloatingFocusManager>
         </FloatingPortal>
     );
 }

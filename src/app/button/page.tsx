@@ -13,6 +13,7 @@ import { RadioGroup, RadioItem } from '../all-components/controls/radio-group'
 import { Switch, SwitchIcon } from '../all-components/controls/switch'
 import { Card, CardAction, CardBody, CardDescription, CardFooter, CardHeader, CardImage, CardTitle } from '../all-components/controls/card'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, AccordionValue } from '../all-components/controls/accordion'
+import { Dialog, DialogButton, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '../all-components/controls/dialog'
 
 export default function ButtonPage() {
     const asd = useRef<HTMLDivElement>(null)
@@ -53,6 +54,21 @@ export default function ButtonPage() {
                 <Input />
                 <Button className='border-non'>asdfsd</Button>
             </InputGroup>
+            <Dialog>
+                <DialogButton>
+                    sd
+                </DialogButton>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Title</DialogTitle>
+                        <DialogDescription>desc</DialogDescription>
+                        <DialogClose>
+                            
+                        </DialogClose>
+                    </DialogHeader>
+                    asdf
+                </DialogContent>
+            </Dialog>
             <Accordion type='multiple' value={acc} onValueChange={(e) => { setAcc(e) }}>
                 <AccordionItem value={1}>
                     <AccordionTrigger >
@@ -79,7 +95,7 @@ export default function ButtonPage() {
                     </AccordionContent>
                 </AccordionItem>
             </Accordion>
-            <div className="min-h-screen bg-cyan-100 p-3">
+            <div className="min-h-screen p-3">
                 <Card className='w-60'>
                     <CardHeader>
                         <CardTitle>Header</CardTitle>
@@ -119,7 +135,7 @@ export default function ButtonPage() {
             <Switch />
             <Checkbox label='woeing' description='asdfasdf' className='bg-black h-8 w-8' />
             <Dropdown position='bottom'>
-                <DropdownButton ref={btnRef}>
+                <DropdownButton >
                     click
                 </DropdownButton>
                 <DropdownContent>

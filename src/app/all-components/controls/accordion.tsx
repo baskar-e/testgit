@@ -109,7 +109,7 @@ export function AccordionItem({ value, children, className, ...props }: Accordio
 
     return (
         <AccordionItemProvider value={{ isOpen, value, triggerId, contentId }}>
-            <div data-state={isOpen ? 'open' : 'closed'} className={cn("mx-4 border-b border-[#d3dbe0] last:border-none", className)} {...props}>
+            <div data-state={isOpen ? 'open' : 'closed'} className={cn("mx-4 border-b border-border last:border-none", className)} {...props}>
                 {children}
             </div>
         </AccordionItemProvider>
