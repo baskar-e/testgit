@@ -1,4 +1,4 @@
-import { ComponentProps, ReactNode, Ref, RefObject, useId, useRef, useState } from 'react';
+import { ComponentProps, createContext, ReactNode, Ref, RefObject, useContext, useId, useRef, useState } from 'react';
 import { createSafeContext } from '@/lib/context';
 import {
     useFloating, useInteractions, useClick, useDismiss, useRole,
@@ -21,7 +21,6 @@ interface DialogContextType {
     descriptionId: string;
     refs: ReturnType<typeof useFloating>['refs'];
     context: FloatingContext;
-    floatingStyles: ReturnType<typeof useFloating>['floatingStyles'];
     setIsOpen: (open: boolean, event?: Event, reason?: OpenChangeReason) => void;
     getFloatingProps: ReturnType<typeof useInteractions>['getFloatingProps'];
     getReferenceProps: ReturnType<typeof useInteractions>['getReferenceProps'];
@@ -34,11 +33,12 @@ type DialogProps = {
     onOpen?: (open: boolean, event?: Event, reason?: OpenChangeReason) => void
 }
 
-type DialogContentProps = {
+type DialogOverlayProps = {
     portal?: HTMLElement | RefObject<HTMLElement | null> | null
-} & ComponentProps<"div">
+} & ComponentProps<typeof FloatingOverlay>
 
-const [DialogProvider, useDialogContext] = createSafeContext<DialogContextType>('Dropdown');
+const [DialogProvider, useDialogContext] = createSafeContext<DialogContextType>('Dialog');
+const DialogOverlayProvider = createContext<{ isOverlay: boolean } | undefined>(undefined);
 
 export function Dialog({ open, onOpen, children, space = 8 }: DialogProps) {
     const labelId = useId();
@@ -48,7 +48,7 @@ export function Dialog({ open, onOpen, children, space = 8 }: DialogProps) {
     const isOpen = open ?? internalOpen;
     const setIsOpen = onOpen ?? setInternalOpen;
 
-    const { refs, context, floatingStyles } = useFloating({
+    const { refs, context } = useFloating({
         open: isOpen,
         onOpenChange: setIsOpen,
         whileElementsMounted: autoUpdate,
@@ -59,39 +59,57 @@ export function Dialog({ open, onOpen, children, space = 8 }: DialogProps) {
     const dismiss = useDismiss(context);
     const role = useRole(context, { role: 'dialog' });
 
-
     const { getFloatingProps, getReferenceProps } = useInteractions([click, dismiss, role]);
 
     return (
-        <DialogProvider value={{ isOpen, refs, labelId, descriptionId, context, floatingStyles, setIsOpen, getFloatingProps, getReferenceProps }}>
+        <DialogProvider value={{ isOpen, refs, labelId, descriptionId, context, setIsOpen, getFloatingProps, getReferenceProps }}>
             {children}
         </DialogProvider>
     );
 }
 
-export function DialogContent({ children, className, portal, ...props }: DialogContentProps) {
+export function DialogContent({ children, className, ...props }: ComponentProps<"div">) {
     const { refs, isOpen, labelId, descriptionId, context, getFloatingProps } = useDialogContext();
+    const overlayCtx  = useContext(DialogOverlayProvider);
+    const isInsideOverlay = !!overlayCtx?.isOverlay;
+
+    if (!isOpen) return null;
+
+    const content = (
+        <FloatingFocusManager context={context}>
+            <div
+                ref={refs.setFloating}
+                aria-labelledby={labelId}
+                aria-describedby={descriptionId}
+                {...getFloatingProps(props)}
+                className={cn("bg-white text-ash p-6 rounded-xl shadow-2xl max-w-md w-full relative outline-none animate-in zoom-in-95 fade-in duration-200", className)}
+            >
+                {children}
+            </div>
+        </FloatingFocusManager>
+    )
+
+    return isInsideOverlay ? content : <DialogOverlay>{content}</DialogOverlay>
+}
+
+export function DialogOverlay({ children, className, portal, ...props }: DialogOverlayProps) {
+    const { isOpen } = useDialogContext();
 
     if (!isOpen) return null;
 
     return (
-        <FloatingPortal root={portal}>
-            <FloatingOverlay className="bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center" lockScroll>
-                <FloatingFocusManager context={context}>
-                    <div
-                        ref={refs.setFloating}
-                        aria-labelledby={labelId}
-                        aria-describedby={descriptionId}
-                        {...getFloatingProps(props)}
-                        className={cn("bg-white text-ash p-6 rounded-xl shadow-2xl max-w-md w-full relative outline-none",
-                            "animate-in zoom-in-95 duration-200", className)}
-                    >
-                        {children}
-                    </div>
-                </FloatingFocusManager>
-            </FloatingOverlay>
-        </FloatingPortal>
-    );
+        <DialogOverlayProvider value={{ isOverlay: true }}>
+            <FloatingPortal root={portal}>
+                <FloatingOverlay
+                    className={cn("bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center animate-in fade-in duration-300", className)}
+                    lockScroll
+                    {...props}
+                >
+                    {children}
+                </FloatingOverlay>
+            </FloatingPortal>
+        </DialogOverlayProvider>
+    )
 }
 
 export function DialogButton<T extends HTMLButtonElement>({ ref: externalRef, children, className, ...props }: ComponentProps<"button"> & { ref?: Ref<T> }) {

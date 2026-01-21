@@ -127,7 +127,7 @@ export function DropdownContent({ children, className, portal, ...props }: Dropd
             <FloatingFocusManager context={context} modal={false}>
                 <div
                     ref={refs.setFloating}
-                    style={{ ...floatingStyles, zIndex: 9999 }}
+                    style={{ ...floatingStyles, zIndex: 50 }}
                     {...getFloatingProps()}
                 >
                     <div

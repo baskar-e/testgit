@@ -13,7 +13,7 @@ import { RadioGroup, RadioItem } from '../all-components/controls/radio-group'
 import { Switch, SwitchIcon } from '../all-components/controls/switch'
 import { Card, CardAction, CardBody, CardDescription, CardFooter, CardHeader, CardImage, CardTitle } from '../all-components/controls/card'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, AccordionValue } from '../all-components/controls/accordion'
-import { Dialog, DialogButton, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '../all-components/controls/dialog'
+import { Dialog, DialogButton, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogOverlay, DialogTitle } from '../all-components/controls/dialog'
 
 export default function ButtonPage() {
     const asd = useRef<HTMLDivElement>(null)
@@ -58,16 +58,18 @@ export default function ButtonPage() {
                 <DialogButton>
                     sd
                 </DialogButton>
-                <DialogContent>
-                    <DialogHeader>
-                        <DialogTitle>Title</DialogTitle>
-                        <DialogDescription>desc</DialogDescription>
-                        <DialogClose>
-                            
-                        </DialogClose>
-                    </DialogHeader>
-                    asdf
-                </DialogContent>
+                <DialogOverlay>
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle>Title</DialogTitle>
+                            <DialogDescription>desc</DialogDescription>
+                            <DialogClose>
+
+                            </DialogClose>
+                        </DialogHeader>
+                        asdf
+                    </DialogContent>
+                </DialogOverlay>
             </Dialog>
             <Accordion type='multiple' value={acc} onValueChange={(e) => { setAcc(e) }}>
                 <AccordionItem value={1}>
