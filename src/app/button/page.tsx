@@ -56,16 +56,14 @@ export default function ButtonPage() {
                 <Button className='border-non'>asdfsd</Button>
             </InputGroup>
             <Tabs defaultValue={'1'}>
-                <TabList className=''>
-                    <TabButton value='1'>asswan</TabButton>
-                    <TabButton value='2'>pantad</TabButton>
+                <TabList className='px-0'>
+                    <TabButton value='1' >asswan</TabButton>
+                    <TabButton value='2' >pantad</TabButton>
                     <TabButton value='3'>traret</TabButton>
                     <TabButton value='4'>maxel</TabButton>
                     <TabButton value='5'>sandal</TabButton>
                     <TabButton value='6'>shows</TabButton>  
                     <TabButton value='7'>hamplton</TabButton>
-                    <TabButton value='8'>freez</TabButton>
-                    <TabButton value='9'>jostil</TabButton>
                 </TabList>
                 <TabPanel value='1'>
                     <span>tab one</span>

@@ -49,7 +49,7 @@ export function Tabs({ children, className, defaultValue, value: controlledValue
         onValueChange?.(id);
     };
 
-    const getOrderedTabs = () => Array.from(tabsMap.current.keys());
+    const getOrderedTabs = useCallback(() => Array.from(tabsMap.current.keys()), []);
 
     return (
         <TabsProvider value={{ tabsMap, baseId, activeTab, handleTabChange, getOrderedTabs }}>
@@ -62,43 +62,83 @@ export function Tabs({ children, className, defaultValue, value: controlledValue
 
 export function TabList({ children, className, ...props }: ComponentProps<"div">) {
     const { tabsMap, activeTab, handleTabChange, getOrderedTabs } = useTabsContext();
-    const [style, setStyle] = useState({ left: 0, width: 0, height: 0 });
     const containerRef = useRef<HTMLDivElement>(null);
+    const indicatorRef = useRef<HTMLDivElement>(null);
+    const prevRectRef = useRef<{ x: number; width: number; height: number } | null>(null);
 
-    const updateHighlight = useCallback(() => {
-        const activeEl = tabsMap.current.get(activeTab);
+    const updateHighlight = () => {
+        const indicator = indicatorRef.current;
         const container = containerRef.current;
-        // requestAnimationFrame(() => {
-            if (activeEl && container) {
-                const tabRect = activeEl.getBoundingClientRect();
-                const containerRect = container.getBoundingClientRect();
-                const containerStyle = window.getComputedStyle(container);
-                const paddingLeft = parseFloat(containerStyle.paddingLeft);
-console.log(tabRect)
-                setStyle({
-                    left: tabRect.left - containerRect.left - paddingLeft,
-                    width: tabRect.width,
-                    height: tabRect.height
-                });
-            }
-        // })
-    }, [activeTab, tabsMap])
+        const activeEl = tabsMap.current.get(activeTab);
+
+        if (!indicator || !container || !activeEl) return;
+
+        const tabRect = activeEl.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
+        const containerStyle = window.getComputedStyle(container);
+        const paddingLeft = parseFloat(containerStyle.paddingLeft);
+
+        const nextRect = {
+            x: tabRect.left - containerRect.left - paddingLeft,
+            width: tabRect.width,
+            height: tabRect.height,
+        };
+
+        const prevRect = prevRectRef.current;
+
+        indicator.style.transition = "none";
+        indicator.style.left = `${nextRect.x}px`;
+        indicator.style.width = `${nextRect.width}px`;
+        indicator.style.height = `${nextRect.height}px`;
+        indicator.style.transform = "none";
+
+        if (prevRect) {
+            const dx = prevRect.x - nextRect.x;
+            const dw = prevRect.width / nextRect.width;
+            const dh = prevRect.height / nextRect.height;
+
+            indicator.style.transformOrigin = "left center";
+            indicator.style.transform = `translateX(${dx}px) scaleX(${dw}) scaleY(${dh})`;
+
+            indicator.getBoundingClientRect();
+
+            requestAnimationFrame(() => {
+                indicator.style.transition = "transform 300ms cubic-bezier(0.4, 0, 0.2, 1)";
+                indicator.style.transform = "none";
+                indicator.style.willChange = "transform";
+            });
+        }
+
+        prevRectRef.current = nextRect;
+    }
+
+    // Polling method.
+    // useLayoutEffect(() => {
+    //     let frameId: number;
+    //     const startTime = performance.now();
+    //     const DURATION = 300;
+
+    //     const poll = (now: number) => {
+    //         updateHighlight();
+    //         if (now - startTime < DURATION + 50) { 
+    //             frameId = requestAnimationFrame(poll);
+    //         }
+    //     };
+
+    //     frameId = requestAnimationFrame(poll);
+    //     return () => cancelAnimationFrame(frameId);
+    // }, [activeTab, updateHighlight]);
 
     useLayoutEffect(() => {
-        const activeEl = tabsMap.current.get(activeTab);
-        if (activeEl) {
-            activeEl.addEventListener('transitionend', updateHighlight);
-            updateHighlight();
-            return () => activeEl.removeEventListener('transitionend', updateHighlight);
-        }
-    }, [activeTab, updateHighlight]);
+        updateHighlight();
+    }, [activeTab, tabsMap]);
 
-    useEffect(() => {
-        if (!containerRef.current) return;
-        const observer = new ResizeObserver(updateHighlight);
-        observer.observe(containerRef.current);
-        return () => observer.disconnect();
-    }, [updateHighlight]);
+    // useEffect(() => {
+    //     if (!containerRef.current) return;
+    //     const observer = new ResizeObserver(updateHighlight);
+    //     observer.observe(containerRef.current);
+    //     return () => observer.disconnect();
+    // }, [updateHighlight]);
 
     const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
         const orderedValues = getOrderedTabs();
@@ -134,25 +174,26 @@ console.log(tabRect)
         }
     }, [getOrderedTabs, activeTab, handleTabChange, tabsMap]);
 
-
     return (
         <div
             ref={containerRef}
             role="tablist"
             aria-orientation="horizontal"
-            className={cn("relative flex border-b border-slate-200 p-2 overflow-auto no-scrollbar ml-6", className)}
+            className={cn("relative flex border-b border-slate-200 p-2 overflow-auto no-scrollbar", className)}
             {...props}
             onKeyDown={handleKeyDown}
         >
             <div
+                ref={indicatorRef}
                 aria-hidden="true"
-                className="absolute bg-[#f8f9fb] rounded-full transition-all duration-300 ease-out shadow-white pointer-events-none"
-                style={{
-                    transform: `translateX(${style.left}px)`,
-                    width: `${style.width}px`,
-                    height: `${style.height}px`,
-                    willChange: 'transform, width'
-                }}
+                className="absolute bg-[#f8f9fb] rounded-full shadow-white transition-all duration-300 ease-out pointer-events-none"
+            // style={{
+            //     transform: `translateX(${style.x}px)`,
+            //     left: `${style.left}px`,
+            //     width: `${style.width}px`,
+            //     height: `${style.height}px`,
+            //     willChange: 'transform, width'
+            // }}
             />
             {children}
         </div>
@@ -180,7 +221,7 @@ export function TabButton({ value, children, className, ...props }: TabButtonPro
             data-state={isActive ? 'active' : 'inactive'}
             tabIndex={isActive ? 0 : -1}
             className={cn(
-                "px-4 py-2 text-sm text-slate-500 xl:text-base font-normal rounded-[22px] hover:text-slate-700 transition-all z-10 data-[state=active]:font-medium data-[state=active]:text-ash data-[state=active]:px-12 duration-200",
+                "px-4 py-2 text-sm text-slate-500 xl:text-base font-normal rounded-[22px] hover:text-slate-700 z-10 data-[state=active]:font-medium data-[state=active]:text-ash focus-visible:outline-slate-400",
                 className
             )}
             {...props}
