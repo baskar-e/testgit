@@ -14,6 +14,7 @@ import { Switch, SwitchIcon } from '../all-components/controls/switch'
 import { Card, CardAction, CardBody, CardDescription, CardFooter, CardHeader, CardImage, CardTitle } from '../all-components/controls/card'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, AccordionValue } from '../all-components/controls/accordion'
 import { Dialog, DialogButton, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogOverlay, DialogTitle } from '../all-components/controls/dialog'
+import { TabButton, TabList, TabPanel, Tabs } from '../all-components/controls/tabs'
 
 export default function ButtonPage() {
     const asd = useRef<HTMLDivElement>(null)
@@ -54,22 +55,39 @@ export default function ButtonPage() {
                 <Input />
                 <Button className='border-non'>asdfsd</Button>
             </InputGroup>
+            <Tabs defaultValue={'1'}>
+                <TabList className=''>
+                    <TabButton value='1'>asswan</TabButton>
+                    <TabButton value='2'>pantad</TabButton>
+                    <TabButton value='3'>traret</TabButton>
+                    <TabButton value='4'>maxel</TabButton>
+                    <TabButton value='5'>sandal</TabButton>
+                    <TabButton value='6'>shows</TabButton>  
+                    <TabButton value='7'>hamplton</TabButton>
+                    <TabButton value='8'>freez</TabButton>
+                    <TabButton value='9'>jostil</TabButton>
+                </TabList>
+                <TabPanel value='1'>
+                    <span>tab one</span>
+                </TabPanel>
+                <TabPanel value='2'>
+                    <span>tab two</span>
+                </TabPanel>
+            </Tabs>
             <Dialog>
                 <DialogButton>
                     sd
                 </DialogButton>
-                <DialogOverlay>
-                    <DialogContent>
-                        <DialogHeader>
-                            <DialogTitle>Title</DialogTitle>
-                            <DialogDescription>desc</DialogDescription>
-                            <DialogClose>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Title</DialogTitle>
+                        <DialogDescription>desc</DialogDescription>
+                        <DialogClose>
 
-                            </DialogClose>
-                        </DialogHeader>
-                        asdf
-                    </DialogContent>
-                </DialogOverlay>
+                        </DialogClose>
+                    </DialogHeader>
+                    asdf
+                </DialogContent>
             </Dialog>
             <Accordion type='multiple' value={acc} onValueChange={(e) => { setAcc(e) }}>
                 <AccordionItem value={1}>

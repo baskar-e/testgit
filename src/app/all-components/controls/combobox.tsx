@@ -7,6 +7,7 @@ import {
     FloatingPortal, FloatingFocusManager, FloatingList,
     OpenChangeReason,
     Placement,
+    useMergeRefs,
 } from '@floating-ui/react';
 
 import { FloatingContextType } from '@/types';
@@ -31,9 +32,11 @@ type ComboboxProps = {
 }
 
 type ComboboxInputProps<T> = ({
+    ref?: RefObject<T>;
     value?: never;
     onChange?: (value: string) => void;
 } | {
+    ref?: RefObject<T>;
     value: string;
     onChange: (value: string) => void;
 }) & Omit<ComponentProps<"input">, "value" | "onChange">
@@ -92,13 +95,14 @@ export function Combobox({ children, open, onOpen, position, space = 5 }: Combob
     );
 }
 
-export function ComboboxInput<T extends HTMLInputElement>({ className, value: controlledValue, onChange, ...props }: ComboboxInputProps<T>) {
+export function ComboboxInput<T extends HTMLInputElement>({ ref: externalRef,className, value: controlledValue, onChange, ...props }: ComboboxInputProps<T>) {
     const { refs, activeIndex, isOpen, inputValue, labelsRef, getReferenceProps, setIsOpen, setInputValue } = useComboboxContext();
     const value = controlledValue ?? inputValue;
+    const mergedRef = useMergeRefs([refs.setReference, externalRef]);
 
     return (
         <div
-            ref={refs.setReference}
+            ref={mergedRef as Ref<HTMLInputElement>}
             className={cn("flex items-center w-full border border-gray-300 rounded-lg outline-none focus:ring-2 ring-violet-500", className)}
         >
             <Input

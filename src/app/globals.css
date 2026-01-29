@@ -50,7 +50,8 @@
   --color-ash: #3e4b61;
   --color-fade: #EDF1F4;
   --color-border: #d3dbe0;
-  --shadow-white: 2px 2px 4px 1px #8080804d, -2px -2px 4px 0px #fff
+  --shadow-white: 2px 2px 7px -1px #ADBDCB, -2px -2px 4px 0px rgba(255,255,255,1)
+  /* [1px_4px_7px_-1px_#ADBDCB,-7px_-4px_8px_-3px_rgba(255,255,255,1)] */
 }
 
 :root {
@@ -128,6 +129,15 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-ash;
+  }
+}
+
+@utility no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  ::-webkit-scrollbar {
+    display: none;
   }
 }
