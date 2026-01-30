@@ -14,7 +14,8 @@ import { Switch, SwitchIcon } from '../all-components/controls/switch'
 import { Card, CardAction, CardBody, CardDescription, CardFooter, CardHeader, CardImage, CardTitle } from '../all-components/controls/card'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, AccordionValue } from '../all-components/controls/accordion'
 import { Dialog, DialogButton, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogOverlay, DialogTitle } from '../all-components/controls/dialog'
-import { TabButton, TabList, TabPanel, Tabs } from '../all-components/controls/tabs'
+import { TabButton, TabHighLight, TabList, TabPanel, Tabs } from '../all-components/controls/tabs'
+import { Breadcrumbs, BreadcrumbsItem, BreadcrumbsLink, BreadcrumbsPage } from '../all-components/controls/breadcrumbs'
 
 export default function ButtonPage() {
     const asd = useRef<HTMLDivElement>(null)
@@ -55,16 +56,18 @@ export default function ButtonPage() {
                 <Input />
                 <Button className='border-non'>asdfsd</Button>
             </InputGroup>
-            <Tabs defaultValue={'1'}>
-                <TabList className='px-0'>
+            <Tabs defaultValue={'1'} orientation='horizontal' variant='line'>
+                {/* <TabHighLight className='bg-green-300'> */}
+                <TabList className=''>
                     <TabButton value='1' >asswan</TabButton>
                     <TabButton value='2' >pantad</TabButton>
                     <TabButton value='3'>traret</TabButton>
                     <TabButton value='4'>maxel</TabButton>
                     <TabButton value='5'>sandal</TabButton>
-                    <TabButton value='6'>shows</TabButton>  
+                    <TabButton value='6'>shows</TabButton>
                     <TabButton value='7'>hamplton</TabButton>
                 </TabList>
+                {/* </TabHighLight> */}
                 <TabPanel value='1'>
                     <span>tab one</span>
                 </TabPanel>
@@ -194,6 +197,20 @@ export default function ButtonPage() {
                 <RadioItem value='2'>b</RadioItem>
                 <RadioItem value='3'>c</RadioItem>
             </RadioGroup>
+
+            <Breadcrumbs>
+                <BreadcrumbsItem>
+                    <BreadcrumbsLink href="/">Home</BreadcrumbsLink>
+                </BreadcrumbsItem>
+
+                <BreadcrumbsItem>
+                    <BreadcrumbsLink href="/products">Products</BreadcrumbsLink>
+                </BreadcrumbsItem>
+
+                <BreadcrumbsItem isCurrentPage>
+                    <BreadcrumbsPage>Laptop</BreadcrumbsPage>
+                </BreadcrumbsItem>
+            </Breadcrumbs>
         </>
     )
 }

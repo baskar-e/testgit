@@ -1,11 +1,14 @@
-import React, { useState, useId, ComponentProps, useEffect, useRef, RefObject, useLayoutEffect, useCallback } from 'react';
+import React, { useState, useId, ComponentProps, useRef, RefObject, useLayoutEffect, useCallback, ReactNode, createContext, useContext } from 'react';
 import { cn } from '@/lib/utils';
 import { createSafeContext } from '@/lib/context';
 
 interface TabsContextProps {
     tabsMap: RefObject<Map<string, HTMLButtonElement>>;
+    indicatorRef: React.RefObject<HTMLDivElement | null>;
     baseId: string;
     activeTab: string;
+    orientation?: "vertical" | "horizontal"
+    variant?: "pill" | "line"
     handleTabChange: (id: string) => void;
     getOrderedTabs: () => string[];
 }
@@ -21,6 +24,8 @@ type UnControlledTabsProps = {
 }
 
 type TabsProps = {
+    orientation?: "vertical" | "horizontal";
+    variant?: "pill" | "line";
     onValueChange?: (value: string) => void;
 } & (ControlledTabsProps | UnControlledTabsProps) & ComponentProps<"div">
 
@@ -33,11 +38,14 @@ type TabPanelProps = {
 } & Omit<ComponentProps<"div">, "value">
 
 const [TabsProvider, useTabsContext] = createSafeContext<TabsContextProps>("Tabs");
+const TabHighlightProvider = createContext<{ className?: string }>({ className: "" });
 
-export function Tabs({ children, className, defaultValue, value: controlledValue, onValueChange, ...props }: TabsProps) {
+export function Tabs({ children, className, orientation = "horizontal", variant = 'pill', defaultValue, value: controlledValue, onValueChange, ...props }: TabsProps) {
     const [internalValue, setInternalValue] = useState(defaultValue);
-    const baseId = useId();
     const tabsMap = useRef(new Map<string, HTMLButtonElement>());
+    const indicatorRef = useRef<HTMLDivElement>(null);
+    const prevRectRef = useRef<DOMRect | null>(null);
+    const baseId = useId();
 
     const isControlled = controlledValue !== undefined;
     const activeTab = isControlled ? controlledValue : internalValue;
@@ -51,9 +59,38 @@ export function Tabs({ children, className, defaultValue, value: controlledValue
 
     const getOrderedTabs = useCallback(() => Array.from(tabsMap.current.keys()), []);
 
+    useLayoutEffect(() => {
+        const indicator = indicatorRef.current;
+
+        if (!indicator) return;
+
+        const nextRect = indicator.getBoundingClientRect();
+        const prevRect = prevRectRef.current;
+
+        if (prevRect) {
+            const dx = prevRect.left - nextRect.left;
+            const dy = prevRect.top - nextRect.top;
+            const sw = prevRect.width / nextRect.width;
+            const sh = prevRect.height / nextRect.height;
+
+            indicator.style.transition = "none";
+            indicator.style.transformOrigin = "top left";
+            indicator.style.transform = `translate(${dx}px, ${dy}px) scale(${sw}, ${sh})`;
+
+            indicator.getBoundingClientRect();
+
+            requestAnimationFrame(() => {
+                indicator.style.transition = "transform 450ms cubic-bezier(0.65, 0, 0.35, 1)";
+                indicator.style.transform = "none";
+            });
+        }
+
+        prevRectRef.current = nextRect;
+    }, [activeTab]);
+
     return (
-        <TabsProvider value={{ tabsMap, baseId, activeTab, handleTabChange, getOrderedTabs }}>
-            <div className={cn("@container w-full", className)} {...props}>
+        <TabsProvider value={{ tabsMap, baseId, activeTab, orientation, variant, indicatorRef, handleTabChange, getOrderedTabs }}>
+            <div data-orientation={orientation} className={cn("@container flex gap-2 w-full data-[orientation=horizontal]:flex-col", className)} {...props}>
                 {children}
             </div>
         </TabsProvider>
@@ -61,84 +98,7 @@ export function Tabs({ children, className, defaultValue, value: controlledValue
 }
 
 export function TabList({ children, className, ...props }: ComponentProps<"div">) {
-    const { tabsMap, activeTab, handleTabChange, getOrderedTabs } = useTabsContext();
-    const containerRef = useRef<HTMLDivElement>(null);
-    const indicatorRef = useRef<HTMLDivElement>(null);
-    const prevRectRef = useRef<{ x: number; width: number; height: number } | null>(null);
-
-    const updateHighlight = () => {
-        const indicator = indicatorRef.current;
-        const container = containerRef.current;
-        const activeEl = tabsMap.current.get(activeTab);
-
-        if (!indicator || !container || !activeEl) return;
-
-        const tabRect = activeEl.getBoundingClientRect();
-        const containerRect = container.getBoundingClientRect();
-        const containerStyle = window.getComputedStyle(container);
-        const paddingLeft = parseFloat(containerStyle.paddingLeft);
-
-        const nextRect = {
-            x: tabRect.left - containerRect.left - paddingLeft,
-            width: tabRect.width,
-            height: tabRect.height,
-        };
-
-        const prevRect = prevRectRef.current;
-
-        indicator.style.transition = "none";
-        indicator.style.left = `${nextRect.x}px`;
-        indicator.style.width = `${nextRect.width}px`;
-        indicator.style.height = `${nextRect.height}px`;
-        indicator.style.transform = "none";
-
-        if (prevRect) {
-            const dx = prevRect.x - nextRect.x;
-            const dw = prevRect.width / nextRect.width;
-            const dh = prevRect.height / nextRect.height;
-
-            indicator.style.transformOrigin = "left center";
-            indicator.style.transform = `translateX(${dx}px) scaleX(${dw}) scaleY(${dh})`;
-
-            indicator.getBoundingClientRect();
-
-            requestAnimationFrame(() => {
-                indicator.style.transition = "transform 300ms cubic-bezier(0.4, 0, 0.2, 1)";
-                indicator.style.transform = "none";
-                indicator.style.willChange = "transform";
-            });
-        }
-
-        prevRectRef.current = nextRect;
-    }
-
-    // Polling method.
-    // useLayoutEffect(() => {
-    //     let frameId: number;
-    //     const startTime = performance.now();
-    //     const DURATION = 300;
-
-    //     const poll = (now: number) => {
-    //         updateHighlight();
-    //         if (now - startTime < DURATION + 50) { 
-    //             frameId = requestAnimationFrame(poll);
-    //         }
-    //     };
-
-    //     frameId = requestAnimationFrame(poll);
-    //     return () => cancelAnimationFrame(frameId);
-    // }, [activeTab, updateHighlight]);
-
-    useLayoutEffect(() => {
-        updateHighlight();
-    }, [activeTab, tabsMap]);
-
-    // useEffect(() => {
-    //     if (!containerRef.current) return;
-    //     const observer = new ResizeObserver(updateHighlight);
-    //     observer.observe(containerRef.current);
-    //     return () => observer.disconnect();
-    // }, [updateHighlight]);
+    const { tabsMap, activeTab, orientation, handleTabChange, getOrderedTabs } = useTabsContext();
 
     const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
         const orderedValues = getOrderedTabs();
@@ -146,12 +106,21 @@ export function TabList({ children, className, ...props }: ComponentProps<"div">
 
         let nextIndex: number | null = null;
 
+        const isHorizontal = orientation === "horizontal";
+        const isVertical = orientation === "vertical";
+
         switch (e.key) {
             case "ArrowRight":
-                nextIndex = (currentIndex + 1) % orderedValues.length;
+                if (isHorizontal) nextIndex = (currentIndex + 1) % orderedValues.length;
                 break;
             case "ArrowLeft":
-                nextIndex = (currentIndex - 1 + orderedValues.length) % orderedValues.length;
+                if (isHorizontal) nextIndex = (currentIndex - 1 + orderedValues.length) % orderedValues.length;
+                break;
+            case "ArrowDown":
+                if (isVertical) nextIndex = (currentIndex + 1) % orderedValues.length;
+                break;
+            case "ArrowUp":
+                if (isVertical) nextIndex = (currentIndex - 1 + orderedValues.length) % orderedValues.length;
                 break;
             case "Home":
                 nextIndex = 0;
@@ -176,32 +145,21 @@ export function TabList({ children, className, ...props }: ComponentProps<"div">
 
     return (
         <div
-            ref={containerRef}
             role="tablist"
-            aria-orientation="horizontal"
-            className={cn("relative flex border-b border-slate-200 p-2 overflow-auto no-scrollbar", className)}
+            aria-orientation={orientation}
+            data-orientation={orientation}
+            className={cn("relative flex bg-[#edf0f3] rounded-lg p-2 data-[orientation=vertical]:flex-col overflow-auto no-scrollbar", className)}
             {...props}
             onKeyDown={handleKeyDown}
         >
-            <div
-                ref={indicatorRef}
-                aria-hidden="true"
-                className="absolute bg-[#f8f9fb] rounded-full shadow-white transition-all duration-300 ease-out pointer-events-none"
-            // style={{
-            //     transform: `translateX(${style.x}px)`,
-            //     left: `${style.left}px`,
-            //     width: `${style.width}px`,
-            //     height: `${style.height}px`,
-            //     willChange: 'transform, width'
-            // }}
-            />
             {children}
         </div>
     );
 }
 
 export function TabButton({ value, children, className, ...props }: TabButtonProps) {
-    const { tabsMap, baseId, activeTab, handleTabChange } = useTabsContext();
+    const { tabsMap, baseId, activeTab, indicatorRef, handleTabChange } = useTabsContext();
+    const indicatorCtx = useContext(TabHighlightProvider);
 
     const isActive = activeTab === value;
     const tabId = `shapes-${baseId}-tab-${value}`;
@@ -221,19 +179,30 @@ export function TabButton({ value, children, className, ...props }: TabButtonPro
             data-state={isActive ? 'active' : 'inactive'}
             tabIndex={isActive ? 0 : -1}
             className={cn(
-                "px-4 py-2 text-sm text-slate-500 xl:text-base font-normal rounded-[22px] hover:text-slate-700 z-10 data-[state=active]:font-medium data-[state=active]:text-ash focus-visible:outline-slate-400",
+                "relative px-4 py-2 text-sm text-slate-500 font-normal rounded-[22px] hover:text-slate-700 data-[state=active]:font-medium data-[state=active]:text-ash focus-visible:outline-slate-400",
                 className
             )}
             {...props}
             onClick={() => handleTabChange(value)}
         >
-            {children}
+            <span className="relative z-10">{children}</span>
+            {isActive && (
+                <div
+                    ref={indicatorRef}
+                    aria-hidden="true"
+                    className={cn(
+                        "absolute inset-0 z-0 pointer-events-none",
+                    )}
+                >
+                    <TabIndicator className={indicatorCtx?.className} />
+                </div>
+            )}
         </button>
     );
 }
 
 export function TabPanel({ value, children, className, ...props }: TabPanelProps) {
-    const { baseId, activeTab } = useTabsContext();
+    const { baseId, activeTab, orientation } = useTabsContext();
 
     const isActive = activeTab === value;
     const tabId = `shapes-${baseId}-tab-${value}`;
@@ -247,11 +216,37 @@ export function TabPanel({ value, children, className, ...props }: TabPanelProps
             id={panelId}
             aria-labelledby={tabId}
             data-state={isActive ? 'active' : 'inactive'}
+            data-orientation={orientation}
             tabIndex={0}
-            className={cn("p-4 animate-in fade-in duration-200", className)}
+            className={cn("p-4 bg-[#edf0f3] text-ash rounded-lg animate-in fade-in duration-200", className)}
             {...props}
         >
             {children}
         </div>
     );
+}
+
+
+export function TabHighLight({ children, className }: { children: ReactNode, className?: string }) {
+    useTabsContext();
+
+    return (
+        <TabHighlightProvider value={{ className }}>
+            {children}
+        </TabHighlightProvider>
+    )
+}
+
+export function TabIndicator({ className }: { className?: string }) {
+    const { variant } = useTabsContext();
+
+    return (
+        <div
+            className={cn("relative w-full rounded-[22px] bg-white shadow-white",
+                variant === "pill" && "h-full",
+                variant === "line" && "h-0.5 top-full",
+                className
+            )}
+        />
+    )
 }
