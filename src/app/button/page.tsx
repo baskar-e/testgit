@@ -15,7 +15,9 @@ import { Card, CardAction, CardBody, CardDescription, CardFooter, CardHeader, Ca
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, AccordionValue } from '../all-components/controls/accordion'
 import { Dialog, DialogButton, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogOverlay, DialogTitle } from '../all-components/controls/dialog'
 import { TabButton, TabHighLight, TabList, TabPanel, Tabs } from '../all-components/controls/tabs'
-import { Breadcrumbs, BreadcrumbsItem, BreadcrumbsLink, BreadcrumbsPage } from '../all-components/controls/breadcrumbs'
+import { Breadcrumbs, BreadcrumbsEllipsis, BreadcrumbsItem, BreadcrumbsLink, BreadcrumbsPage, BreadcrumbsSeparator } from '../all-components/controls/breadcrumbs'
+import { DynamicBreadcrumbs } from '../all-components/controls/expandBReadCrumbs'
+import { DatePicker, DatePickerContent, DatePickerGrid, DatePickerHeader, DatePickerTrigger } from '../all-components/controls/datepicker'
 
 export default function ButtonPage() {
     const asd = useRef<HTMLDivElement>(null)
@@ -36,6 +38,7 @@ export default function ButtonPage() {
     const [check, setCheck] = useState('1');
     const [switchs, setSwitchs] = useState(false);
     const [acc, setAcc] = useState<AccordionValue[]>([1]);
+    const [date, setDate] = useState<Date | null>(new Date());
     console.log(acc)
     return (
         <>
@@ -56,6 +59,13 @@ export default function ButtonPage() {
                 <Input />
                 <Button className='border-non'>asdfsd</Button>
             </InputGroup>
+            <DatePicker value={date} onChange={setDate}>
+                <DatePickerTrigger />
+                <DatePickerContent>
+                    <DatePickerHeader />
+                    <DatePickerGrid />
+                </DatePickerContent>
+            </DatePicker>
             <Tabs defaultValue={'1'} orientation='horizontal' variant='line'>
                 {/* <TabHighLight className='bg-green-300'> */}
                 <TabList className=''>
@@ -202,15 +212,19 @@ export default function ButtonPage() {
                 <BreadcrumbsItem>
                     <BreadcrumbsLink href="/">Home</BreadcrumbsLink>
                 </BreadcrumbsItem>
+                <BreadcrumbsItem>
+                    <BreadcrumbsEllipsis />
+                </BreadcrumbsItem>
 
                 <BreadcrumbsItem>
                     <BreadcrumbsLink href="/products">Products</BreadcrumbsLink>
                 </BreadcrumbsItem>
-
-                <BreadcrumbsItem isCurrentPage>
+                <BreadcrumbsItem>
                     <BreadcrumbsPage>Laptop</BreadcrumbsPage>
+                    {/* <BreadcrumbsLink href="/products">Products</BreadcrumbsLink> */}
                 </BreadcrumbsItem>
             </Breadcrumbs>
+            <DynamicBreadcrumbs />
         </>
     )
 }

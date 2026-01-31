@@ -242,6 +242,7 @@ export function TabIndicator({ className }: { className?: string }) {
 
     return (
         <div
+            aria-hidden="true"
             className={cn("relative w-full rounded-[22px] bg-white shadow-white",
                 variant === "pill" && "h-full",
                 variant === "line" && "h-0.5 top-full",
