@@ -31,6 +31,7 @@ export function NavMain({
     }[]
   }[]
 }) {
+  console.log(items)
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Platform</SidebarGroupLabel>
@@ -63,7 +64,7 @@ export function NavMain({
                     </SidebarMenuSub>
                   </CollapsibleContent>
                 </>
-              ) : null}
+              ): null}
             </SidebarMenuItem>
           </Collapsible>
         ))}

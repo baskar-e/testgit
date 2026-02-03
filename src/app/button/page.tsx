@@ -18,6 +18,7 @@ import { TabButton, TabHighLight, TabList, TabPanel, Tabs } from '../all-compone
 import { Breadcrumbs, BreadcrumbsEllipsis, BreadcrumbsItem, BreadcrumbsLink, BreadcrumbsPage, BreadcrumbsSeparator } from '../all-components/controls/breadcrumbs'
 import { DynamicBreadcrumbs } from '../all-components/controls/expandBReadCrumbs'
 import { DatePicker, DatePickerContent, DatePickerGrid, DatePickerHeader, DatePickerTrigger } from '../all-components/controls/datepicker'
+import Sortable from '../all-components/controls/dragAndDrop'
 
 export default function ButtonPage() {
     const asd = useRef<HTMLDivElement>(null)
@@ -38,7 +39,7 @@ export default function ButtonPage() {
     const [check, setCheck] = useState('1');
     const [switchs, setSwitchs] = useState(false);
     const [acc, setAcc] = useState<AccordionValue[]>([1]);
-    const [date, setDate] = useState<Date | null>(new Date());
+    const [date, setDate] = useState<Date | null>();
     console.log(acc)
     return (
         <>
@@ -49,6 +50,8 @@ export default function ButtonPage() {
             <Button variant='ghost' >labe</Button>
             <Button variant='white' >labe</Button>
             {/* <Input ref={asd} /> */}
+
+            <Sortable />
             <ButtonGroup>
                 <Button className=' block bg-green-500 h-full'>asdfasd</Button>
                 <Button variant='ghost'>asdg</Button>
@@ -59,7 +62,7 @@ export default function ButtonPage() {
                 <Input />
                 <Button className='border-non'>asdfsd</Button>
             </InputGroup>
-            <DatePicker value={date} onChange={setDate}>
+            <DatePicker >
                 <DatePickerTrigger />
                 <DatePickerContent>
                     <DatePickerHeader />

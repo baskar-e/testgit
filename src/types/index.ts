@@ -14,3 +14,10 @@ export interface FloatingContextType {
     getReferenceProps: ReturnType<typeof useInteractions>['getReferenceProps'];
     getItemProps: ReturnType<typeof useInteractions>['getItemProps'];
 }
+
+export interface MenuItemProps {
+    id: string;
+    parentId?: string | null;
+    title: string;
+    url: string | null;
+}

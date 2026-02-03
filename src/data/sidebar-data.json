@@ -1,0 +1,188 @@
+[
+    {
+        "id": "1",
+        "parentId": null,
+        "title": "Input & Controls",
+        "url": null
+    },
+    {
+        "id": "2",
+        "parentId": "1",
+        "title": "Button",
+        "url": "/button"
+    },
+    {
+        "id": "3",
+        "parentId": "1",
+        "title": "Button Group",
+        "url": "/button-group"
+    },
+    {
+        "id": "4",
+        "parentId": "1",
+        "title": "Checkbox",
+        "url": "/checkbox"
+    },
+    {
+        "id": "5",
+        "parentId": "1",
+        "title": "Combobox",
+        "url": "/combobox"
+    },
+    {
+        "id": "6",
+        "parentId": "1",
+        "title": "Dropdown Menu",
+        "url": "/dropdown-menu"
+    },
+    {
+        "id": "7",
+        "parentId": "1",
+        "title": "File Upload",
+        "url": "/file-upload"
+    },
+    {
+        "id": "8",
+        "parentId": "1",
+        "title": "Input",
+        "url": "/input"
+    },
+    {
+        "id": "9",
+        "parentId": "1",
+        "title": "Input Group",
+        "url": "/input-group"
+    },
+    {
+        "id": "10",
+        "parentId": "1",
+        "title": "Radio Group",
+        "url": "/radio-group"
+    },
+    {
+        "id": "11",
+        "parentId": "1",
+        "title": "Select",
+        "url": "/select"
+    },
+    {
+        "id": "12",
+        "parentId": "1",
+        "title": "Switch",
+        "url": "/switch"
+    },
+    {
+        "id": "13",
+        "parentId": null,
+        "title": "Container",
+        "url": null
+    },
+    {
+        "id": "14",
+        "parentId": "13",
+        "title": "Accordion",
+        "url": "/accordion"
+    },
+    {
+        "id": "15",
+        "parentId": "13",
+        "title": "Card",
+        "url": "/card"
+    },
+    {
+        "id": "16",
+        "parentId": "13",
+        "title": "Collapsible",
+        "url": "/collapsible"
+    },
+    {
+        "id": "17",
+        "parentId": "13",
+        "title": "Dialog",
+        "url": "/dialog"
+    },
+    {
+        "id": "18",
+        "parentId": "13",
+        "title": "Tabs",
+        "url": "/tabs"
+    },
+    {
+        "id": "19",
+        "parentId": null,
+        "title": "Navigation",
+        "url": null
+    },
+    {
+        "id": "20",
+        "parentId": "19",
+        "title": "Breadcrumbs",
+        "url": "/breadcrumbs"
+    },
+    {
+        "id": "21",
+        "parentId": null,
+        "title": "Status",
+        "url": null
+    },
+    {
+        "id": "22",
+        "parentId": "21",
+        "title": "Alert",
+        "url": "/alert"
+    },
+    {
+        "id": "23",
+        "parentId": "21",
+        "title": "Avatar",
+        "url": "/avatar"
+    },
+    {
+        "id": "24",
+        "parentId": "21",
+        "title": "Badge",
+        "url": "/badge"
+    },
+    {
+        "id": "25",
+        "parentId": "21",
+        "title": "Calendar",
+        "url": "/calendar"
+    },
+    {
+        "id": "26",
+        "parentId": "21",
+        "title": "Progress",
+        "url": "/progress"
+    },
+    {
+        "id": "27",
+        "parentId": null,
+        "title": "Data Visualization",
+        "url": null
+    },
+    {
+        "id": "28",
+        "parentId": "27",
+        "title": "Chart",
+        "url": "/chart"
+    },
+    {
+        "id": "29",
+        "parentId": null,
+        "title": "Interactive Component",
+        "url": null
+    },
+    {
+        "id": "30",
+        "parentId": "29",
+        "title": "Text Editor",
+        "url": "/text-editor"
+    },
+    {
+        "id": "31",
+        "parentId": "29",
+        "title": "Sortable List",
+        "url": "/sortable-list"
+    }
+]
