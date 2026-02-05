@@ -40,7 +40,6 @@ export default function ButtonPage() {
     const [switchs, setSwitchs] = useState(false);
     const [acc, setAcc] = useState<AccordionValue[]>([1]);
     const [date, setDate] = useState<Date | null>();
-    console.log(acc)
     return (
         <>
             <div id='as'></div>

@@ -1,6 +1,6 @@
 "use client"
 
-import { ChevronRight, type LucideIcon } from "lucide-react"
+import { ChevronRight } from "lucide-react"
 
 import {
   Collapsible,
@@ -24,37 +24,41 @@ export function NavMain({
 }: {
   items: {
     title: string
-    isActive?: boolean
+    url: string
     items?: {
       title: string
       url: string
     }[]
   }[]
 }) {
-  console.log(items)
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Platform</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
-          <Collapsible key={item.title} asChild defaultOpen={item.isActive}>
+          <Collapsible key={item.title} asChild>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild tooltip={item.title}>
-                <span>{item.title}</span>
-              </SidebarMenuButton>
-              {item.items?.length ? (
+              {!item.items?.length ? (
+                item.url ?
+                  <SidebarMenuButton key={item.title} asChild>
+                    <a href={item?.url ?? "#"} >{item.title}</a>
+                  </SidebarMenuButton>
+                  : null
+              ) :
                 <>
-                  <CollapsibleTrigger asChild>
-                    <SidebarMenuAction className="data-[state=open]:rotate-90">
-                      <ChevronRight />
-                      <span className="sr-only">Toggle</span>
-                    </SidebarMenuAction>
+                  <CollapsibleTrigger asChild className="group text-slate-800 text-sm pl-2 py-1.5">
+                    <div>{item.title}
+                      <SidebarMenuAction className="group-data-[state=open]:rotate-90">
+                        <ChevronRight className="text-slate-600" />
+                        <span className="sr-only">Toggle</span>
+                      </SidebarMenuAction>
+                    </div>
                   </CollapsibleTrigger>
                   <CollapsibleContent>
                     <SidebarMenuSub>
                       {item.items?.map((subItem) => (
                         <SidebarMenuSubItem key={subItem.title}>
-                          <SidebarMenuSubButton asChild>
+                          <SidebarMenuSubButton asChild className="text-slate-800">
                             <a href={subItem.url}>
                               <span>{subItem.title}</span>
                             </a>
@@ -64,11 +68,11 @@ export function NavMain({
                     </SidebarMenuSub>
                   </CollapsibleContent>
                 </>
-              ): null}
+              }
             </SidebarMenuItem>
           </Collapsible>
         ))}
       </SidebarMenu>
-    </SidebarGroup>
+    </SidebarGroup >
   )
 }

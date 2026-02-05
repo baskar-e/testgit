@@ -1,6 +1,6 @@
-import { useState, useCallback, useMemo, memo } from 'react';
+import { useState, useCallback, useMemo, memo, useRef } from 'react';
 import { cn } from '@/lib/utils';
-import { ChevronDown, CircleCheckBig, Move, X } from 'lucide-react';
+import { ChevronDown, CircleCheckBig, CornerRightDown, Move, X } from 'lucide-react';
 
 import {
     DndContext,
@@ -40,6 +40,7 @@ interface LeftMenuProps {
 type SortableListProps = {
     id: string;
     list: MenuItemProps[]
+    handleNested?: (prev: MenuItemProps, next: MenuItemProps) => void;
     onRemove?: (prev: MenuItemProps, next: MenuItemProps) => void;
 }
 
@@ -47,10 +48,11 @@ type SortableItemProps = {
     id: UniqueIdentifier;
     data: MenuItemProps;
     overlay?: boolean;
+    handleNested?: () => void;
     onRemove?: () => void;
 }
 
-const SortableItem = memo<SortableItemProps>(({ id, data, onRemove, overlay = true }) => {
+const SortableItem = memo<SortableItemProps>(({ id, data, handleNested, onRemove, overlay = true }) => {
     const { setNodeRef, transform, transition, isDragging, attributes, listeners } = useSortable({ id });
     const style = { transition, transform: CSS.Transform.toString(transform) };
 
@@ -59,6 +61,11 @@ const SortableItem = memo<SortableItemProps>(({ id, data, onRemove, overlay = tr
         ${isDragging ? 'opacity-50' : ''} ${(data.parentId && overlay) ? 'ml-[12%]' : ''}`}>
             <Move {...attributes} {...listeners} width={12} height={12} className='shrink-0' />
             <span className="text-nowrap text-ellipsis overflow-hidden mr-auto">{data.title}</span>
+            {data.url &&
+                <button className='group-[.hook]/left:group-hover/list:block hidden shrink-0' onClick={handleNested}>
+                    <CornerRightDown width={14} height={14} className={`${data.parentId ? 'rotate-90' : ''}`} />
+                </button>
+            }
             <button className='group-[.hook]/left:group-hover/list:block hidden shrink-0' onClick={onRemove}>
                 <X width={14} height={14} />
             </button>
@@ -66,12 +73,12 @@ const SortableItem = memo<SortableItemProps>(({ id, data, onRemove, overlay = tr
     )
 })
 
-export const SortableList = memo<SortableListProps>(({ id, list, onRemove }) => {
+const SortableList = memo<SortableListProps>(({ id, list, handleNested, onRemove }) => {
     const { setNodeRef } = useDroppable({ id });
 
     const listItem = useMemo(() => (list.map((left, i) => {
         const prev = list[i - 1];
-        return <SortableItem key={left.id} id={left.id} data={left} onRemove={() => onRemove?.(prev, left)} />
+        return <SortableItem key={left.id} id={left.id} data={left} handleNested={() => handleNested?.(prev, left)} onRemove={() => onRemove?.(prev, left)} />
     })), [list])
 
     return (
@@ -92,10 +99,9 @@ export default function Sortable({
         available: [],
         leftmenu: sidebarData,
     });
-
-    const {sidebarLayout, setSidebarLayout} = useSidebar();
-
     const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
+    const { sidebarLayout, setSidebarLayout } = useSidebar();
+    const containerRef = useRef<string | null>(null);
 
     const sensors = useSensors(
         useSensor(MouseSensor),
@@ -166,6 +172,8 @@ export default function Sortable({
                 ],
             };
         });
+
+        containerRef.current = activeContainer;
     }, [leftbar, findContainer]);
 
     const handleDragEnd = useCallback((event: DragEndEvent) => {
@@ -179,41 +187,45 @@ export default function Sortable({
         const activeContainer = findContainer(active.id);
         const overContainer = findContainer(over.id);
 
-        if (
-            !activeContainer ||
-            !overContainer ||
-            activeContainer !== overContainer
-        ) {
+        if (!activeContainer || !overContainer || activeContainer !== overContainer) {
             setActiveId(null);
             return;
         }
 
-        const activeIndex = leftbar[activeContainer].findIndex(
-            (i) => i.id === active.id
-        );
-        const overIndex = leftbar[overContainer].findIndex(
-            (i) => i.id === over.id
-        );
+        const activeIndex = leftbar[activeContainer].findIndex((i) => i.id === active.id);
+        const overIndex = leftbar[overContainer].findIndex((i) => i.id === over.id);
 
         if (activeIndex !== overIndex) {
             setLeftbar((items) => {
-                let prev: MenuItemProps | null;
-                const moved = arrayMove(
-                    items[overContainer],
-                    activeIndex,
-                    overIndex
-                );
+                // Just reorder - preserve existing parentIds
+                const moved = arrayMove(items[overContainer], activeIndex, overIndex);
 
-                const updatedId = moved.map((item) => {
-                    if (item.parentId === null) {
-                        prev = item;
-                        return item;
-                    } else {
-                        return {
-                            ...item,
-                            parentId: prev?.id ?? null
-                        };
+                // Validate parentIds (make sure parents still exist)
+                const updatedId = moved.map((item, i) => {
+                    let prev = moved[i - 1] || null;
+
+                    if (item.url === null) {
+                        return item
                     }
+
+                    // For children, check if their parent still exists
+                    if (item.parentId !== null) {
+                        const parentExists = moved.some(
+                            (m) => m.id === item.parentId && m.url === null
+                        );
+
+                        // If parent exists, keep the parentId
+                        if (parentExists) {
+                            return item;
+                        }
+                        // If parent doesn't exist, make standalone
+                        else {
+                            return { ...item, parentId: null };
+                        }
+                    }
+
+                    // Already standalone - keep it that way
+                    return item;
                 });
 
                 return {
@@ -224,35 +236,81 @@ export default function Sortable({
         }
 
         setActiveId(null);
+        containerRef.current = activeContainer;
     }, [leftbar, findContainer]);
 
-    // const handleNested = useCallback((prev: MenuItemProps, curr: MenuItemProps) => {
-    //     let check = false;
-    //     const newParentId =
-    //         curr.parentId !== null
-    //             ? null
-    //             : prev?.parentId ?? prev?.id;
+    console.log(leftbar.leftmenu)
 
-    //     setLeftbar((prevLeftbar) => ({
-    //         ...prevLeftbar,
-    //         leftmenu: prevLeftbar.leftmenu.map((item) => {
-    //             if (item.id === curr.id) {
-    //                 check = true;
-    //                 return { ...item, parentId: newParentId };
-    //             } else {
-    //                 if (check && item.parentId) {
-    //                     return {
-    //                         ...item,
-    //                         parentId: newParentId ?? curr.id
-    //                     };
-    //                 } else {
-    //                     check = false;
-    //                     return item;
-    //                 }
-    //             }
-    //         }),
-    //     }));
-    // }, []);
+    const handleNested = useCallback((prev: MenuItemProps, curr: MenuItemProps) => {
+        setLeftbar((prevLeftbar) => {
+            // Only items WITH URL can toggle nesting
+            if (curr.url !== null) {
+
+                // UNNEST: Remove parent and reposition to bottom of siblings
+                if (curr.parentId !== null) {
+                    const oldParentId = curr.parentId;
+                    const items = prevLeftbar.leftmenu;
+
+                    // Remove current item
+                    const withoutCurrent = items.filter(item => item.id !== curr.id);
+
+                    // Find all siblings (items with same parentId)
+                    const siblings = withoutCurrent.filter(item =>
+                        item.parentId === oldParentId && item.id !== curr.id
+                    );
+
+                    // Find the position after the last sibling
+                    let insertAfterIndex = -1;
+                    if (siblings.length > 0) {
+                        const lastSibling = siblings[siblings.length - 1];
+                        insertAfterIndex = withoutCurrent.findIndex(item => item.id === lastSibling.id);
+                    } else {
+                        // If no siblings, insert after parent
+                        insertAfterIndex = withoutCurrent.findIndex(item => item.id === oldParentId);
+                    }
+
+                    // Create standalone version
+                    const standaloneItem = { ...curr, parentId: null };
+
+                    // Insert after the calculated position
+                    const newLeftmenu = [
+                        ...withoutCurrent.slice(0, insertAfterIndex + 1),
+                        standaloneItem,
+                        ...withoutCurrent.slice(insertAfterIndex + 1)
+                    ];
+
+                    return {
+                        ...prevLeftbar,
+                        leftmenu: newLeftmenu
+                    };
+                }
+
+                // NEST: Add parent (only if prev has no URL)
+                else {
+                    const canNestUnderPrev = prev && prev.url === null || prev.parentId !== null
+
+                    if (!canNestUnderPrev) {
+                        // Can't nest - prev is not a valid parent
+                        return prevLeftbar;
+                    }
+
+                    // Simple nesting - just update parentId
+                    return {
+                        ...prevLeftbar,
+                        leftmenu: prevLeftbar.leftmenu.map((item) => {
+                            if (item.id === curr.id) {
+                                return { ...item, parentId: !prev.url ? prev.id : prev.parentId };
+                            }
+                            return item;
+                        })
+                    };
+                }
+            }
+
+            // Items WITHOUT URL are parents - no change
+            return prevLeftbar;
+        });
+    }, []);
 
     const onRemove = useCallback((prev: MenuItemProps, remove: MenuItemProps) => {
         const { filtered, removedItem } = leftbar.leftmenu.reduce<{
@@ -261,13 +319,14 @@ export default function Sortable({
         }>(
             (acc, cur) => {
                 if (cur.id !== remove.id) {
-                    if (
-                        remove.parentId === null &&
-                        remove.id === cur.parentId
-                    ) {
+                    if (remove.url === null && remove.id === cur.parentId) {
+                        const newParentId = prev && prev.url === null && prev.id !== remove.id
+                            ? prev.id
+                            : null;
+
                         acc.filtered.push({
                             ...cur,
-                            parentId: prev?.parentId ?? prev?.id,
+                            parentId: newParentId,
                         });
                     } else {
                         acc.filtered.push(cur);
@@ -299,21 +358,9 @@ export default function Sortable({
     );
 
     return (
-        <div
-            className={cn(
-                'flex flex-col gap-y-2.5 [--left-h:36px] xl:[--left-h:45px]',
-                className
-            )}
-        >
-            <div
-                className={cn(
-                    'flex items-center gap-x-5 text-[#3E4B61]',
-                    headerClass
-                )}
-            >
-                <h3 className="font-medium text-base xl:text-lg me-auto">
-                    Left Menu
-                </h3>
+        <div className={cn('flex flex-col gap-y-2.5 [--left-h:36px] xl:[--left-h:45px]', className)}>
+            <div className={cn('flex items-center gap-x-5 text-[#3E4B61]', headerClass)}>
+                <h3 className="font-medium text-base xl:text-lg me-auto">Left Menu</h3>
                 <button
                     className="flex items-center justify-center text-white text-sm bg-violet-800 rounded-lg gap-x-1.5 w-20 xl:w-22.5 h-(--left-h) mt-auto"
                     onClick={() => setSidebarLayout(leftbar.leftmenu)}
@@ -360,6 +407,7 @@ export default function Sortable({
                             <SortableList
                                 id="leftmenu"
                                 list={leftMenu}
+                                handleNested={handleNested}
                                 onRemove={onRemove}
                             />
                         </div>

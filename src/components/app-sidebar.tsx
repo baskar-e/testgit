@@ -1,7 +1,5 @@
 "use client"
 
-import { useMemo } from "react"
-
 import {
   Shapes,
 } from "lucide-react"
@@ -175,9 +173,8 @@ function buildMenuTree(items: MenuItemProps[]) {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { sidebarLayout } = useSidebar();
-  console.log(sidebarLayout)
   const data = buildMenuTree(sidebarLayout);
-  console.log(data)
+
   return (
     <Sidebar variant="inset" {...props}>
       <SidebarHeader>
