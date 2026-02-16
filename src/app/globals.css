@@ -48,7 +48,7 @@
 
 @theme {
   --color-ash: #3e4b61;
-  --color-fade: #EDF1F4;
+  --color-fade: #F5F7FA;
   --color-border: #d3dbe0;
   --shadow-white: 2px 2px 7px -1px #ADBDCB, -2px -2px 4px 0px rgba(255,255,255,1)
   /* [1px_4px_7px_-1px_#ADBDCB,-7px_-4px_8px_-3px_rgba(255,255,255,1)] */
@@ -139,5 +139,22 @@
 
   ::-webkit-scrollbar {
     display: none;
+  }
+}
+
+@utility custom-scrollbar {
+  &::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 20px;
+    background-color: #E9EFF4;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background-color: #BFD1DB;
   }
 }

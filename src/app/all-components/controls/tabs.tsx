@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState, useId, ComponentProps, useRef, RefObject, useLayoutEffect, useCallback, ReactNode, createContext, useContext } from 'react';
 import { cn } from '@/lib/utils';
 import { createSafeContext } from '@/lib/context';
@@ -90,7 +92,7 @@ export function Tabs({ children, className, orientation = "horizontal", variant 
 
     return (
         <TabsProvider value={{ tabsMap, baseId, activeTab, orientation, variant, indicatorRef, handleTabChange, getOrderedTabs }}>
-            <div data-orientation={orientation} className={cn("@container flex gap-2 w-full data-[orientation=horizontal]:flex-col", className)} {...props}>
+            <div data-orientation={orientation} className={cn("@container flex gap-2.5 w-full data-[orientation=horizontal]:flex-col", className)} {...props}>
                 {children}
             </div>
         </TabsProvider>
@@ -98,7 +100,7 @@ export function Tabs({ children, className, orientation = "horizontal", variant 
 }
 
 export function TabList({ children, className, ...props }: ComponentProps<"div">) {
-    const { tabsMap, activeTab, orientation, handleTabChange, getOrderedTabs } = useTabsContext();
+    const { tabsMap, activeTab, orientation, variant, handleTabChange, getOrderedTabs } = useTabsContext();
 
     const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
         const orderedValues = getOrderedTabs();
@@ -148,7 +150,12 @@ export function TabList({ children, className, ...props }: ComponentProps<"div">
             role="tablist"
             aria-orientation={orientation}
             data-orientation={orientation}
-            className={cn("relative flex bg-[#edf0f3] rounded-lg p-2 data-[orientation=vertical]:flex-col overflow-auto no-scrollbar", className)}
+            className={cn(
+                "relative flex data-[orientation=vertical]:flex-col overflow-auto no-scrollbar",
+                variant === "pill" && "bg-white rounded-full p-1.5",
+                variant === "line" && "border-b border-b-slate-300",
+                className
+            )}
             {...props}
             onKeyDown={handleKeyDown}
         >
@@ -243,9 +250,9 @@ export function TabIndicator({ className }: { className?: string }) {
     return (
         <div
             aria-hidden="true"
-            className={cn("relative w-full rounded-[22px] bg-white shadow-white",
-                variant === "pill" && "h-full",
-                variant === "line" && "h-0.5 top-full",
+            className={cn("relative w-full rounded-[22px] shadow-white",
+                variant === "pill" && "h-full bg-white",
+                variant === "line" && "h-0.5 top-[calc(100%-2px)] bg-slate-600",
                 className
             )}
         />

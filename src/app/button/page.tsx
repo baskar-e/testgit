@@ -102,8 +102,8 @@ export default function ButtonPage() {
                     asdf
                 </DialogContent>
             </Dialog>
-            <Accordion type='multiple' value={acc} onValueChange={(e) => { setAcc(e) }}>
-                <AccordionItem value={1}>
+            <Accordion type='single'>
+                <AccordionItem value={'1'}>
                     <AccordionTrigger >
                         button
                     </AccordionTrigger>
@@ -111,7 +111,7 @@ export default function ButtonPage() {
                         as
                     </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value={2}>
+                <AccordionItem value={'2'}>
                     <AccordionTrigger>
                         bu1
                     </AccordionTrigger>
@@ -119,7 +119,7 @@ export default function ButtonPage() {
                         workd
                     </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value={3}>
+                <AccordionItem value={'3'}>
                     <AccordionTrigger>
                         bu12
                     </AccordionTrigger>

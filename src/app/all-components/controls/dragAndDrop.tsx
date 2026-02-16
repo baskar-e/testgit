@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo, memo, useRef } from 'react';
+import { useState, useCallback, useMemo, memo } from 'react';
 import { cn } from '@/lib/utils';
 import { ChevronDown, CircleCheckBig, CornerRightDown, Move, X } from 'lucide-react';
 
@@ -21,6 +21,7 @@ import { CSS } from '@dnd-kit/utilities';
 import { useSortable } from '@dnd-kit/sortable';
 import { useSidebar } from '@/components/ui/sidebar';
 import { MenuItemProps } from '@/types';
+import { buildMenuTree } from '@/lib/buildMenuTree';
 import sidebarData from '@/data/sidebar-data.json';
 
 // Types
@@ -101,7 +102,7 @@ export default function Sortable({
     });
     const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
     const { sidebarLayout, setSidebarLayout } = useSidebar();
-    const containerRef = useRef<string | null>(null);
+    const previewTree = buildMenuTree(sidebarLayout);
 
     const sensors = useSensors(
         useSensor(MouseSensor),
@@ -172,8 +173,6 @@ export default function Sortable({
                 ],
             };
         });
-
-        containerRef.current = activeContainer;
     }, [leftbar, findContainer]);
 
     const handleDragEnd = useCallback((event: DragEndEvent) => {
@@ -202,8 +201,6 @@ export default function Sortable({
 
                 // Validate parentIds (make sure parents still exist)
                 const updatedId = moved.map((item, i) => {
-                    let prev = moved[i - 1] || null;
-
                     if (item.url === null) {
                         return item
                     }
@@ -236,10 +233,7 @@ export default function Sortable({
         }
 
         setActiveId(null);
-        containerRef.current = activeContainer;
     }, [leftbar, findContainer]);
-
-    console.log(leftbar.leftmenu)
 
     const handleNested = useCallback((prev: MenuItemProps, curr: MenuItemProps) => {
         setLeftbar((prevLeftbar) => {
@@ -358,7 +352,7 @@ export default function Sortable({
     );
 
     return (
-        <div className={cn('flex flex-col gap-y-2.5 [--left-h:36px] xl:[--left-h:45px]', className)}>
+        <div className={cn('flex flex-col gap-y-2.5 [--left-h:36px] xl:[--left-h:40px]', className)}>
             <div className={cn('flex items-center gap-x-5 text-[#3E4B61]', headerClass)}>
                 <h3 className="font-medium text-base xl:text-lg me-auto">Left Menu</h3>
                 <button
@@ -374,10 +368,9 @@ export default function Sortable({
             </div>
             <div
                 className={cn(
-                    'grid grid-cols-3 gap-x-2 lg:gap-x-4 xl:gap-x-6 2xl:gap-x-10 bg-[#EDF0F3] text-[#3E4B61] rounded-4xl',
+                    'grid grid-cols-3 gap-x-2 lg:gap-x-4 xl:gap-x-6 bg-[#EDF0F3] text-ash rounded-4xl',
                     '[--left-head-h:36px] xl:[--left-head-h:44px]',
-                    '[--left-pad:14px] xl:[--left-pad:24px]',
-                    '[--left-item-top:14px] xl:[--left-item-top:30px]',
+                    '[--left-pad:14px] xl:[--left-pad:20px]',
                     containerClass
                 )}
             >
@@ -388,22 +381,22 @@ export default function Sortable({
                     onDragOver={handleDragOver}
                     onDragEnd={handleDragEnd}
                 >
-                    <div className="group/ava bg-[#E2E9EE] rounded-lg p-(--left-item-top) pb-4.5 pl-4.5 pr-2 [--ava-sub-h:19.5px] xl:[--ava-sub-h:22.5px] has-[li]:[--ava-sub-h:0px]">
-                        <h5 className="text-sm xl:text-base font-semibold text-center group-has-[li]/ava:pb-3 group-has-[li]/ava:xl:pb-4">
-                            Available Menu Items
-                        </h5>
-                        <p className="text-xs xl:text-sm text-center pt-0.5 group-has-[li]/ava:hidden">
-                            No more items available
-                        </p>
-                        <div className="h-full max-h-[calc(100vh-var(--body-padding)*2-var(--body-gap-y)-var(--nav-height)-var(--profile-pad)*2-var(--left-h)-var(--tab-gap)-var(--left-pad)*2-var(--left-head-h)-var(--left-item-top)-18px)] group-has-[li]/ava:overflow-y-auto custom-scrollbar scrll-ava">
+                    <div className="group/ava bg-[#E2E9EE] rounded-lg p-(--left-pad) pr-2">
+                        <div className="max-h-[calc(100vh-var(--header-h)-var(--left-h)-var(--left-pad)*2-30px)] overflow-y-auto custom-scrollbar">
+                            <h5 className="text-sm xl:text-base font-semibold text-center group-has-[li]/ava:pb-3 group-has-[li]/ava:xl:pb-4">
+                                Available Menu Items
+                            </h5>
+                            <p className="text-xs xl:text-sm text-center pt-0.5 group-has-[li]/ava:hidden">
+                                No more items available
+                            </p>
                             <SortableList id="available" list={leftAvailable} />
                         </div>
                     </div>
-                    <div className="group/left flex flex-col bg-[#E2E9EE] rounded-lg p-(--left-item-top) pb-4.5 pl-4.5 pr-2 hook [--add-btn-h:36px] xl:[--add-btn-h:40px]">
-                        <h5 className="text-sm xl:text-base font-semibold text-center pb-3 xl:pb-4">
-                            Side Menu
-                        </h5>
-                        <div className="h-auto max-h-[calc(100vh-var(--body-padding)*2-var(--body-gap-y)-var(--nav-height)-var(--profile-pad)*2-var(--left-h)-var(--tab-gap)-var(--left-pad)*2-var(--left-head-h)-var(--left-item-top)-var(--add-btn-h)-26px)] overflow-y-auto custom-scrollbar scrll-left">
+                    <div className="group/left flex flex-col bg-[#E2E9EE] rounded-lg p-(--left-pad) pr-2 hook">
+                        <div className="max-h-[calc(100vh-var(--header-h)-var(--left-h)-var(--left-pad)*2-30px)] overflow-y-auto custom-scrollbar">
+                            <h5 className="text-sm xl:text-base font-semibold text-center pb-3 xl:pb-4">
+                                Side Menu
+                            </h5>
                             <SortableList
                                 id="leftmenu"
                                 list={leftMenu}
@@ -428,34 +421,35 @@ export default function Sortable({
                         ) : null}
                     </DragOverlay>
                 </DndContext>
-                <div className="bg-[#E2E9EE] rounded-lg p-(--left-item-top) pb-4.5 pr-2 xl:pr-4.5 [--preview-head-h:79px] min-[720px]:[--preview-head-h:60px] xl:[--preview-head-h:72px] [--prev-head-h:24px] xl:[--prev-head-h:28px]">
-                    <h5 className="text-sm xl:text-base font-semibold text-center">Preview</h5>
-                    <p className="text-xs xl:text-sm text-center pt-0.5 h-(--left-head-h)">
-                        Hit save button to see preview
-                    </p>
-                    <ul className="px-1 space-y-1 xl:space-y-2.5 max-h-[calc(100vh-var(--body-padding)*2-var(--body-gap-y)-var(--nav-height)-var(--profile-pad)*2-var(--left-h)-var(--tab-gap)-var(--left-pad)*2-var(--preview-head-h)-var(--left-item-top)-18px)] overflow-y-auto custom-scrollbar scrll-prev">
-                        {sidebarLayout?.map((side, i) => {
-                            return (
-                                side.parentId == null &&
-                                <li
-                                    key={side.id}
-                                    className="flex items-center gap-x-4 text-xs xl:text-sm p-2 rounded-lg hover:bg-[#DBE2E7]"
-                                >
-                                    <span className="text-nowrap text-ellipsis overflow-hidden">
-                                        {side.title}
-                                    </span>
-                                    {sidebarLayout[i + 1]?.parentId === side.id && (
-                                        <span className="ml-auto shrink-0">
-                                            <ChevronDown
-                                                width={14}
-                                                height={14}
-                                            />
+                <div className="bg-[#E2E9EE] rounded-lg p-(--left-pad) pr-2">
+                    <div className="max-h-[calc(100vh-var(--header-h)-var(--left-h)-var(--left-pad)*2-30px)] overflow-y-auto custom-scrollbar">
+                        <h5 className="text-sm xl:text-base font-semibold text-center">Preview</h5>
+                        <p className="text-xs xl:text-sm text-center pt-0.5 h-(--left-head-h)">
+                            Hit save button to see preview
+                        </p>
+                        <ul className="px-1 space-y-1 xl:space-y-2.5 max-h-[calc(100vh-var(--hh)-18px)] overflow-y-auto custom-scrollbar scrll-prev">
+                            {previewTree?.map((view, i) => {
+                                return (
+                                    <li
+                                        key={view.id}
+                                        className="flex items-center gap-x-4 text-xs xl:text-sm p-2 rounded-lg hover:bg-[#DBE2E7]"
+                                    >
+                                        <span className="text-nowrap text-ellipsis overflow-hidden">
+                                            {view.title}
                                         </span>
-                                    )}
-                                </li>
-                            )
-                        })}
-                    </ul>
+                                        {view.items.length > 0 && (
+                                            <span className="ml-auto shrink-0">
+                                                <ChevronDown
+                                                    width={14}
+                                                    height={14}
+                                                />
+                                            </span>
+                                        )}
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

@@ -21,14 +21,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dar k">
       <body
-        className={`${inter.variable} font-sans bg-sidebar antialiased`}
+        className={`${inter.variable} font-sans bg-sidebar antialiased [--header-h:52px] xl:[--header-h:64px]`}
       >
         <SidebarProvider>
           <AppSidebar />
-          <SidebarInset>
-            <header className="sticky flex h-13 xl:h-16 w-full shrink-0 items-center gap-2 top-0 z-50 -mx-px rounded-t-xl shadow-xs bg-fade/80 backdrop-blur">
+          <SidebarInset className="max-h-[calc(100vh-16px)] overflow-y-auto no-scrollbar">
+            <header className="sticky flex h-(--header-h) w-full shrink-0 items-center gap-2 top-0 z-50 -mx-px rounded-t-xl shadow-xs bg-fade/20 backdrop-blur">
               <div className="flex items-center gap-2 px-4">
                 <SidebarTrigger className="-ml-1" />
                 <Separator orientation="vertical" className="mr-2 data-[orientation=vertical]:h-4" />
