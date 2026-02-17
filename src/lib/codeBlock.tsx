@@ -11,7 +11,6 @@ export type TokenType =
   | 'number'
   | 'function'
   | 'tag'
-  | 'tagClose'
   | 'prop'
   | 'operator'
   | 'bracket'
@@ -23,12 +22,11 @@ const TOKEN_COLORS: Record<TokenType, string> = {
   keyword: 'text-red-700 dark:text-purple-400',
   string: 'text-green-700 dark:text-green-400',
   number: 'text-orange-400',
-  function: 'text-yellow-400',
+  function: 'text-yellow-600 dark:text-rose-400',
   tag: 'text-blue-800 dark:text-blue-400',
-  tagClose: 'text-blue-800 dark:text-blue-400',
-  prop: 'text-cyan-300',
+  prop: 'text-violet-600 dark:text-cyan-300',
   operator: 'text-cyan-700 dark:text-cyan-400',
-  bracket: 'text-purple-700 dark:text-yellow-300',
+  bracket: 'text-purple-700 dark:text-amber-400',
   comment: 'text-gray-500',
   text: 'text-slate-700 dark:text-slate-300',
 };
@@ -56,19 +54,18 @@ interface Token {
 }
 
 // Flexible word structure - can have multiple token types in one object
-type Word = Partial<Record<TokenType, string>> | Token[];
+type Word = Partial<Record<TokenType, string>> & {space?: boolean} | Token[];
 
 function wordToTokens(word: Word): Token[] {
   if (Array.isArray(word)) {
     return word;
   }
-  console.log(word)
-
+  const {space = true, ...tokensOnly} = word; 
   // Convert object to array of tokens
-  return Object.entries(word).map(([type, value]) => ({
+  return Object.entries(tokensOnly).map(([type, value]) => ({
     type: type as TokenType,
     value: value as string,
-    space: true
+    space: space
   }));
 }
 
@@ -127,7 +124,7 @@ export function CodeBlock({
   // };
 
   return (
-    <div className={cn('relative rounded-lg overflow-hidden bg-[#141414] bg-linear-[to_top,#dfe9f3_0%,white_100%] dark:bg-linear-[to_top,#2e3030_0%,#141414_100%] shadow-md dark:border border-slate-700', className)}>
+    <div className={cn('relative rounded-lg overflow-hidden bg-linear-[to_top,#dfe9f3_0%,white_100%] dark:bg-linear-[to_top,#2e3030_0%,#141414_100%] shadow-md dark:border border-slate-700', className)}>
       {/* Header */}
       {title && (
         <div className="flex items-center px-4 py-2 border-b border-slate-300 dark:border-slate-700">
@@ -151,13 +148,13 @@ export function CodeBlock({
       )}
 
       {/* Code */}
-      <div className="overflow-auto custom-scrollbar">
-        <pre className="p-3 pl-0 text-sm font-mono [counter-reset:line]">
+      <div className="p-3">
+        <pre className="text-sm font-mono overflow-auto custom-scrollbar [counter-reset:line] max-h-50">
           <code>
             {lines.map((line, index) => {
               const isHighlighted = highlightLines.includes(index);
               const tokens = wordToTokens(line.word);
-
+console.log(tokens)
               return (
                 <div
                   key={index}
@@ -167,9 +164,11 @@ export function CodeBlock({
                   )}
                 >
                   {/* Code Line with Tokens */}
-                  <span className="whitespace-pre [counter-increment:line] before:content-[counter(line)] before:inline-block before:mr-3 before:px-4 before:py-1 before:h-full before:text-slate-500 dark:before:text-slate-600">
+                  <span className="whitespace-pre [counter-increment:line] before:content-[counter(line)] before:inline-block before:mr-3 before:pl-2 before:pr-4 before:py-1 before:h-full before:text-slate-500 dark:before:text-slate-600">
                     {line.indent > 0 && <span>{' '.repeat(line.indent)}</span>}
-                    {tokens.map((token, tokenIndex) => (
+                    {tokens.map((token, tokenIndex) => {
+                      // console.log(token)
+                      return(
                       <Fragment key={tokenIndex}>
                         <span className={TOKEN_COLORS[token.type]}>
                           {token.value}
@@ -177,7 +176,7 @@ export function CodeBlock({
                         {/* Add space between tokens except last one */}
                         {tokenIndex < tokens.length - 1 && token?.space && ' '}
                       </Fragment>
-                    ))}
+                    )})}
                   </span>
                 </div>
               );

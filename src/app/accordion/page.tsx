@@ -1,6 +1,7 @@
 import { CodeBlock, t } from "@/lib/codeBlock"
 import { TabButton, TabList, TabPanel, Tabs } from "../all-components/controls/tabs"
 import { parseRawCode } from "@/lib/codeGenerate"
+import { text } from "stream/consumers"
 
 const code = [
   {
@@ -111,7 +112,7 @@ const basic = [
     word: { bracket: '}', keyword: 'from', string: '"@/components/ui/accordion"' }
   },
   { word: { text: '' } },
-  { word: [t('keyword', 'const'), t('operator', 'items'), t('keyword', '='), t('bracket', '[')] }
+  { word: [t('keyword', 'const'), t('text', 'items'), t('keyword', '='), t('bracket', '[')] }
   // {}
 ]
 
@@ -120,7 +121,7 @@ const a = [{
     "keyword": "const",
     "text": "items",
     "operator": "=",
-    "bracket": "[", space: false
+    "bracket": "["
   },
   level: [{
     word: { "bracket": "{" },
@@ -129,22 +130,133 @@ const a = [{
         word: [t("text", "value:"), t("string", '"item-1"', false), t("text", ",")],
       },
       {
-        word: [t("text", "trigger:"), t("string", '"How do I reset my password?"'), t("text", ",")],
+        word: [t("text", "trigger:"), t("string", '"How do I reset my password?"', false), t("text", ",")],
       },
       {
-        word: [t("text", "content:"), t("string", "\"Click on 'Forgot Password' on the login page, enter your email address, and we'll send you a link to reset your password. The link will expire in 24 hours.\""), t("text", ",")],
+        word: [t("text", "content:"), t("string", "\"Click on 'Forgot Password' on the login page, enter your email address, and we'll send you a link to reset your password. The link will expire in 24 hours.\"", false), t("text", ",")],
       },
     ]
-  },]
-}]
+  },
+  { word: { "bracket": "}", text: ",", space: false } },
+  {
+    word: { "bracket": "{" },
+    level: [
+      {
+        word: [t("text", "value:"), t("string", '"item-2"', false), t("text", ",")],
+      },
+      {
+        word: [t("text", "trigger:"), t("string", '"Where can I view my purchase history?"', false), t("text", ",")],
+      },
+      {
+        word: [t("text", "content:"), t("string", "\"You can view your purchase history by logging into your account and navigating to the 'Orders' section. There, you'll find a list of all your past purchases along with their details.\"", false), t("text", ",")],
+      },
+    ]
+  },
+  { word: { "bracket": "}", text: ",", space: false } },
+  {
+    word: { "bracket": "{" },
+    level: [
+      {
+        word: [t("text", "value:"), t("string", '"item-3"', false)],
+      },
+      {
+        word: [t("text", "trigger:"), t("string", '"How do I contact customer support?"', false), t("text", ",")],
+      },
+      {
+        word: [t("text", "content:"), t("string", "\"You can contact our customer support team by clicking on the 'Support' link at the bottom of our website. From there, you can choose to chat with a representative, send us an email, or call our support hotline. We're available 24/7 to assist you with any questions or concerns you may have.\"", false)],
+      },
+    ]
+  },
+  {
+    word: { "bracket": "}" }
+  }
+  ]
+},
+{ word: { "bracket": "]" } },
+{ word: { "": "" } },
+{
+  word: {
+    "keyword": "export function",
+    "function": "AccordionBasic",
+    "bracket": "() {"
+  },
+  level: [
+    {
+      word: {
+        "keyword": "return",
+        "bracket": "("
+      },
+    },
+    {
+      level: [
+        {
+          word: [t('tag', '<Accordion'), t('prop', 'type', false), t('keyword', '=', false), t('text', '"single"'), t('prop', 'defaultValue', false), t('keyword', '=', false), t('text', '"item-1"', false), t('tag', '>')],
+        },
+        {
+          "level": [
+            {
+              "word": [{
+                "bracket": "{",
+                "text": "items.map",
+                "bracket": "() => ("
+              },
+              "level": [
+                {
+                  "word": {
+                    "tag": "AccordionItem",
+                    "key": "item.value",
+                    "value": "item.value"
+                  }
+                },
+                {
+                  "level": [
+                    {
+                      "word": {
+                        "tag": "AccordionTrigger",
+                        "content": "item.trigger"
+                      }
+                    },
+                    {
+                      "word": {
+                        "tag": "AccordionContent",
+                        "content": "item.content"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+  ]
+}
+]
 
-
+const raw = `export function AccordionBasic() {
+  return (
+    <Accordion
+      type="single"
+      collapsible
+      defaultValue="item-1"
+      className="max-w-lg"
+    >
+      {items.map((item) => (
+        <AccordionItem key={item.value} value={item.value}>
+          <AccordionTrigger>{item.trigger}</AccordionTrigger>
+          <AccordionContent>{item.content}</AccordionContent>
+        </AccordionItem>
+      ))}
+    </Accordion>
+  )
+}`
 
 export default function Accordion() {
-  // const data = parseRawCode(a);
-  // console.log(JSON.stringify(data, null, 2))
+  const data = parseRawCode(raw);
+  console.log(JSON.stringify(data, null, 2))
   return (
-    <div className="grid gap-8 max-w-130 xl:max-w-160 py-4 xl:py-6 mx-auto">
+    <div className="grid gap-8 max-w-130 xl:max-w-160 py-4 xl:py-6 mx-auto" >
       <div className="grid gap-3">
         <h3 className="text-2xl xl:text-3xl font-medium text-slate-800">Accordion</h3>
         <p className="max-xl:text-[15px]">A collapsible container for organizing content into expandable sections, commonly used to manage space in user interfaces.</p>
@@ -179,7 +291,7 @@ export default function Accordion() {
           </TabPanel>
         </Tabs>
       </div>
-    </div>
+    </div >
   )
 }
 
