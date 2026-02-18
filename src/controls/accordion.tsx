@@ -1,3 +1,5 @@
+'use client';
+
 import { ComponentProps, useId, useState } from 'react';
 import { createSafeContext } from '@/lib/context';
 import { cn } from '@/lib/utils';
@@ -91,7 +93,7 @@ export function Accordion({ children, className, type, defaultValue, value: cont
 
     return (
         <AccordionProvider value={{ checkIsOpen, toggleItem }}>
-            <div className={cn("w-full rounded-lg shadow-white overflow-hidden", className)} {...props}>
+            <div className={cn("w-full rounded-lg bg-white shadow-white-md overflow-hidden", className)} {...props}>
                 {children}
             </div>
         </AccordionProvider>
@@ -128,7 +130,7 @@ export function AccordionTrigger({ children, className, ...props }: ComponentPro
                 aria-expanded={isOpen}
                 aria-controls={contentId}
                 data-state={isOpen ? 'open' : 'closed'}
-                className={cn("flex w-full items-center justify-between py-4 text-ash text-left font-medium transition-all", className)}
+                className={cn("flex w-full items-center justify-between py-3 text-sm text-ash text-left font-medium transition-all", className)}
                 onClick={() => toggleItem(value)}
                 {...props}
             >
@@ -154,7 +156,7 @@ export function AccordionContent({ children, className, ...props }: ComponentPro
             )}
         >
             <div className="overflow-hidden">
-                <div className={cn("pt-0 pb-4 text-sm text-slate-600 leading-relaxed", className)} {...props}>
+                <div className={cn("pt-0 pb-3 text-sm text-slate-600 leading-relaxed", className)} {...props}>
                     {children}
                 </div>
             </div>

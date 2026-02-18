@@ -11,7 +11,7 @@ export function Card({ children, className, ...props }: ComponentProps<"div">) {
         <CardProvider value={{}}>
             <div
                 className={cn(
-                    "relative w-80 overflow-hidden rounded-xl border border-white/20 bg-white/10 backdrop-blur-md shadow-white supports-backdrop-filter:bg-white/10",
+                    "relative w-80 overflow-hidden rounded-xl border border-white/20 bg-white/10 backdrop-blur-md shadow-white-md supports-backdrop-filter:bg-white/10",
                     className
                 )}
                 {...props}

@@ -54,13 +54,13 @@ interface Token {
 }
 
 // Flexible word structure - can have multiple token types in one object
-type Word = Partial<Record<TokenType, string>> & {space?: boolean} | Token[];
+type Word = Partial<Record<TokenType, string>> & { space?: boolean } | Token[];
 
 function wordToTokens(word: Word): Token[] {
   if (Array.isArray(word)) {
     return word;
   }
-  const {space = true, ...tokensOnly} = word; 
+  const { space = true, ...tokensOnly } = word;
   // Convert object to array of tokens
   return Object.entries(tokensOnly).map(([type, value]) => ({
     type: type as TokenType,
@@ -135,7 +135,7 @@ export function CodeBlock({
       {/* Copy */}
       {showCopy && (
         <button
-          className="absolute top-1 left-full -translate-x-8 p-1.5 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-md transition-colors"
+          className="absolute top-1 left-full -translate-x-8 p-1.5 rounded-md backdrop-blur-sm transition-colors hover:bg-slate-100 dark:hover:bg-slate-700"
           aria-label="Copy code"
         // onClick={handleCopy}
         >
@@ -149,12 +149,12 @@ export function CodeBlock({
 
       {/* Code */}
       <div className="p-3">
-        <pre className="text-sm font-mono overflow-auto custom-scrollbar [counter-reset:line] max-h-50">
+        <pre className="text-sm font-mono overflow-auto custom-scrollbar [counter-reset:line] max-h-71">
           <code>
             {lines.map((line, index) => {
               const isHighlighted = highlightLines.includes(index);
               const tokens = wordToTokens(line.word);
-console.log(tokens)
+
               return (
                 <div
                   key={index}
@@ -166,9 +166,7 @@ console.log(tokens)
                   {/* Code Line with Tokens */}
                   <span className="whitespace-pre [counter-increment:line] before:content-[counter(line)] before:inline-block before:mr-3 before:pl-2 before:pr-4 before:py-1 before:h-full before:text-slate-500 dark:before:text-slate-600">
                     {line.indent > 0 && <span>{' '.repeat(line.indent)}</span>}
-                    {tokens.map((token, tokenIndex) => {
-                      // console.log(token)
-                      return(
+                    {tokens.map((token, tokenIndex) => (
                       <Fragment key={tokenIndex}>
                         <span className={TOKEN_COLORS[token.type]}>
                           {token.value}
@@ -176,7 +174,7 @@ console.log(tokens)
                         {/* Add space between tokens except last one */}
                         {tokenIndex < tokens.length - 1 && token?.space && ' '}
                       </Fragment>
-                    )})}
+                    ))}
                   </span>
                 </div>
               );

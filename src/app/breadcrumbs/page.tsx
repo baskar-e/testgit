@@ -4,19 +4,20 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "..
 import { PropsTable } from "@/components/propsTable"
 import { AttributeTable } from "@/components/attributeTable"
 import { accordionBasic, accordionCode, accordionItemAttribute, accordionItemPropsData, accordionItems, accordionMultiple, accordionPropsData, accordionUsage } from "@/data/accordion-data"
+import { breadcrumbCode } from "@/data/breadcrumb-data"
 
-export default function AccordionPage() {
+export default function BreadcrumbPage() {
   return (
     <div className="grid gap-8 max-w-160 lg:max-w-180 2xl:max-w-200 py-4 xl:py-6 mx-auto" >
       <div className="grid gap-3">
-        <h3 className="text-2xl xl:text-3xl font-medium text-slate-800">Accordion</h3>
-        <p className="max-xl:text-[15px]">A collapsible container for organizing content into expandable sections, commonly used to manage space in user interfaces.</p>
+        <h3 className="text-2xl xl:text-3xl font-medium text-slate-800">Breadcrumbs</h3>
+        <p className="max-xl:text-[15px]">A breadcrumb component is a secondary navigation element that provides a hierarchical trail of the user's current location.</p>
       </div>
       <div className="grid gap-5">
         <h4 className="text-xl xl:text-2xl text-slate-800 font-medium">Usage</h4>
         <CodeBlock
           title="Imports"
-          data={accordionCode}
+          data={breadcrumbCode}
         />
         <CodeBlock
           title="Components"

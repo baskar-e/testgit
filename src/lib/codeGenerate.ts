@@ -1,4 +1,4 @@
-import { TokenType } from "./codeBlock";
+import { TokenType } from "../components/codeBlock";
 
 const GRAMMAR: { type: TokenType; regex: RegExp }[] = [
   { type: 'comment', regex: /\/\/.*|\/\*[\s\S]*?\*\// },

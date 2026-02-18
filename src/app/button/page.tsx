@@ -1,24 +1,24 @@
 'use client'
 
 import { useRef, useState } from 'react'
-import { Button } from '../all-components/controls/button'
-import { ButtonGroup } from '../all-components/controls/button-group'
-import { Input } from '../all-components/controls/input'
-import { InputGroup, InputGroupAddon } from '../all-components/controls/input-group'
+import { Button } from '../../controls/button'
+import { ButtonGroup } from '../../controls/button-group'
+import { Input } from '../../controls/input'
+import { InputGroup, InputGroupAddon } from '../../controls/input-group'
 import { Heart, Moon, Search, Sun } from 'lucide-react'
-import { Checkbox } from '../all-components/controls/checkbox'
-import { Dropdown, DropdownButton, DropdownContent, DropdownItem } from '../all-components/controls/dropdown'
-import { Combobox, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList } from '../all-components/controls/combobox'
-import { RadioGroup, RadioItem } from '../all-components/controls/radio-group'
-import { Switch, SwitchIcon } from '../all-components/controls/switch'
-import { Card, CardAction, CardBody, CardDescription, CardFooter, CardHeader, CardImage, CardTitle } from '../all-components/controls/card'
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, AccordionValue } from '../all-components/controls/accordion'
-import { Dialog, DialogButton, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogOverlay, DialogTitle } from '../all-components/controls/dialog'
-import { TabButton, TabHighLight, TabList, TabPanel, Tabs } from '../all-components/controls/tabs'
-import { Breadcrumbs, BreadcrumbsEllipsis, BreadcrumbsItem, BreadcrumbsLink, BreadcrumbsPage, BreadcrumbsSeparator } from '../all-components/controls/breadcrumbs'
-import { DynamicBreadcrumbs } from '../all-components/controls/expandBReadCrumbs'
-import { DatePicker, DatePickerContent, DatePickerGrid, DatePickerHeader, DatePickerTrigger } from '../all-components/controls/datepicker'
-import Sortable from '../all-components/controls/dragAndDrop'
+import { Checkbox } from '../../controls/checkbox'
+import { Dropdown, DropdownButton, DropdownContent, DropdownItem } from '../../controls/dropdown'
+import { Combobox, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList } from '../../controls/combobox'
+import { RadioGroup, RadioItem } from '../../controls/radio-group'
+import { Switch, SwitchIcon } from '../../controls/switch'
+import { Card, CardAction, CardBody, CardDescription, CardFooter, CardHeader, CardImage, CardTitle } from '../../controls/card'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, AccordionValue } from '../../controls/accordion'
+import { Dialog, DialogButton, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogOverlay, DialogTitle } from '../../controls/dialog'
+import { TabButton, TabHighLight, TabList, TabPanel, Tabs } from '../../controls/tabs'
+import { Breadcrumbs, BreadcrumbsEllipsis, BreadcrumbsItem, BreadcrumbsLink, BreadcrumbsPage, BreadcrumbsSeparator } from '../../controls/breadcrumbs'
+import { DynamicBreadcrumbs } from '../../controls/expandBReadCrumbs'
+import { DatePicker, DatePickerContent, DatePickerGrid, DatePickerHeader, DatePickerTrigger } from '../../controls/datepicker'
+import Sortable from '../../controls/dragAndDrop'
 
 export default function ButtonPage() {
     const asd = useRef<HTMLDivElement>(null)
@@ -217,7 +217,6 @@ export default function ButtonPage() {
                 <BreadcrumbsItem>
                     <BreadcrumbsEllipsis />
                 </BreadcrumbsItem>
-
                 <BreadcrumbsItem>
                     <BreadcrumbsLink href="/products">Products</BreadcrumbsLink>
                 </BreadcrumbsItem>
