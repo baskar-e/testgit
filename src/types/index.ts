@@ -1,4 +1,4 @@
-import { RefObject } from "react";
+import { ReactElement, RefObject } from "react";
 import { FloatingContext, OpenChangeReason, Placement, useFloating, useInteractions } from "@floating-ui/react";
 
 export interface FloatingContextType {
@@ -21,3 +21,10 @@ export interface MenuItemProps {
     title: string;
     url: string | null;
 }
+
+export interface DataProps {
+    name: ReactElement | string
+    type: ReactElement | string
+    default?: ReactElement | string
+    description: string
+}   

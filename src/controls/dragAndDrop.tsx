@@ -353,7 +353,7 @@ export default function Sortable({
 
     return (
         <div className={cn('flex flex-col gap-y-2.5 [--left-h:36px] xl:[--left-h:40px]', className)}>
-            <div className={cn('flex items-center gap-x-5 text-[#3E4B61]', headerClass)}>
+            <div className={cn('flex items-center gap-x-5 text-ash', headerClass)}>
                 <h3 className="font-medium text-base xl:text-lg me-auto">Left Menu</h3>
                 <button
                     className="flex items-center justify-center text-white text-sm bg-violet-800 rounded-lg gap-x-1.5 w-20 xl:w-22.5 h-(--left-h) mt-auto"

@@ -95,7 +95,7 @@ export function Combobox({ children, open, onOpen, position, space = 5 }: Combob
     );
 }
 
-export function ComboboxInput<T extends HTMLInputElement>({ ref: externalRef,className, value: controlledValue, onChange, ...props }: ComboboxInputProps<T>) {
+export function ComboboxInput<T extends HTMLInputElement>({ ref: externalRef, className, value: controlledValue, onChange, ...props }: ComboboxInputProps<T>) {
     const { refs, activeIndex, isOpen, inputValue, labelsRef, getReferenceProps, setIsOpen, setInputValue } = useComboboxContext();
     const value = controlledValue ?? inputValue;
     const mergedRef = useMergeRefs([refs.setReference, externalRef]);
@@ -103,9 +103,9 @@ export function ComboboxInput<T extends HTMLInputElement>({ ref: externalRef,cla
     return (
         <div
             ref={mergedRef as Ref<HTMLInputElement>}
-            className={cn("flex items-center w-full border border-gray-300 rounded-lg outline-none focus:ring-2 ring-violet-500", className)}
+            className={cn("flex items-center w-full bg-white border border-slate-100 h-9 rounded-lg outline-none shadow-white-md focus:ring-2 ring-violet-500", className)}
         >
-            <Input
+            <Input className='bg-transparent '
                 {...getReferenceProps({
                     placeholder: 'Search...',
                     ...props,
@@ -131,7 +131,18 @@ export function ComboboxInput<T extends HTMLInputElement>({ ref: externalRef,cla
                 aria-activedescendant={activeIndex != null ? `combobox-item-${activeIndex}` : undefined}
                 data-state={isOpen ? 'open' : 'closed'}
             />
-            <Button type='button' aria-controls='combobox-list' aria-expanded={isOpen} tabIndex={-1} onClick={(e) => { e.stopPropagation(), setIsOpen(!isOpen) }}><ChevronDown className='text-gray-500 w-4.5' /></Button>
+            <div className='flex p-1'>
+                <Button
+                    type='button'
+                    aria-controls='combobox-list'
+                    aria-expanded={isOpen}
+                    className='px-2 hover:bg-slate-100'
+                    tabIndex={-1}
+                    onClick={(e) => { e.stopPropagation(), setIsOpen(!isOpen) }}
+                >
+                    <ChevronDown className='text-gray-500 size-4' />
+                </Button>
+            </div>
         </div>
     );
 }
@@ -201,8 +212,6 @@ export function ComboboxItem({ children, className, value, onSelect, ...props }:
         </div>
     );
 }
-
-
 
 export function ComboboxEmpty({ children = "No results found.", className }: ComponentProps<"div">) {
     const { listRef } = useComboboxContext();

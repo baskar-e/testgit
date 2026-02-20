@@ -62,13 +62,13 @@ export const accordionCode = [
     word: { keyword: 'import', bracket: '{' },
     level: [
       {
-        word: { text: 'Accordion' },
+        word: { text: 'Accordion,', },
       },
       {
-        word: { text: 'AccordionContent' },
+        word: { text: 'AccordionContent,' },
       },
       {
-        word: { text: 'AccordionItem' },
+        word: { text: 'AccordionItem,' },
       },
       {
         word: { text: 'AccordionTrigger' },
@@ -85,8 +85,7 @@ export const accordionUsage = [
     word: { tag: '<Accordion>' },
     level: [
       {
-        word: [t('tag', '<AccordionTrigger>'), t('text', 'Open 1'), t('tag', '</AccordionTrigger>')],
-        space: false
+        word: [t('tag', '<AccordionTrigger>', false), t('text', 'Open 1', false), t('tag', '</AccordionTrigger>')],
       },
       {
         word: { tag: '<AccordionContent>' },
@@ -104,8 +103,7 @@ export const accordionUsage = [
   {
     level: [
       {
-        word: [t('tag', '<AccordionTrigger>'), t('text', 'Open 2'), t('tag', '</AccordionTrigger>')],
-        space: false
+        word: [t('tag', '<AccordionTrigger>', false), t('text', 'Open 2', false), t('tag', '</AccordionTrigger>')],
       },
       {
         word: { tag: '<AccordionContent>' },
@@ -123,8 +121,7 @@ export const accordionUsage = [
   {
     level: [
       {
-        word: [t('tag', '<AccordionTrigger>'), t('text', 'Open 3'), t('tag', '</AccordionTrigger>')],
-        space: false
+        word: [t('tag', '<AccordionTrigger>', false), t('text', 'Open 3', false), t('tag', '</AccordionTrigger>')],
       },
       {
         word: { tag: '<AccordionContent>' },
@@ -148,11 +145,7 @@ export const accordionBasic = [
   ...accordionCode,
   ...items,
   {
-    word: {
-      "keyword": "export function",
-      "function": "AccordionBasic",
-      "bracket": "() {"
-    },
+    word: [t("keyword", "export function"), t("function", "AccordionBasic", false), t("bracket", "() {")],
     level: [
       {
         word: {
@@ -163,12 +156,12 @@ export const accordionBasic = [
       {
         level: [
           {
-            word: [t('tag', '<Accordion'), t('prop', 'type', false), t('keyword', '=', false), t('text', '"single"'), t('prop', 'defaultValue', false), t('keyword', '=', false), t('text', '"item-1"', false), t('tag', '>')],
+            word: [t('tag', '<Accordion'), t('prop', 'type', false), t('keyword', '=', false), t('string', '"single"'), t('prop', 'defaultValue', false), t('keyword', '=', false), t('string', '"item-1"', false), t('tag', '>')],
           },
           {
             "level": [
               {
-                "word": [t("bracket", "{", false), t("text", "items.", false), t("function", "map", false), t("bracket", "((item) => (")],
+                "word": [t("bracket", "{", false), t("text", "items.", false), t("function", "map", false), t("bracket", "((", false), t("operator", "item", false), t("bracket", ")"), t("keyword", "=>"), t("bracket", "(")],
                 "level": [
                   {
                     "word": [t("tag", "<AccordionItem"), t("prop", "key", false), t("keyword", "=", false), t("bracket", "{", false), t("text", "item.value", false), t("bracket", "}"), t("prop", "value", false), t("keyword", "=", false), t("bracket", "{", false), t("text", "item.value", false), t("bracket", "}", false), t("tag", ">")]
@@ -210,11 +203,7 @@ export const accordionMultiple = [
   ...accordionCode,
   ...items,
   {
-    word: {
-      "keyword": "export function",
-      "function": "AccordionMultiple",
-      "bracket": "() {"
-    },
+    word: [t("keyword", "export function"), t("function", "AccordionMultiple", false), t("bracket", "() {")],
     level: [
       {
         word: {
@@ -225,12 +214,12 @@ export const accordionMultiple = [
       {
         level: [
           {
-            word: [t('tag', '<Accordion'), t('prop', 'type', false), t('keyword', '=', false), t('text', '"multiple"'), t('prop', 'defaultValue', false), t('keyword', '=', false), t("bracket", "[", false), t('text', '"item-1",'), t('text', '"item-3"', false), t('bracket', ']', false), t('tag', '>')],
+            word: [t('tag', '<Accordion'), t('prop', 'type', false), t('keyword', '=', false), t('string', '"multiple"'), t('prop', 'defaultValue', false), t('keyword', '=', false), t("bracket", "[", false), t('string', '"item-1",'), t('string', '"item-3"', false), t('bracket', ']', false), t('tag', '>')],
           },
           {
             "level": [
               {
-                "word": [t("bracket", "{", false), t("text", "items.", false), t("function", "map", false), t("bracket", "((item) => (")],
+                "word": [t("bracket", "{", false), t("text", "items.", false), t("function", "map", false), t("bracket", "((", false), t("operator", "item", false), t("bracket", ")"), t("keyword", "=>"), t("bracket", "(")],
                 "level": [
                   {
                     "word": [t("tag", "<AccordionItem"), t("prop", "key", false), t("keyword", "=", false), t("bracket", "{", false), t("text", "item.value", false), t("bracket", "}"), t("prop", "value", false), t("keyword", "=", false), t("bracket", "{", false), t("text", "item.value", false), t("bracket", "}", false), t("tag", ">")]
@@ -292,19 +281,19 @@ export const accordionItems = [
 export const accordionPropsData = [
   {
     name: <span className="inline-block w-min bg-gray-100 px-2 py-1 rounded-md">type*</span>,
-    type: <span className="inline-block w-min bg-gray-100 px-2 py-1 rounded-md">"single" | "multiple"</span>,
+    type: <div className="flex flex-wrap gap-1"><span className="bg-gray-100 px-2 py-1 rounded-md">"single"</span><span className="bg-gray-100 px-2 py-1 rounded-md">"multiple"</span></div>,
     default: '-',
     description: "Defines whether the accordion allows single or multiple panels to be expanded."
   },
   {
     name: <span className="inline-block w-min bg-gray-100 px-2 py-1 rounded-md">value</span>,
-    type: <span className="inline-block w-min bg-gray-100 px-2 py-1 rounded-md">string | number</span>,
+    type: <div className="flex flex-wrap gap-1"><span className="bg-gray-100 px-2 py-1 rounded-md">string</span><span className="bg-gray-100 px-2 py-1 rounded-md">number</span></div>,
     default: '-',
     description: "Controls which panel is expanded. Can be a string or number representing the selected panel."
   },
   {
     name: <span className="inline-block w-min bg-gray-100 px-2 py-1 rounded-md">defaultValue</span>,
-    type: <span className="inline-block w-min bg-gray-100 px-2 py-1 rounded-md">string | number</span>,
+    type: <div className="flex flex-wrap gap-1"><span className="bg-gray-100 px-2 py-1 rounded-md">string</span><span className="bg-gray-100 px-2 py-1 rounded-md">number</span></div>,
     default: '-',
     description: "Sets the initially active panel. Only used in uncontrolled components."
   },
@@ -316,13 +305,13 @@ export const accordionPropsData = [
   },
   {
     name: <span className="inline-block w-min bg-gray-100 px-2 py-1 rounded-md">value <span className="whitespace-nowrap">(for multiple)</span></span>,
-    type: <span className="inline-block w-min bg-gray-100 px-2 py-1 rounded-md">string[] | number[]</span>,
+    type: <div className="flex flex-wrap gap-1"><span className="bg-gray-100 px-2 py-1 rounded-md">string[]</span><span className="bg-gray-100 px-2 py-1 rounded-md">number[]</span></div>,
     default: '[]',
     description: "Controls multiple panels to be expanded (for 'multiple' type)."
   },
   {
     name: <span className="inline-block w-min bg-gray-100 px-2 py-1 rounded-md">defaultValue <span className="whitespace-nowrap">(for multiple)</span></span>,
-    type: <span className="inline-block w-min bg-gray-100 px-2 py-1 rounded-md">string[] | number[]</span>,
+    type: <div className="flex flex-wrap gap-1"><span className="bg-gray-100 px-2 py-1 rounded-md">string[]</span><span className="bg-gray-100 px-2 py-1 rounded-md">number[]</span></div>,
     default: '[]',
     description: "Sets the initially active panels (for 'multiple' type)."
   },
@@ -345,8 +334,8 @@ export const accordionItemPropsData = [
 
 export const accordionItemAttribute = [
   {
-    name: <span className="bg-gray-100 px-2 py-1 rounded-md">data-state</span>,
-    type: <span className="bg-gray-100 px-2 py-1 rounded-md">"open" | "closed"</span>,
+    name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">data-state</span>,
+    type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">"open" | "closed"</span>,
     description: "Indicates whether the item is expanded or collapsed."
   }
 ]

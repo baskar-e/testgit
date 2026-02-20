@@ -186,7 +186,7 @@ export function TabButton({ value, children, className, ...props }: TabButtonPro
             data-state={isActive ? 'active' : 'inactive'}
             tabIndex={isActive ? 0 : -1}
             className={cn(
-                "relative px-4 py-2 text-sm text-slate-500 font-normal rounded-[22px] hover:text-slate-700 data-[state=active]:font-medium data-[state=active]:text-ash focus-visible:outline-slate-400",
+                "relative px-4 py-2 text-sm text-ash font-normal rounded-[22px] -outline-offset-1 hover:text-slate-800 data-[state=active]:font-medium data-[state=active]:text-slate-800 focus-visible:outline-slate-400",
                 className
             )}
             {...props}
@@ -225,7 +225,7 @@ export function TabPanel({ value, children, className, ...props }: TabPanelProps
             data-state={isActive ? 'active' : 'inactive'}
             data-orientation={orientation}
             tabIndex={0}
-            className={cn("p-4 bg-[#edf0f3] text-ash rounded-lg animate-in fade-in duration-200", className)}
+            className={cn("p-4 bg-[#edf0f3] rounded-lg animate-in fade-in duration-200", className)}
             {...props}
         >
             {children}

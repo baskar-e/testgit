@@ -1,3 +1,5 @@
+'use client';
+
 import { ComponentProps } from 'react';
 import { createSafeContext } from '@/lib/context';
 import { cn } from '@/lib/utils';
@@ -11,7 +13,7 @@ export function Card({ children, className, ...props }: ComponentProps<"div">) {
         <CardProvider value={{}}>
             <div
                 className={cn(
-                    "relative w-80 overflow-hidden rounded-xl border border-white/20 bg-white/10 backdrop-blur-md shadow-white-md supports-backdrop-filter:bg-white/10",
+                    "relative w-80 text-sm overflow-hidden rounded-xl space-y-3 bg-white shadow-white-md",
                     className
                 )}
                 {...props}
@@ -28,7 +30,7 @@ export function CardHeader({ children, className, ...props }: ComponentProps<"di
     return (
         <div
             className={cn(
-                "border-b border-white/20 px-5 py-3",
+                "border-b border-white/20 px-5 mt-4",
                 className
             )}
             {...props}>
@@ -43,7 +45,7 @@ export function CardFooter({ children, className, ...props }: ComponentProps<"di
     return (
         <div
             className={cn(
-                "flex items-center gap-2.5 border-t border-white/20 px-5 py-3",
+                "flex items-center gap-2.5 border-t border-white/20 px-5 pt-1 mb-4",
                 className
             )}
             {...props}>
@@ -52,12 +54,11 @@ export function CardFooter({ children, className, ...props }: ComponentProps<"di
     );
 };
 
-
-export function CardBody({ children, className, ...props }: ComponentProps<"div">) {
+export function CardContent({ children, className, ...props }: ComponentProps<"div">) {
     useCardContext();
 
     return (
-        <div className={cn("flex flex-col gap-3 px-5 py-4", className)} {...props}>{children}</div>
+        <div className={cn("flex flex-col gap-4 px-5 my-4", className)} {...props}>{children}</div>
     )
 }
 
@@ -73,7 +74,7 @@ export function CardTitle({ children, className, ...props }: ComponentProps<"h3"
     useCardContext();
 
     return (
-        <h3 className={cn("text-xl font-bold text-slate-700 drop-shadow-sm", className)} {...props}>{children}</h3>
+        <h3 className={cn("text-lg font-medium text-slate-800 drop-shadow-sm", className)} {...props}>{children}</h3>
     )
 }
 
@@ -91,7 +92,7 @@ export function CardAction({ children, className, ...props }: ComponentProps<"bu
     return (
         <button
             type='button'
-            className={cn("w-fit rounded-lg px-4 py-2 text-sm text-white font-medium bg-violet-700 backdrop-blur-sm hover:bg-violet-800", className)}
+            className={cn("w-full rounded-lg px-3 py-1.5 text-sm text-white font-medium bg-violet-700 hover:bg-violet-800", className)}
             {...props}
         >
             {children}

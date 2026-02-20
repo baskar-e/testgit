@@ -21,7 +21,7 @@ export type TokenType =
 const TOKEN_COLORS: Record<TokenType, string> = {
   keyword: 'text-red-700 dark:text-purple-400',
   string: 'text-green-700 dark:text-green-400',
-  number: 'text-orange-400',
+  number: 'text-sky-600 dark:text-orange-400',
   function: 'text-yellow-600 dark:text-rose-400',
   tag: 'text-blue-800 dark:text-blue-400',
   prop: 'text-violet-600 dark:text-cyan-300',
@@ -164,7 +164,7 @@ export function CodeBlock({
                   )}
                 >
                   {/* Code Line with Tokens */}
-                  <span className="whitespace-pre [counter-increment:line] before:content-[counter(line)] before:inline-block before:mr-3 before:pl-2 before:pr-4 before:py-1 before:h-full before:text-slate-500 dark:before:text-slate-600">
+                  <span className="whitespace-pre [counter-increment:line] before:content-[counter(line)] before:inline-block before:w-8 before:h-full before:mr-3 before:pl-2 before:py-1 before:text-slate-500 dark:before:text-slate-600">
                     {line.indent > 0 && <span>{' '.repeat(line.indent)}</span>}
                     {tokens.map((token, tokenIndex) => (
                       <Fragment key={tokenIndex}>

@@ -1,3 +1,5 @@
+'use client';
+
 import { ComponentProps } from 'react';
 import { cn } from '@/lib/utils';
 import { ChevronRight, Ellipsis } from 'lucide-react';
@@ -83,7 +85,7 @@ export function BreadcrumbsEllipsis({ className, ...props }: ComponentProps<"spa
             className={cn("text-slate-600", className)}
             {...props}
         >
-            <Ellipsis className='w-4 h-4' />
+            <Ellipsis className='w-4 h-4 text-slate-500' />
             <span className="sr-only">More</span>
         </span>
     );
