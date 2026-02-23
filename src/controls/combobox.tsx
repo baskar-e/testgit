@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent, ComponentProps, Dispatch, ReactNode, Ref, RefObject, SetStateAction, useRef, useState } from 'react';
+import { ChangeEvent, ComponentProps, Dispatch, ReactNode, Ref, RefObject, SetStateAction, useMemo, useRef, useState } from 'react';
 import {
     useFloating, autoUpdate, offset, flip, size,
     useListNavigation, useListItem, useDismiss, useInteractions, useRole,
@@ -17,18 +17,26 @@ import { cn } from '@/lib/utils';
 import { ChevronDown } from 'lucide-react';
 import { Button } from './button';
 
-interface ComboboxContextProps extends FloatingContextType {
-    labelsRef: any
+interface ComboboxContextProps<T extends ItemProps> extends FloatingContextType {
+    filteredItems: T[]
     inputValue: string
     setInputValue: Dispatch<SetStateAction<string>>
+    getItemLabel: (item: T) => string;
+    getItemValue: (item: T) => string;
+    isItemDisabled: (item: T) => boolean;
 }
 
-type ComboboxProps = {
+type ComboboxProps<T extends ItemProps> = {
     children: ReactNode
+    items: T[]
     space?: number
     position?: Placement
+    autoHighlight?: boolean
     open?: boolean
     onOpen?: (open: boolean, event?: Event, reason?: OpenChangeReason) => void
+    labelKey?: keyof T | ((item: T) => string);
+    valueKey?: keyof T | ((item: T) => string);
+    disabledKey?: keyof T | ((item: T) => boolean);
 }
 
 type ComboboxInputProps<T> = ({
@@ -41,22 +49,62 @@ type ComboboxInputProps<T> = ({
     onChange: (value: string) => void;
 }) & Omit<ComponentProps<"input">, "value" | "onChange">
 
-type ComboListProps = {
-    value?: string;
-    onSelect?: (value: string) => void;
+type ComboboxItemProps = {
+    value: ItemProps;
+    onSelect?: (value: string, item: ItemProps) => void;
 } & Omit<ComponentProps<"div">, "onSelect">
 
-const [ComboboxProvider, useComboboxContext] = createSafeContext<ComboboxContextProps>('Combobox');
+type ItemProps = string | Record<string, any>;
 
-export function Combobox({ children, open, onOpen, position, space = 5 }: ComboboxProps) {
+const [ComboboxProvider, useComboboxContext] = createSafeContext<ComboboxContextProps<any>>('Combobox');
+
+export function Combobox<T extends ItemProps>({ children, open, onOpen, items, autoHighlight = false, position, space = 5, labelKey = 'label' as keyof T, valueKey = 'value' as keyof T, disabledKey = 'disabled' as keyof T }: ComboboxProps<T>) {
     const [internalOpen, setInternalOpen] = useState(false);
     const [inputValue, setInputValue] = useState("");
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
     const listRef = useRef<Array<HTMLElement | null>>([]);
-    const labelsRef = useRef<(string | null)[]>([]);
 
     const isOpen = open ?? internalOpen;
     const setIsOpen = onOpen ?? setInternalOpen;
+
+    const getItemLabel = (item: T): string => {
+        if (typeof item === 'string') return item;
+
+        if (typeof labelKey === 'function') {
+            return String(labelKey(item));
+        }
+
+        return String(item[labelKey] ?? item);
+    };
+
+    const getItemValue = (item: T): string => {
+        if (typeof item === 'string') return item;
+
+        if (typeof valueKey === 'function') {
+            return String(valueKey(item));
+        }
+
+        return String(item[valueKey] ?? item[labelKey as keyof T] ?? item);
+    };
+
+    const isItemDisabled = (item: T): boolean => {
+        if (typeof item === 'string') return false;
+
+        if (typeof disabledKey === 'function') {
+            return Boolean(disabledKey(item));
+        }
+
+        return Boolean(item[disabledKey]);
+    };
+
+    const filteredItems = useMemo(() => {
+        const search = inputValue.toLowerCase().trim();
+        if (!search) return items;
+        return items.filter((item) => {
+            const label = getItemLabel(item);
+            return label.toLowerCase().includes(search);
+        });
+    }, [items, inputValue]);
 
     const { refs, context, placement, floatingStyles } = useFloating({
         open: isOpen,
@@ -84,19 +132,21 @@ export function Combobox({ children, open, onOpen, position, space = 5 }: Combob
         onNavigate: setActiveIndex,
         virtual: true,
         loop: true,
+        focusItemOnOpen: autoHighlight,
     });
 
     const { getFloatingProps, getReferenceProps, getItemProps } = useInteractions([role, dismiss, listNav]);
 
     return (
-        <ComboboxProvider value={{ isOpen, inputValue, activeIndex, listRef, labelsRef, refs, context, placement, floatingStyles, getFloatingProps, getReferenceProps, getItemProps, setIsOpen, setInputValue }}>
+        <ComboboxProvider value={{ isOpen, inputValue, activeIndex, listRef, refs, filteredItems, context, placement, floatingStyles, getItemLabel, getItemValue, isItemDisabled, getFloatingProps, getReferenceProps, getItemProps, setIsOpen, setInputValue }}>
             {children}
         </ComboboxProvider>
     );
 }
 
 export function ComboboxInput<T extends HTMLInputElement>({ ref: externalRef, className, value: controlledValue, onChange, ...props }: ComboboxInputProps<T>) {
-    const { refs, activeIndex, isOpen, inputValue, labelsRef, getReferenceProps, setIsOpen, setInputValue } = useComboboxContext();
+    const { refs, activeIndex, isOpen, inputValue, filteredItems, getItemLabel, getItemValue, isItemDisabled, getReferenceProps, setIsOpen, setInputValue } = useComboboxContext();
+
     const value = controlledValue ?? inputValue;
     const mergedRef = useMergeRefs([refs.setReference, externalRef]);
 
@@ -118,10 +168,12 @@ export function ComboboxInput<T extends HTMLInputElement>({ ref: externalRef, cl
                     },
                     onKeyDown: (e: React.KeyboardEvent) => {
                         if (e.key === 'Enter' && activeIndex != null) {
-                            const selectedItem = labelsRef.current[activeIndex];
-                            if (selectedItem) {
-                                onChange?.(selectedItem);
-                                setInputValue(selectedItem);
+                            const selectedItem = filteredItems[activeIndex];
+                            if (selectedItem && !isItemDisabled(selectedItem)) {
+                                const selectedValue = getItemValue(selectedItem);
+                                const selectedLabel = getItemLabel(selectedItem);
+                                onChange?.(selectedValue);
+                                setInputValue(selectedLabel);
                                 setIsOpen(false);
                             }
                         }
@@ -148,7 +200,7 @@ export function ComboboxInput<T extends HTMLInputElement>({ ref: externalRef, cl
 }
 
 export function ComboboxList({ children, className, ...props }: ComponentProps<"div">) {
-    const { isOpen, refs, listRef, labelsRef, placement, floatingStyles, getFloatingProps, context } = useComboboxContext();
+    const { isOpen, refs, listRef, placement, floatingStyles, getFloatingProps, context } = useComboboxContext();
 
     if (!isOpen) return null;
 
@@ -163,7 +215,7 @@ export function ComboboxList({ children, className, ...props }: ComponentProps<"
                     data-placement={placement}
                     className={cn("z-50 border rounded-lg shadow-md overflow-y-auto max-h-60 p-1.5 bg-white/20 backdrop-blur-md border-white/30 space-y-1 dark:bg-slate-950/70 dark:backdrop-blur-lg dark:border-slate-800/50", className)}
                 >
-                    <FloatingList elementsRef={listRef} labelsRef={labelsRef}>
+                    <FloatingList elementsRef={listRef}>
                         {children}
                     </FloatingList>
                 </div>
@@ -172,22 +224,29 @@ export function ComboboxList({ children, className, ...props }: ComponentProps<"
     );
 }
 
-export function ComboboxItem({ children, className, value, onSelect, ...props }: ComboListProps) {
-    const { activeIndex, inputValue, getItemProps, setIsOpen, setInputValue } = useComboboxContext();
-    const itemLabel = value ? String(value) : typeof children === 'string' ? children : "";
+export function ComboboxItem({ children, className, value, onSelect, ...props }: ComboboxItemProps) {
+    const { activeIndex, filteredItems, getItemLabel, getItemValue, isItemDisabled, getItemProps, setIsOpen, setInputValue } = useComboboxContext();
     const { ref, index } = useListItem();
 
-    const search = inputValue.toLowerCase().trim();
-    const isMatch = itemLabel.toLowerCase().includes(search);
+    if (!value) return null;
 
-    const isActive = activeIndex === index && isMatch;
+    const itemLabel = getItemLabel(value);
+    const itemValue = getItemValue(value);
+    const disabled = isItemDisabled(value);
+    console.log(itemLabel)
+
+    const isMatch = filteredItems.indexOf(value);
+
+    if (isMatch === -1) return null;
+
+    const isActive = activeIndex === index;
 
     return (
         <div
             className={cn(
                 "relative flex cursor-pointer select-none items-center rounded-lg px-3 py-2 text-sm  transition-colors duration-200  dark:hover:bg-slate-800/60 focus:bg-white/60 outline-none",
                 isActive && 'bg-white/40 text-slate-800 shadow-md ring-1 ring-white/70',
-                !isMatch && 'hidden',
+                disabled && 'opacity-50 cursor-not-allowed',
                 className
             )}
             {...getItemProps({
@@ -195,18 +254,17 @@ export function ComboboxItem({ children, className, value, onSelect, ...props }:
                 ref,
                 role: 'option',
                 'aria-selected': isActive,
+                'aria-disabled': disabled,
                 tabIndex: isActive ? 0 : -1,
                 onClick() {
-                    onSelect?.(value ?? "");
-                    setInputValue(String(children));
+                    if (disabled) return;
+                    onSelect?.(itemValue, value!);
+                    setInputValue(itemLabel);
                     setIsOpen(false);
                 },
             })}
             id={`combobox-item-${index}`}
-            aria-disabled={!isMatch}
-            aria-hidden={!isMatch}
             data-selected={isActive ? 'selected' : ''}
-            data-visible={isMatch}
         >
             {children}
         </div>
@@ -214,13 +272,9 @@ export function ComboboxItem({ children, className, value, onSelect, ...props }:
 }
 
 export function ComboboxEmpty({ children = "No results found.", className }: ComponentProps<"div">) {
-    const { listRef } = useComboboxContext();
+    const { filteredItems } = useComboboxContext();
 
-    const isEmpty = listRef.current
-        .filter((node): node is HTMLElement => node !== null)
-        .every((node) => node.dataset.visible !== 'true');
-
-    if (!isEmpty) return null;
+    if (filteredItems.length > 0) return null;
 
     return (
         <div

@@ -6,6 +6,7 @@ import { checkboxBasic, checkboxCode, checkboxDisabled, checkboxLabel, checkboxP
 import { Combobox, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList } from "@/controls/combobox"
 
 export default function ComboboxPage() {
+    const arr = [{'lab':'apple', val: 'a'}, {'lab':'banana',val:'b'}, {'lab':'mango', val: 'm'}];
     return (
         <div className="grid gap-8 max-w-160 lg:max-w-180 2xl:max-w-200 py-4 xl:py-6 mx-auto" >
             <div className="grid gap-3">
@@ -37,13 +38,15 @@ export default function ComboboxPage() {
                         <TabButton value="code">Code</TabButton>
                     </TabList>
                     <TabPanel value="preview" className="flex items-center justify-center px-32 min-h-77">
-                        <Combobox>
+                        <Combobox items={arr} labelKey={'lab'}>
                             <ComboboxInput placeholder="Select an option..." />
                             <ComboboxList>
                                 <ComboboxEmpty />
-                                <ComboboxItem value="option1">Option 1</ComboboxItem>
-                                <ComboboxItem value="option2">Option 2</ComboboxItem>
-                                <ComboboxItem value="option3">Option 3</ComboboxItem>
+                                {
+                                    arr.map(a=>(
+                                        <ComboboxItem key={a.lab} value={a}>{a.lab}</ComboboxItem>
+                                    ))
+                                }
                             </ComboboxList>
                         </Combobox>
                     </TabPanel>

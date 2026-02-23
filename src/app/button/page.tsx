@@ -182,7 +182,7 @@ export default function ButtonPage() {
                     </DropdownItem>
                 </DropdownContent>
             </Dropdown>
-            <Combobox position='top-start' >
+            <Combobox items={[]} position='top-start' >
                 <ComboboxInput placeholder='sd' value={ci} onChange={(e) => { setCi(e), console.log(e) }} />
                 <ComboboxList>
                     <ComboboxEmpty />
