@@ -36,7 +36,7 @@ type ComboboxProps<T extends ItemProps> = {
     onOpen?: (open: boolean, event?: Event, reason?: OpenChangeReason) => void
     labelKey?: keyof T | ((item: T) => string);
     valueKey?: keyof T | ((item: T) => string);
-    disabledKey?: keyof T | ((item: T) => boolean);
+    disabledKey?: keyof T | ((item: T) => boolean) | null;
 }
 
 type ComboboxInputProps<T> = ({
@@ -49,6 +49,10 @@ type ComboboxInputProps<T> = ({
     onChange: (value: string) => void;
 }) & Omit<ComponentProps<"input">, "value" | "onChange">
 
+type ComboboxListProps = {
+    children?: ReactNode | ((item: any, index: number) => ReactNode);
+} & Omit<ComponentProps<"div">, "children">
+
 type ComboboxItemProps = {
     value: ItemProps;
     onSelect?: (value: string, item: ItemProps) => void;
@@ -57,6 +61,7 @@ type ComboboxItemProps = {
 type ItemProps = string | Record<string, any>;
 
 const [ComboboxProvider, useComboboxContext] = createSafeContext<ComboboxContextProps<any>>('Combobox');
+const [ComboboxContentProvider, useComboboxContentContext] = createSafeContext<{}>('ComboboxContent');
 
 export function Combobox<T extends ItemProps>({ children, open, onOpen, items, autoHighlight = false, position, space = 5, labelKey = 'label' as keyof T, valueKey = 'value' as keyof T, disabledKey = 'disabled' as keyof T }: ComboboxProps<T>) {
     const [internalOpen, setInternalOpen] = useState(false);
@@ -89,10 +94,13 @@ export function Combobox<T extends ItemProps>({ children, open, onOpen, items, a
 
     const isItemDisabled = (item: T): boolean => {
         if (typeof item === 'string') return false;
+        
+        if (disabledKey === null) return false;
 
         if (typeof disabledKey === 'function') {
             return Boolean(disabledKey(item));
         }
+
 
         return Boolean(item[disabledKey]);
     };
@@ -199,28 +207,45 @@ export function ComboboxInput<T extends HTMLInputElement>({ ref: externalRef, cl
     );
 }
 
-export function ComboboxList({ children, className, ...props }: ComponentProps<"div">) {
-    const { isOpen, refs, listRef, placement, floatingStyles, getFloatingProps, context } = useComboboxContext();
+export function ComboboxContent({ children, className, ...props }: ComponentProps<"div">) {
+    const { isOpen, refs, placement, floatingStyles, getFloatingProps, context } = useComboboxContext();
 
     if (!isOpen) return null;
 
     return (
-        <FloatingPortal>
-            <FloatingFocusManager context={context} modal={false} initialFocus={-1}>
-                <div
-                    style={floatingStyles}
-                    {...getFloatingProps({ ...props, id: 'combobox-list' })}
-                    ref={refs.setFloating}
-                    data-state={isOpen ? 'open' : 'closed'}
-                    data-placement={placement}
-                    className={cn("z-50 border rounded-lg shadow-md overflow-y-auto max-h-60 p-1.5 bg-white/20 backdrop-blur-md border-white/30 space-y-1 dark:bg-slate-950/70 dark:backdrop-blur-lg dark:border-slate-800/50", className)}
-                >
-                    <FloatingList elementsRef={listRef}>
+        <ComboboxContentProvider value={{}}>
+            <FloatingPortal>
+                <FloatingFocusManager context={context} modal={false} initialFocus={-1}>
+                    <div
+                        style={floatingStyles}
+                        {...getFloatingProps({ ...props, id: 'combobox-list' })}
+                        ref={refs.setFloating}
+                        data-state={isOpen ? 'open' : 'closed'}
+                        data-placement={placement}
+                        className={cn("z-50 border rounded-lg shadow-md overflow-y-auto max-h-60 p-1.5 bg-white/20 backdrop-blur-md border-white/30 space-y-1 dark:bg-slate-950/70 dark:backdrop-blur-lg dark:border-slate-800/50", className)}
+                    >
                         {children}
-                    </FloatingList>
-                </div>
-            </FloatingFocusManager>
-        </FloatingPortal>
+                    </div>
+                </FloatingFocusManager>
+            </FloatingPortal>
+        </ComboboxContentProvider>
+    );
+}
+
+export function ComboboxList({ children }: ComboboxListProps) {
+    useComboboxContentContext();
+    const { listRef, filteredItems } = useComboboxContext();
+
+    const isRenderFunction = typeof children === 'function';
+
+    const content = isRenderFunction
+        ? filteredItems.map((item, index) => children(item, index))
+        : children;
+
+    return (
+        <FloatingList elementsRef={listRef}>
+            {content}
+        </FloatingList>
     );
 }
 
@@ -233,7 +258,6 @@ export function ComboboxItem({ children, className, value, onSelect, ...props }:
     const itemLabel = getItemLabel(value);
     const itemValue = getItemValue(value);
     const disabled = isItemDisabled(value);
-    console.log(itemLabel)
 
     const isMatch = filteredItems.indexOf(value);
 

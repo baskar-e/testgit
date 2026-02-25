@@ -12,7 +12,7 @@ export type TokenType =
   | 'function'
   | 'tag'
   | 'prop'
-  | 'operator'
+  | 'variable'
   | 'bracket'
   | 'comment'
   | 'text';
@@ -25,7 +25,7 @@ const TOKEN_COLORS: Record<TokenType, string> = {
   function: 'text-yellow-600 dark:text-rose-400',
   tag: 'text-blue-800 dark:text-blue-400',
   prop: 'text-violet-600 dark:text-cyan-300',
-  operator: 'text-cyan-700 dark:text-cyan-400',
+  variable: 'text-cyan-700 dark:text-cyan-400',
   bracket: 'text-purple-700 dark:text-amber-400',
   comment: 'text-gray-500',
   text: 'text-slate-700 dark:text-slate-300',
