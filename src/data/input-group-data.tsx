@@ -331,16 +331,16 @@ export const inputGroupPropsData = [
 
 export const inputGroupAddonPropsData = [
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">align</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">align</span>,
         type: (
             <div className="flex flex-wrap gap-1">
-                <span className="bg-gray-100 px-2 py-1 rounded-md">"inline-start"</span>
-                <span className="bg-gray-100 px-2 py-1 rounded-md">"inline-end"</span>
-                <span className="bg-gray-100 px-2 py-1 rounded-md">"block-start"</span>
-                <span className="bg-gray-100 px-2 py-1 rounded-md">"block-end"</span>
+                <span className="bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"inline-start"</span>
+                <span className="bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"inline-end"</span>
+                <span className="bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"block-start"</span>
+                <span className="bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"block-end"</span>
             </div>
         ),
-        default: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">"horizontal"</span>,
+        default: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"horizontal"</span>,
         description: "A prop used to specify the alignment of an element relative to its container."
     },
     {
@@ -351,8 +351,8 @@ export const inputGroupAddonPropsData = [
 
 export const inputGroupAddonAttribute = [
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">data-align</span>,
-        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">"inline-start" | "inline-end" | "block-start" | "block-end"</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">data-align</span>,
+        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"inline-start" | "inline-end" | "block-start" | "block-end"</span>,
         description: "A data attribute that reflects the alignment value of the element."
     }
 ]

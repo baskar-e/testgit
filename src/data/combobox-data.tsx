@@ -852,75 +852,75 @@ export const comboboxAutoHighlight = [
 
 export const comboboxPropsData = [
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">open</span>,
-        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">boolean</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">open</span>,
+        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">boolean</span>,
         default: 'false',
         description: "Controls whether the combobox dropdown is open."
     },
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">onOpen</span>,
-        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">{"(open: boolean) => void"}</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">onOpen</span>,
+        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">{"(open: boolean) => void"}</span>,
         default: '-',
         description: "Callback function fired when the combobox open state is changed."
     },
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">items*</span>,
-        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">array</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">items*</span>,
+        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">array</span>,
         default: '-',
         description: "Array of items to be displayed in the dropdown list."
     },
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">autoHighlight</span>,
-        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">boolean</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">autoHighlight</span>,
+        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">boolean</span>,
         default: 'false',
         description: "Automatically highlights the first item when the dropdown is opened."
     },
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">align</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">align</span>,
         type: (
             <div className="flex flex-wrap gap-1">
-                <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">"start"</span>
-                <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">"center"</span>
-                <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">"end"</span>
+                <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"start"</span>
+                <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"center"</span>
+                <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"end"</span>
             </div>
         ),
         default: 'center',
         description: "The preferred alignment against the trigger which the component will be positioned."
     },
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">side</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">side</span>,
         type: (
             <div className="flex flex-wrap gap-1">
-                <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">"top"</span>
-                <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">"bottom"</span>
-                <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">"left"</span>
-                <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">"right"</span>
+                <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"top"</span>
+                <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"bottom"</span>
+                <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"left"</span>
+                <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"right"</span>
             </div>
         ),
         default: 'bottom',
         description: "The preferred edge of the trigger against which the component will be positioned."
     },
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">space</span>,
-        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">number</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">space</span>,
+        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">number</span>,
         default: '5',
         description: "The space between the combobox input and the dropdown."
     },
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">labelKey</span>,
-        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">'label'</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">labelKey</span>,
+        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">'label'</span>,
         default: "'label'",
         description: "Specifies the object property or provides a callback function to determine the display text for each item."
     },
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">valueKey</span>,
-        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">'value'</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">valueKey</span>,
+        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">'value'</span>,
         default: "'value'",
         description: "Specifies the object property or provides a callback function to determine the unique identifier for each item."
     },
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">disabledKey</span>,
-        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">'disabled'</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">disabledKey</span>,
+        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">'disabled'</span>,
         default: "'disabled'",
         description: "Specifies the object property or provides a callback function to determine if an item is non-interactive."
     }
@@ -928,8 +928,8 @@ export const comboboxPropsData = [
 
 export const comboboxEmptyPropsData = [
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">children</span>,
-        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">ReactNode</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">children</span>,
+        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">ReactNode</span>,
         default: 'No results found.',
         description: "Content or elements rendered inside the component."
     },
@@ -937,14 +937,14 @@ export const comboboxEmptyPropsData = [
 
 export const comboboxInputPropsData = [
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">value</span>,
-        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">string</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">value</span>,
+        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">string</span>,
         default: '""',
         description: "The controlled input value of the combobox input."
     },
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">onChange</span>,
-        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">{"(value: string) => void"}</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">onChange</span>,
+        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">{"(value: string) => void"}</span>,
         default: '-',
         description: "Event handler called when the input value changes."
     },
@@ -952,19 +952,19 @@ export const comboboxInputPropsData = [
 
 export const comboboxItemPropsData = [
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">value*</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">value*</span>,
         type: (
             <div className="flex flex-wrap gap-1">
-                <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">string</span>
-                <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">object</span>
+                <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">string</span>
+                <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">object</span>
             </div>
         ),
         default: '-',
         description: "The value associated with the item. Typically used to identify the selected item."
     },
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">onSelect</span>,
-        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">{"(value: string, item: string | object) => void"}</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">onSelect</span>,
+        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">{"(value: string, item: string | object) => void"}</span>,
         default: '-',
         description: "A callback function executed when the item is clicked or selected via keyboard, returning both the item's value and its original data object."
     },
@@ -972,34 +972,34 @@ export const comboboxItemPropsData = [
 
 export const comboboxContentAttribute = [
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">data-state</span>,
-        type: <span className="inline-block w-max bg-gray-100 px-2 py-1 rounded-md">"open" | "closed"</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">data-state</span>,
+        type: <span className="inline-block w-max bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"open" | "closed"</span>,
         description: "Indicates whether the combobox content is opened or closed."
     },
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">data-align</span>,
-        type: <span className="inline-block w-max bg-gray-100 px-2 py-1 rounded-md">"start" | "center" | "end"</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">data-align</span>,
+        type: <span className="inline-block w-max bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"start" | "center" | "end"</span>,
         description: "Indicates the alignment of the combobox content relative to its trigger."
     },
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">data-side</span>,
-        type: <span className="inline-block w-max bg-gray-100 px-2 py-1 rounded-md">"top" | "bottom" | "left" | "right"</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">data-side</span>,
+        type: <span className="inline-block w-max bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"top" | "bottom" | "left" | "right"</span>,
         description: "The attribute specifies the side on which the combobox content is positioned relative to the trigger."
     }
 ]
 
 export const comboboxInputAttribute = [
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">data-state</span>,
-        type: <span className="inline-block w-max bg-gray-100 px-2 py-1 rounded-md">"open" | "closed"</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">data-state</span>,
+        type: <span className="inline-block w-max bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"open" | "closed"</span>,
         description: "Indicates whether the combobox content is opened or closed."
     }
 ]
 
 export const comboboxItemAttribute = [
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">data-selected</span>,
-        type: <span className="inline-block w-max bg-gray-100 px-2 py-1 rounded-md">"selected"</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">data-selected</span>,
+        type: <span className="inline-block w-max bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"selected"</span>,
         description: "Indicates whether the item is currently selected."
     }
 ]

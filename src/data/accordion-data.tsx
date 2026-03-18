@@ -280,50 +280,58 @@ export const accordionItems = [
 
 export const accordionPropsData = [
   {
-    name: <span className="inline-block w-min bg-gray-100 px-2 py-1 rounded-md">type*</span>,
-    type: <div className="flex flex-wrap gap-1"><span className="bg-gray-100 px-2 py-1 rounded-md">"single"</span><span className="bg-gray-100 px-2 py-1 rounded-md">"multiple"</span></div>,
+    name: <span className="inline-block w-min bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">type*</span>,
+    type: (
+      <div className="flex flex-wrap gap-1">
+        <span className="bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"single"</span>
+        <span className="bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"multiple"</span>
+      </div>
+    ),
     default: '-',
     description: "Defines whether the accordion allows single or multiple panels to be expanded."
   },
   {
-    name: <span className="inline-block w-min bg-gray-100 px-2 py-1 rounded-md">value</span>,
+    name: <span className="inline-block w-min bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">value</span>,
     type: (
       <div className="flex flex-wrap gap-1">
-        <span className="bg-gray-100 px-2 py-1 rounded-md">string</span>
-        <span className="bg-gray-100 px-2 py-1 rounded-md">number</span>
-        <span className="bg-gray-100 px-2 py-1 rounded-md">null</span>
+        <span className="bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">string</span>
+        <span className="bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">number</span>
+        <span className="bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">null</span>
       </div>
     ),
     default: '-',
     description: "Controls which panel is expanded. Can be a string or number representing the selected panel."
   },
   {
-    name: <span className="inline-block w-min bg-gray-100 px-2 py-1 rounded-md">defaultValue</span>,
-    type: <div className="flex flex-wrap gap-1"><span className="bg-gray-100 px-2 py-1 rounded-md">string</span><span className="bg-gray-100 px-2 py-1 rounded-md">number</span></div>,
+    name: <span className="inline-block w-min bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">defaultValue</span>,
+    type: <div className="flex flex-wrap gap-1">
+      <span className="bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">string</span>
+      <span className="bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">number</span>
+      </div>,
     default: '-',
     description: "Sets the initially active panel. Only used in uncontrolled components."
   },
   {
-    name: <span className="inline-block w-min bg-gray-100 px-2 py-1 rounded-md">onValueChange</span>,
-    type: <span className="inline-block w-auto bg-gray-100 px-2 py-1 rounded-md">{"(value: string | number | null) => void"}</span>,
+    name: <span className="inline-block w-min bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">onValueChange</span>,
+    type: <span className="inline-block w-auto bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">{"(value: string | number | null) => void"}</span>,
     default: '-',
     description: "Callback function fired when the active value changes. Only available in controlled components."
   },
   {
-    name: <span className="inline-block w-min bg-gray-100 px-2 py-1 rounded-md">value <span className="whitespace-nowrap">(for multiple)</span></span>,
-    type: <div className="flex flex-wrap gap-1"><span className="bg-gray-100 px-2 py-1 rounded-md">string[]</span><span className="bg-gray-100 px-2 py-1 rounded-md">number[]</span></div>,
+    name: <span className="inline-block w-min bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">value <span className="whitespace-nowrap">(for multiple)</span></span>,
+    type: <div className="flex flex-wrap gap-1"><span className="bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">string[]</span><span className="bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">number[]</span></div>,
     default: '[]',
     description: "Controls multiple panels to be expanded (for 'multiple' type)."
   },
   {
-    name: <span className="inline-block w-min bg-gray-100 px-2 py-1 rounded-md">defaultValue <span className="whitespace-nowrap">(for multiple)</span></span>,
-    type: <div className="flex flex-wrap gap-1"><span className="bg-gray-100 px-2 py-1 rounded-md">string[]</span><span className="bg-gray-100 px-2 py-1 rounded-md">number[]</span></div>,
+    name: <span className="inline-block w-min bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">defaultValue <span className="whitespace-nowrap">(for multiple)</span></span>,
+    type: <div className="flex flex-wrap gap-1"><span className="bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">string[]</span><span className="bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">number[]</span></div>,
     default: '[]',
     description: "Sets the initially active panels (for 'multiple' type)."
   },
   {
-    name: <span className="inline-block w-min bg-gray-100 px-2 py-1 rounded-md">onValueChange <span className="whitespace-nowrap">(for multiple)</span></span>,
-    type: <span className="inline-block w-auto bg-gray-100 px-2 py-1 rounded-md">{"(value: string[] | number[]) => void"}</span>,
+    name: <span className="inline-block w-min bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">onValueChange <span className="whitespace-nowrap">(for multiple)</span></span>,
+    type: <span className="inline-block w-auto bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">{"(value: string[] | number[]) => void"}</span>,
     default: '-',
     description: "Callback function fired when the active value changes. Only available in controlled components."
   },
@@ -331,8 +339,8 @@ export const accordionPropsData = [
 
 export const accordionItemPropsData = [
   {
-    name: <span className="inline-block w-min bg-gray-100 px-2 py-1 rounded-md">value*</span>,
-    type: <span className="inline-block w-min bg-gray-100 px-2 py-1 rounded-md">string</span>,
+    name: <span className="inline-block w-min bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">value*</span>,
+    type: <span className="inline-block w-min bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">string</span>,
     default: '-',
     description: "The unique identifier for each AccordionItem."
   }
@@ -340,8 +348,8 @@ export const accordionItemPropsData = [
 
 export const accordionItemAttribute = [
   {
-    name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">data-state</span>,
-    type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">"open" | "closed"</span>,
+    name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">data-state</span>,
+    type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"open" | "closed"</span>,
     description: "Indicates whether the item is expanded or collapsed."
   }
 ]

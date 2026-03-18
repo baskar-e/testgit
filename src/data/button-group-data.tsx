@@ -218,9 +218,14 @@ export const buttonGroupInput = [
 
 export const buttonGroupPropsData = [
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">orientation</span>,
-        type: <div className="flex flex-wrap gap-1"><span className="bg-gray-100 px-2 py-1 rounded-md">"horizontal"</span><span className="bg-gray-100 px-2 py-1 rounded-md">"vertical"</span></div>,
-        default: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">"horizontal"</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">orientation</span>,
+        type: (
+            <div className="flex flex-wrap gap-1">
+                <span className="bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"horizontal"</span>
+                <span className="bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"vertical"</span>
+            </div>
+        ),
+        default: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"horizontal"</span>,
         description: "Change the orientation of the button group."
     },
     {
@@ -231,8 +236,8 @@ export const buttonGroupPropsData = [
 
 export const buttonGroupAttribute = [
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">data-orientation</span>,
-        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">"horizontal" | "vertical"</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">data-orientation</span>,
+        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"horizontal" | "vertical"</span>,
         description: "Indicates the orientation of the button group."
     }
 ]

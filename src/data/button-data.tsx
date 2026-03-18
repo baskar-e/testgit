@@ -209,30 +209,30 @@ export const buttonSize = [
 
 export const buttonPropsData = [
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">variant</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">variant</span>,
         type: (
             <div className="flex flex-wrap gap-1">
-                <span className="bg-gray-100 px-2 py-1 rounded-md">"primary"</span>
-                <span className="bg-gray-100 px-2 py-1 rounded-md">"secondary"</span>
-                <span className="bg-gray-100 px-2 py-1 rounded-md">"ghost"</span>
-                <span className="bg-gray-100 px-2 py-1 rounded-md">"outline"</span>
-                <span className="bg-gray-100 px-2 py-1 rounded-md">"white"</span>
+                <span className="bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"primary"</span>
+                <span className="bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"secondary"</span>
+                <span className="bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"ghost"</span>
+                <span className="bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"outline"</span>
+                <span className="bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"white"</span>
             </div>
         ),
-        default: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">"primary"</span>,
+        default: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"primary"</span>,
         description: "Change the variant of the button."
     },
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">size</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">size</span>,
         type: (
             <div className="flex flex-wrap gap-1">
-                <span className="bg-gray-100 px-2 py-1 rounded-md">"xs"</span>
-                <span className="bg-gray-100 px-2 py-1 rounded-md">"sm"</span>
-                <span className="bg-gray-100 px-2 py-1 rounded-md">"md"</span>
-                <span className="bg-gray-100 px-2 py-1 rounded-md">"lg"</span>
+                <span className="bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"xs"</span>
+                <span className="bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"sm"</span>
+                <span className="bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"md"</span>
+                <span className="bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"lg"</span>
             </div>
         ),
-        default: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">"md"</span>,
+        default: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"md"</span>,
         description: "Change the size of the button."
     },
     {
@@ -243,13 +243,13 @@ export const buttonPropsData = [
 
 export const ButtonAttribute = [
     {
-        name: <span className="inline-block w-max bg-gray-100 px-2 py-1 rounded-md">data-variant</span>,
-        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">"primary" | "secondary" | "ghost" | "outline" | "white"</span>,
+        name: <span className="inline-block w-max bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">data-variant</span>,
+        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"primary" | "secondary" | "ghost" | "outline" | "white"</span>,
         description: "Indicates the variant of the button."
     },
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">data-size</span>,
-        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">"xs" | "sm" | "md" | "lg"</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">data-size</span>,
+        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"xs" | "sm" | "md" | "lg"</span>,
         description: "Indicates the size of the button."
     }
 ]

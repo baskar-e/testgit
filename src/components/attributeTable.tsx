@@ -7,9 +7,9 @@ const AttributeTable = ({ data }: { data: DataProps[] }) => {
             <table className="text-[13px] xl:text-sm w-full @max-[640px]:w-160">
                 <thead className="text-left">
                     <tr>
-                        <th className="bg-white px-3 py-2 rounded-l-md whitespace-nowrap">Data Attribute</th>
-                        <th className="bg-white px-3 py-2">Values</th>
-                        <th className="bg-white px-3 py-2 rounded-r-md">Description</th>
+                        <th className="bg-white px-3 py-2 rounded-l-md whitespace-nowrap dark:bg-zinc-900">Data Attribute</th>
+                        <th className="bg-white px-3 py-2 dark:bg-zinc-900">Values</th>
+                        <th className="bg-white px-3 py-2 rounded-r-md dark:bg-zinc-900">Description</th>
                     </tr>
                     <tr className="h-2"></tr>
                 </thead>
@@ -17,9 +17,9 @@ const AttributeTable = ({ data }: { data: DataProps[] }) => {
                     {data.map((row, index) => (
                         <Fragment key={index}>
                             <tr>
-                                <td className="bg-white px-3 py-2 rounded-l-md">{row.name}</td>
-                                <td className="bg-white px-3 py-2">{row.type}</td>
-                                <td className="bg-white px-3 py-2 rounded-r-md text-ash">{row.description}</td>
+                                <td className="bg-white px-3 py-2 rounded-l-md dark:bg-zinc-900">{row.name}</td>
+                                <td className="bg-white px-3 py-2 dark:bg-zinc-900">{row.type}</td>
+                                <td className="bg-white px-3 py-2 rounded-r-md text-ash dark:text-slate-200/80 dark:bg-zinc-900">{row.description}</td>
                             </tr>
                             <tr className="h-1"></tr>
                         </Fragment>

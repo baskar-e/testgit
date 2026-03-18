@@ -437,14 +437,14 @@ export const dialogOverlay = [
 
 export const dialogPropsData = [
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">open</span>,
-        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">boolean</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">open</span>,
+        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">boolean</span>,
         default: 'false',
         description: "Controls whether the combobox dropdown is open."
     },
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">onOpen</span>,
-        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">{"(open: boolean) => void"}</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">onOpen</span>,
+        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">{"(open: boolean) => void"}</span>,
         default: '-',
         description: "Callback function fired when the combobox open state is changed."
     }
@@ -452,8 +452,8 @@ export const dialogPropsData = [
 
 export const dialogContentPropsData = [
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">showCloseButton</span>,
-        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">boolean</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">showCloseButton</span>,
+        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">boolean</span>,
         default: 'true',
         description: "indicates whether the close button will be displayed within the dialog component."
     },
@@ -461,16 +461,16 @@ export const dialogContentPropsData = [
 
 export const dialogButtonAttribute = [
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">data-state</span>,
-        type: <span className="inline-block w-max bg-gray-100 px-2 py-1 rounded-md">"open" | "closed"</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">data-state</span>,
+        type: <span className="inline-block w-max bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">"open" | "closed"</span>,
         description: "Indicates whether the modal is opened or closed."
     }
 ]
 
 export const dialogOverlayPropsData = [
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">portal</span>,
-        type: <span className="inline-block w-max bg-gray-100 px-2 py-1 rounded-md">{"RefObject<HTMLElement | null>"}</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">portal</span>,
+        type: <span className="inline-block w-max bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">{"RefObject<HTMLElement | null>"}</span>,
         default: 'document.body',
         description: "Specify a container element to render the content into via a portal."
     }

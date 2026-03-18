@@ -7,7 +7,7 @@ import { Heart } from "lucide-react"
 
 export default function CardPage() {
     return (
-        <div className="grid gap-8 max-w-160 lg:max-w-180 2xl:max-w-200 py-4 xl:py-6 mx-auto" >
+        <div className="grid gap-8 max-w-160 lg:max-w-180 2xl:max-w-200 py-4 xl:py-6 mx-auto dark:text-slate-200">
             <div className="grid gap-3">
                 <h3 className="text-2xl xl:text-3xl font-medium">Card</h3>
                 <p className="max-xl:text-[15px]">Cards are flexible containers used to group related content and action. It includes subcomponents for header, title, description, image, content and footer sections to structure information effectively.</p>
@@ -58,7 +58,7 @@ export default function CardPage() {
             <div className="grid gap-3">
                 <h5 className="text-lg xl:text-xl font-medium pb-1">Image</h5>
                 <p className="text-sm">
-                    Add an image using <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">{'<CardImage />'}</code> component to create a card with an image.
+                    Add an image using <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">{'<CardImage />'}</code> component to create a card with an image.
                 </p>
                 <Tabs defaultValue={'preview'} variant="line">
                     <TabList>
@@ -96,56 +96,56 @@ export default function CardPage() {
                 <h4 className="text-xl xl:text-2xl font-medium pb-2">Component API</h4>
                 <h5 className="text-lg xl:text-xl font-medium">Card</h5>
                 <p className="text-sm pb-1">
-                    The <span className="text-[13px] rounded-sm px-1.5 py-0.5 bg-gray-200">Card</span> component is the root container for card content.
+                    The <span className="text-[13px] rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">Card</span> component is the root container for card content.
                 </p>
                 <PropsTable data={cardPropsData} />
             </div>
             <div className="grid gap-3">
                 <h5 className="text-lg xl:text-xl font-medium">CardAction</h5>
                 <p className="text-sm pb-1">
-                    The <span className="text-[13px] rounded-sm px-1.5 py-0.5 bg-gray-200">CardAction</span> component provides mechanism to make card elements interactive.
+                    The <span className="text-[13px] rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">CardAction</span> component provides mechanism to make card elements interactive.
                 </p>
                 <PropsTable data={cardActionPropsData} />
             </div>
             <div className="grid gap-3">
                 <h5 className="text-lg xl:text-xl font-medium">CardContent</h5>
                 <p className="text-sm pb-1">
-                    The <span className="text-[13px] rounded-sm px-1.5 py-0.5 bg-gray-200">CardContent</span> component is used for the main card body.
+                    The <span className="text-[13px] rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">CardContent</span> component is used for the main card body.
                 </p>
                 <PropsTable data={cardContentPropsData} />
             </div>
             <div className="grid gap-3">
                 <h5 className="text-lg xl:text-xl font-medium">CardDescription</h5>
                 <p className="text-sm pb-1">
-                    The <span className="text-[13px] rounded-sm px-1.5 py-0.5 bg-gray-200">CardDescription</span> component is used for helper text under the title.
+                    The <span className="text-[13px] rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">CardDescription</span> component is used for helper text under the title.
                 </p>
                 <PropsTable data={cardDescriptionPropsData} />
             </div>
             <div className="grid gap-3">
                 <h5 className="text-lg xl:text-xl font-medium">CardFooter</h5>
                 <p className="text-sm pb-1">
-                    The <span className="text-[13px] rounded-sm px-1.5 py-0.5 bg-gray-200">CardFooter</span> component is used for actions and secondary content at the bottom of the card.
+                    The <span className="text-[13px] rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">CardFooter</span> component is used for actions and secondary content at the bottom of the card.
                 </p>
                 <PropsTable data={cardFooterPropsData} />
             </div>
             <div className="grid gap-3">
                 <h5 className="text-lg xl:text-xl font-medium">CardHeader</h5>
                 <p className="text-sm pb-1">
-                    The <span className="text-[13px] rounded-sm px-1.5 py-0.5 bg-gray-200">CardHeader</span> component is used for a title, description, and optional action.
+                    The <span className="text-[13px] rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">CardHeader</span> component is used for a title, description, and optional action.
                 </p>
                 <PropsTable data={cardHeaderPropsData} />
             </div>
             <div className="grid gap-3">
                 <h5 className="text-lg xl:text-xl font-medium">CardImage</h5>
                 <p className="text-sm pb-1">
-                    The <span className="text-[13px] rounded-sm px-1.5 py-0.5 bg-gray-200">CardImage</span> component is used to display the main image of the card.
+                    The <span className="text-[13px] rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">CardImage</span> component is used to display the main image of the card.
                 </p>
                 <PropsTable data={cardImagePropsData} />
             </div>
             <div className="grid gap-3">
                 <h5 className="text-lg xl:text-xl font-medium">CardTitle</h5>
                 <p className="text-sm pb-1">
-                    The <span className="text-[13px] rounded-sm px-1.5 py-0.5 bg-gray-200">CardTitle</span> component is used for the card title.
+                    The <span className="text-[13px] rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">CardTitle</span> component is used for the card title.
                 </p>
                 <PropsTable data={cardTitlePropsData} />
             </div>

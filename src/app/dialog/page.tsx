@@ -13,11 +13,11 @@ export default function DialogPage() {
     const [open, setOpen] = useState(false);
 
     return (
-        <div className="grid gap-8 max-w-160 lg:max-w-180 2xl:max-w-200 py-4 xl:py-6 mx-auto" >
+        <div className="grid gap-8 max-w-160 lg:max-w-180 2xl:max-w-200 py-4 xl:py-6 mx-auto dark:text-slate-200">
             <div className="grid gap-3">
                 <h3 className="text-2xl xl:text-3xl font-medium">Dialog</h3>
                 <p className="max-xl:text-[15px]">
-                    <span className="text-[13px] rounded-sm px-1.5 py-0.5 bg-gray-200">Dialog</span> components create a modal overlay that appears above the main page content. This is used for focused interactions, such as forms, alerts, or confirmation dialogs.
+                    Dialog components create a modal overlay that appears above the main page content. This is used for focused interactions, such as forms, alerts, or confirmation dialogs.
                 </p>
             </div>
             <div className="grid gap-5">
@@ -36,7 +36,7 @@ export default function DialogPage() {
                 <h4 className="text-xl xl:text-2xl font-medium pb-2">Examples</h4>
                 <h5 className="text-lg xl:text-xl font-medium pb-1">Basic</h5>
                 <p className="text-sm">
-                    A basic <span className="text-[13px] rounded-sm px-1.5 py-0.5 bg-gray-200">{'Dialog'}</span> component that groups a header, main content, and footer into a focused modal window for user interaction.
+                    A basic <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">{'Dialog'}</code> component that groups a header, main content, and footer into a focused modal window for user interaction.
                 </p>
                 <Tabs defaultValue={'preview'} variant="line">
                     <TabList>
@@ -118,7 +118,7 @@ export default function DialogPage() {
             <div className="grid gap-3">
                 <h5 className="text-lg xl:text-xl font-medium pb-1">No Close Button</h5>
                 <p className="text-sm">
-                    Use <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">{"showCloseButton={false}"}</code> to hide the close button.
+                    Use <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">{"showCloseButton={false}"}</code> to hide the close button.
                 </p>
                 <Tabs defaultValue={'preview'} variant="line">
                     <TabList>
@@ -158,7 +158,7 @@ export default function DialogPage() {
             <div className="grid gap-3">
                 <h5 className="text-lg xl:text-xl font-medium pb-1">Dialog Overlay</h5>
                 <p className="text-sm">
-                    Use the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">DialogOverlay</code> component to customize or modify the overlay of the dialog component.
+                    Use the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">DialogOverlay</code> component to customize or modify the overlay of the dialog component.
                 </p>
                 <Tabs defaultValue={'preview'} variant="line">
                     <TabList>

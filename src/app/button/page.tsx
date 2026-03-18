@@ -7,7 +7,7 @@ import { ButtonAttribute, buttonBasic, buttonCode, buttonGhost, buttonOutline, b
 
 export default function ButtonPage() {
   return (
-    <div className="grid gap-8 max-w-160 lg:max-w-180 2xl:max-w-200 py-4 xl:py-6 mx-auto" >
+    <div className="grid gap-8 max-w-160 lg:max-w-180 2xl:max-w-200 py-4 xl:py-6 mx-auto dark:text-slate-200">
       <div className="grid gap-3">
         <h3 className="text-2xl xl:text-3xl font-medium">Button</h3>
         <p className="max-xl:text-[15px]">A button component is an interactive element used to trigger immediate actions, handle form submissions.</p>
@@ -47,7 +47,7 @@ export default function ButtonPage() {
       <div className="grid gap-3">
         <h5 className="text-lg xl:text-xl font-medium pb-1">Primary</h5>
         <p className="text-sm">
-          Set the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">{'variant="primary"'}</code> prop to change the variant of the button.
+          Set the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">{'variant="primary"'}</code> prop to change the variant of the button.
         </p>
         <Tabs defaultValue={'preview'} variant="line">
           <TabList>
@@ -67,7 +67,7 @@ export default function ButtonPage() {
      <div className="grid gap-3">
         <h5 className="text-lg xl:text-xl font-medium pb-1">Secondary</h5>
         <p className="text-sm">
-          Set the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">{'variant="secondary"'}</code> prop to change the variant of the button.
+          Set the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">{'variant="secondary"'}</code> prop to change the variant of the button.
         </p>
         <Tabs defaultValue={'preview'} variant="line">
           <TabList>
@@ -87,7 +87,7 @@ export default function ButtonPage() {
       <div className="grid gap-3">
         <h5 className="text-lg xl:text-xl font-medium pb-1">Ghost</h5>
         <p className="text-sm">
-          Set the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">{'variant="ghost"'}</code> prop to change the variant of the button.
+          Set the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">{'variant="ghost"'}</code> prop to change the variant of the button.
         </p>
         <Tabs defaultValue={'preview'} variant="line">
           <TabList>
@@ -107,7 +107,7 @@ export default function ButtonPage() {
       <div className="grid gap-3">
         <h5 className="text-lg xl:text-xl font-medium pb-1">Outline</h5>
         <p className="text-sm">
-          Set the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">{'variant="outline"'}</code> prop to change the variant of the button.
+          Set the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">{'variant="outline"'}</code> prop to change the variant of the button.
         </p>
         <Tabs defaultValue={'preview'} variant="line">
           <TabList>
@@ -127,7 +127,7 @@ export default function ButtonPage() {
       <div className="grid gap-3">
         <h5 className="text-lg xl:text-xl font-medium pb-1">White</h5>
         <p className="text-sm">
-          Set the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">{'variant="white"'}</code> prop to change the variant of the button.
+          Set the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">{'variant="white"'}</code> prop to change the variant of the button.
         </p>
         <Tabs defaultValue={'preview'} variant="line">
           <TabList>
@@ -147,7 +147,7 @@ export default function ButtonPage() {
        <div className="grid gap-3">
         <h5 className="text-lg xl:text-xl font-medium pb-1">Size</h5>
         <p className="text-sm">
-          Use the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">{"size"}</code> prop to change the size of the button. Default size is <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">"md"</code>.
+          Use the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">{"size"}</code> prop to change the size of the button. Default size is <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">"md"</code>.
         </p>
         <Tabs defaultValue={'preview'} variant="line">
           <TabList>
@@ -173,7 +173,7 @@ export default function ButtonPage() {
         <h4 className="text-xl xl:text-2xl font-medium pb-2">Component API</h4>
         <h5 className="text-lg xl:text-xl font-medium">Button</h5>
         <p className="text-sm pb-1">
-            The <span className="text-[13px] rounded-sm px-1.5 py-0.5 bg-gray-200">Button</span> component is a wrapper around the button element that adds a variety of styles and functionality.
+            The <span className="text-[13px] rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">Button</span> component is a wrapper around the button element that adds a variety of styles and functionality.
         </p>
         <PropsTable data={buttonPropsData} className="mb-5" />
         <AttributeTable data={ButtonAttribute} />

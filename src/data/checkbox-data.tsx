@@ -118,20 +118,20 @@ export const checkboxDisabled = [
 
 export const checkboxPropsData = [
     {
-        name: <span className="inline-block w-max bg-gray-100 px-2 py-1 rounded-md">label</span>,
-        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">string</span>,
+        name: <span className="inline-block w-max bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">label</span>,
+        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">string</span>,
         default: '-',
         description: "The label text for the checkbox."
     },
     {
-        name: <span className="inline-block w-max bg-gray-100 px-2 py-1 rounded-md">description</span>,
-        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">string</span>,
+        name: <span className="inline-block w-max bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">description</span>,
+        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">string</span>,
         default: '-',
         description: "The description text for the checkbox."
     },
     {
-        name: <span className="inline-block w-max bg-gray-100 px-2 py-1 rounded-md">disabled</span>,
-        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">boolean</span>,
+        name: <span className="inline-block w-max bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">disabled</span>,
+        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">boolean</span>,
         default: 'false',
         description: "Whether the checkbox is disabled."
     }

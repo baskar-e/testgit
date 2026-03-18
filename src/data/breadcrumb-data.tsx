@@ -246,15 +246,15 @@ export const breadcrumbEllipsis = [
 
 export const breadcrumbPropsData = [
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">className</span>,
-        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">string</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">className</span>,
+        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">string</span>,
         default: '-',
         description: "Custom CSS class name for styling the breadcrumb component."
     },
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">separator</span>,
-        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">boolean</span>,
-        default: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">true</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">separator</span>,
+        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">boolean</span>,
+        default: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">true</span>,
         description: "Disables separator for the breadcrumbs when set to false. You can also pass a custom separator component."
     },
 ]
@@ -269,8 +269,8 @@ export const breadcrumbPagePropsData = [{ ...classNameProps, description: "Custo
 
 export const breadcrumbSeparatorPropsData = [
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">children</span>,
-        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">React.ReactNode</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">children</span>,
+        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">React.ReactNode</span>,
         default: '-',
         description: "Custom separator element. By default, it renders a right arrow icon."
     },
@@ -279,8 +279,8 @@ export const breadcrumbSeparatorPropsData = [
 
 export const breadcrumbPageAttribute = [
     {
-        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">data-current</span>,
-        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md">boolean</span>,
+        name: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">data-current</span>,
+        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">boolean</span>,
         description: "Indicates whether the item is the current page."
     }
 ]

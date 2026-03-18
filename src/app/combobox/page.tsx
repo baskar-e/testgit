@@ -39,7 +39,7 @@ export default function ComboboxPage() {
     ];
 
     return (
-        <div className="grid gap-8 max-w-160 lg:max-w-180 2xl:max-w-200 py-4 xl:py-6 mx-auto" >
+        <div className="grid gap-8 max-w-160 lg:max-w-180 2xl:max-w-200 py-4 xl:py-6 mx-auto dark:text-slate-200">
             <div className="grid gap-3">
                 <h3 className="text-2xl xl:text-3xl font-medium">Combobox</h3>
                 <p className="max-xl:text-[15px]">
@@ -62,7 +62,7 @@ export default function ComboboxPage() {
                 <h4 className="text-xl xl:text-2xl font-medium pb-2">Examples</h4>
                 <h5 className="text-lg xl:text-xl font-medium pb-1">Basic</h5>
                 <p className="text-sm">
-                    A simple <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">{'Combobox'}</code> component that allows the user to select an option from a list of items.
+                    A simple <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">{'Combobox'}</code> component that allows the user to select an option from a list of items.
                 </p>
                 <Tabs defaultValue={'preview'} variant="line">
                     <TabList>
@@ -93,7 +93,7 @@ export default function ComboboxPage() {
             <div className="grid gap-3">
                 <h5 className="text-lg xl:text-xl font-medium pb-1">Label</h5>
                 <p className="text-sm">
-                    Use the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">labelKey</code> prop to specify the name of the property in your object that contains the text to be displayed in the UI. By default, this is set to <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">"label"</code>.
+                    Use the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">labelKey</code> prop to specify the name of the property in your object that contains the text to be displayed in the UI. By default, this is set to <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">"label"</code>.
                 </p>
                 <Tabs defaultValue={'preview'} variant="line">
                     <TabList>
@@ -120,7 +120,7 @@ export default function ComboboxPage() {
                     </TabPanel>
                 </Tabs>
                 <p className="text-sm pt-5">
-                    Provide a callback function to the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">labelKey</code> prop to dynamically determine the display label for each item.
+                    Provide a callback function to the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">labelKey</code> prop to dynamically determine the display label for each item.
                 </p>
                 <Tabs defaultValue={'preview'} variant="line">
                     <TabList>
@@ -151,7 +151,7 @@ export default function ComboboxPage() {
             <div className="grid gap-3">
                 <h5 className="text-lg xl:text-xl font-medium pb-1">Value</h5>
                 <p className="text-sm">
-                    Use the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">valueKey</code> prop to specify the object property that contains the unique identifier for each item. By default, this is set to <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">"value"</code>.
+                    Use the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">valueKey</code> prop to specify the object property that contains the unique identifier for each item. By default, this is set to <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">"value"</code>.
                 </p>
                 <Tabs defaultValue={'preview'} variant="line">
                     <TabList>
@@ -178,7 +178,7 @@ export default function ComboboxPage() {
                     </TabPanel>
                 </Tabs>
                 <p className="text-sm pt-5">
-                    You can also pass a callback function to the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">valueKey</code> prop to to dynamically generate a unique identifier from the item's properties.
+                    You can also pass a callback function to the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">valueKey</code> prop to to dynamically generate a unique identifier from the item's properties.
                 </p>
                 <Tabs defaultValue={'preview'} variant="line">
                     <TabList>
@@ -209,7 +209,7 @@ export default function ComboboxPage() {
             <div className="grid gap-3">
                 <h5 className="text-lg xl:text-xl font-medium pb-1">Disabled</h5>
                 <p className="text-sm">
-                    Use the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">disabledKey</code> prop to specify the property name in your object that marks an item as uninteractive. By default, this is set to <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">"disabled"</code>.
+                    Use the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">disabledKey</code> prop to specify the property name in your object that marks an item as uninteractive. By default, this is set to <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">"disabled"</code>.
                 </p>
                 <Tabs defaultValue={'preview'} variant="line">
                     <TabList>
@@ -236,7 +236,7 @@ export default function ComboboxPage() {
                     </TabPanel>
                 </Tabs>
                 <p className="text-sm pt-5">
-                    The <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">disabledKey</code> prop accepts a callback function, allowing you to disable items based on custom logic or multiple property checks within the object.
+                    The <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">disabledKey</code> prop accepts a callback function, allowing you to disable items based on custom logic or multiple property checks within the object.
                 </p>
                 <Tabs defaultValue={'preview'} variant="line">
                     <TabList>
@@ -267,7 +267,7 @@ export default function ComboboxPage() {
             <div className="grid gap-3">
                 <h5 className="text-lg xl:text-xl font-medium pb-1">Auto Highlight</h5>
                 <p className="text-sm">
-                    Use the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">autoHighlight</code> prop automatically highlight the first item on filter.
+                    Use the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">autoHighlight</code> prop automatically highlight the first item on filter.
                 </p>
                 <Tabs defaultValue={'preview'} variant="line">
                     <TabList>

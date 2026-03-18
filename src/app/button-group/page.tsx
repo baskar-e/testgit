@@ -10,7 +10,7 @@ import { Plus, Search } from "lucide-react"
 
 export default function ButtonGroupPage() {
   return (
-    <div className="grid gap-8 max-w-160 lg:max-w-180 2xl:max-w-200 py-4 xl:py-6 mx-auto" >
+    <div className="grid gap-8 max-w-160 lg:max-w-180 2xl:max-w-200 py-4 xl:py-6 mx-auto dark:text-slate-200">
       <div className="grid gap-3">
         <h3 className="text-2xl xl:text-3xl font-medium">Button Group</h3>
         <p className="max-xl:text-[15px]">A button group component is a container for grouping multiple buttons together.</p>
@@ -52,7 +52,7 @@ export default function ButtonGroupPage() {
       <div className="grid gap-3">
         <h5 className="text-lg xl:text-xl font-medium pb-1">Orientation</h5>
         <p className="text-sm">
-          Set the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">{"orientation='vertical'"}</code> prop to change the orientation of the buttons.
+          Set the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">{"orientation='vertical'"}</code> prop to change the orientation of the buttons.
         </p>
         <Tabs defaultValue={'preview'} variant="line">
           <TabList>
@@ -76,7 +76,7 @@ export default function ButtonGroupPage() {
       <div className="grid gap-3">
         <h5 className="text-lg xl:text-xl font-medium pb-1">Nested</h5>
         <p className="text-sm">
-          Nest <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">{"<ButtonGroup>"}</code> components to create nested button groups.
+          Nest <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">{"<ButtonGroup>"}</code> components to create nested button groups.
         </p>
         <Tabs defaultValue={'preview'} variant="line">
           <TabList>
@@ -106,7 +106,7 @@ export default function ButtonGroupPage() {
       <div className="grid gap-3">
         <h5 className="text-lg xl:text-xl font-medium pb-1">Input</h5>
         <p className="text-sm">
-          Wrap an <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">{"Input"}</code> component with buttons.
+          Wrap an <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">{"Input"}</code> component with buttons.
         </p>
         <Tabs defaultValue={'preview'} variant="line">
           <TabList>
@@ -132,7 +132,7 @@ export default function ButtonGroupPage() {
         <h4 className="text-xl xl:text-2xl font-medium pb-2">Component API</h4>
         <h5 className="text-lg xl:text-xl font-medium">ButtonGroup</h5>
         <p className="text-sm pb-1">
-          A <span className="text-[13px] rounded-sm px-1.5 py-0.5 bg-gray-200">ButtonGroup</span> component is a layout container designed to unify related buttons into a single, cohesive interface with seamless transitions and consistent styling.
+          A <span className="text-[13px] rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">ButtonGroup</span> component is a layout container designed to unify related buttons into a single, cohesive interface with seamless transitions and consistent styling.
         </p>
         <PropsTable data={buttonGroupPropsData} className="mb-5" />
         <AttributeTable data={buttonGroupAttribute} />

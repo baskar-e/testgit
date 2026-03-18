@@ -8,7 +8,7 @@ import { inputGroupAddonAttribute, inputGroupAddonPropsData, inputGroupBlockEnd,
 
 export default function InputGroupPage() {
     return (
-        <div className="grid gap-8 max-w-160 lg:max-w-180 2xl:max-w-200 py-4 xl:py-6 mx-auto" >
+        <div className="grid gap-8 max-w-160 lg:max-w-180 2xl:max-w-200 py-4 xl:py-6 mx-auto dark:text-slate-200">
             <div className="grid gap-3">
                 <h3 className="text-2xl xl:text-3xl font-medium">Input Group</h3>
                 <p className="max-xl:text-[15px]">A flexible container that groups multiple form controls, buttons, or decorative addons into a single, cohesive visual unit.</p>
@@ -27,7 +27,7 @@ export default function InputGroupPage() {
             <div className="grid gap-3">
                 <h4 className="text-xl xl:text-2xl font-medium pb-2">Examples</h4>
                 <h5 className="text-lg xl:text-xl font-medium pb-1">Align</h5>
-                <p className="text-sm">Use <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">align="inline-start"</code> to position the addon at the beginning of the input. This is the default.</p>
+                <p className="text-sm">Use <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">align="inline-start"</code> to position the addon at the beginning of the input. This is the default.</p>
                 <Tabs defaultValue={'preview'} variant="line">
                     <TabList>
                         <TabButton value="preview">Preview</TabButton>
@@ -48,7 +48,7 @@ export default function InputGroupPage() {
                     </TabPanel>
                 </Tabs>
                 <p className="text-sm pt-5">
-                    Use <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">align="inline-end"</code> to position the addon at the end of the input.
+                    Use <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">align="inline-end"</code> to position the addon at the end of the input.
                 </p>
                 <Tabs defaultValue={'preview'} variant="line">
                     <TabList>
@@ -70,7 +70,7 @@ export default function InputGroupPage() {
                     </TabPanel>
                 </Tabs>
                 <p className="text-sm pt-5">
-                    Use <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">align="block-start"</code> to position the addon above the input.
+                    Use <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">align="block-start"</code> to position the addon above the input.
                 </p>
                 <Tabs defaultValue={'preview'} variant="line">
                     <TabList>
@@ -92,7 +92,7 @@ export default function InputGroupPage() {
                     </TabPanel>
                 </Tabs>
                 <p className="text-sm pt-5">
-                    Use <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">align="block-end"</code> to position the addon below the input.
+                    Use <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">align="block-end"</code> to position the addon below the input.
                 </p>
                 <Tabs defaultValue={'preview'} variant="line">
                     <TabList>
@@ -117,7 +117,7 @@ export default function InputGroupPage() {
             <div className="grid gap-3">
                 <h5 className="text-lg xl:text-xl font-medium pb-1">Disabled</h5>
                 <p className="text-sm">
-                    Use the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">disabled</code> prop to prevent user interaction.
+                    Use the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">disabled</code> prop to prevent user interaction.
                 </p>
                 <Tabs defaultValue={'preview'} variant="line">
                     <TabList>

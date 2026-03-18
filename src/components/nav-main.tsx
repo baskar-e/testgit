@@ -33,7 +33,7 @@ export function NavMain({
 }) {
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+      <SidebarGroupLabel>Components</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
           <Collapsible key={item.title} asChild>
@@ -46,19 +46,19 @@ export function NavMain({
                   : null
               ) :
                 <>
-                  <CollapsibleTrigger asChild className="group text-slate-800 text-sm pl-2 py-1.5 cursor-default select-none">
+                  <CollapsibleTrigger asChild className="group text-slate-800 text-sm pl-2 py-1.5 cursor-default select-none dark:text-slate-300">
                     <div>{item.title}
                       <SidebarMenuAction className="group-data-[state=open]:rotate-90">
-                        <ChevronRight className="text-slate-600" />
+                        <ChevronRight className="text-slate-600 dark:text-slate-300" />
                         <span className="sr-only">Toggle</span>
                       </SidebarMenuAction>
                     </div>
                   </CollapsibleTrigger>
                   <CollapsibleContent>
-                    <SidebarMenuSub>
+                    <SidebarMenuSub className="dark:border-l-slate-700">
                       {item.items?.map((subItem) => (
                         <SidebarMenuSubItem key={subItem.title}>
-                          <SidebarMenuSubButton asChild className="text-slate-800">
+                          <SidebarMenuSubButton asChild className="text-slate-800 dark:text-slate-300">
                             <a href={subItem.url}>
                               <span>{subItem.title}</span>
                             </a>

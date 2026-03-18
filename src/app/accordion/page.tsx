@@ -7,7 +7,7 @@ import { accordionBasic, accordionCode, accordionItemAttribute, accordionItemPro
 
 export default function AccordionPage() {
   return (
-    <div className="grid gap-8 max-w-160 lg:max-w-180 2xl:max-w-200 py-4 xl:py-6 mx-auto" >
+    <div className="grid gap-8 max-w-160 lg:max-w-180 2xl:max-w-200 py-4 xl:py-6 mx-auto dark:text-slate-200">
       <div className="grid gap-3">
         <h3 className="text-2xl xl:text-3xl font-medium">Accordion</h3>
         <p className="max-xl:text-[15px]">A collapsible container for organizing content into expandable sections, commonly used to manage space in user interfaces.</p>
@@ -23,6 +23,7 @@ export default function AccordionPage() {
           data={accordionUsage}
         />
       </div>
+      {/* Basic */}
       <div className="grid gap-3">
         <h4 className="text-xl xl:text-2xl font-medium pb-2">Examples</h4>
         <h5 className="text-lg xl:text-xl font-medium pb-1">Basic</h5>
@@ -49,10 +50,11 @@ export default function AccordionPage() {
           </TabPanel>
         </Tabs>
       </div>
+      {/* Multiple */}
       <div className="grid gap-3">
         <h5 className="text-lg xl:text-xl font-medium pb-1">Multiple</h5>
         <p className="text-sm">
-          An accordion that allows multiple items to be open simultaneously. use <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">type="multiple"</code>.
+          An accordion that allows multiple items to be open simultaneously. use <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">type="multiple"</code>.
         </p>
         <Tabs defaultValue={'preview'} variant="line">
           <TabList>

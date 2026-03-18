@@ -3,7 +3,6 @@
 import { CodeBlock } from "@/components/codeBlock"
 import { TabButton, TabList, TabPanel, Tabs } from "../../controls/tabs"
 import { PropsTable } from "@/components/propsTable"
-import { checkboxBasic, checkboxCode, checkboxLabel, checkboxUsage } from "@/data/checkbox-data"
 import { useState } from "react"
 import { AttributeTable } from "@/components/attributeTable"
 import { Switch, SwitchThumb } from "@/controls/switch"
@@ -14,7 +13,7 @@ export default function SwitchPage() {
     const [check, setCheck] = useState(false);
 
     return (
-        <div className="grid gap-8 max-w-160 lg:max-w-180 2xl:max-w-200 py-4 xl:py-6 mx-auto" >
+        <div className="grid gap-8 max-w-160 lg:max-w-180 2xl:max-w-200 py-4 xl:py-6 mx-auto dark:text-slate-200">
             <div className="grid gap-3">
                 <h3 className="text-2xl xl:text-3xl font-medium">Switch</h3>
                 <p className="max-xl:text-[15px]">
@@ -36,7 +35,7 @@ export default function SwitchPage() {
                 <h4 className="text-xl xl:text-2xl font-medium pb-2">Examples</h4>
                 <h5 className="text-lg xl:text-xl font-medium pb-1">Basic</h5>
                 <p className="text-sm">
-                    A default switch with two states. Use the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">{'<Switch />'}</code> component to create a simple toggle that enables or disables a setting.
+                    A default switch with two states. Use the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">{'<Switch />'}</code> component to create a simple toggle that enables or disables a setting.
                 </p>
                 <Tabs defaultValue={'preview'} variant="line">
                     <TabList>
@@ -56,7 +55,7 @@ export default function SwitchPage() {
             <div className="grid gap-3">
                 <h5 className="text-lg xl:text-xl font-medium pb-1">Card</h5>
                 <p className="text-sm">
-                    A switch styled inside a card component. Use the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">{'<Switch />'}</code> component to allow users to toggle between two states.
+                    A switch styled inside a card component. Use the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">{'<Switch />'}</code> component to allow users to toggle between two states.
                 </p>
                 <Tabs defaultValue={'preview'} variant="line">
                     <TabList>
@@ -80,7 +79,7 @@ export default function SwitchPage() {
             <div className="grid gap-3">
                 <h5 className="text-lg xl:text-xl font-medium pb-1">Controlled</h5>
                 <p className="text-sm">
-                    Manage the toggle state programmatically using the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">value</code> and <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">onValueChange</code> props.
+                    Manage the toggle state programmatically using the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">value</code> and <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">onValueChange</code> props.
                 </p>
                 <Tabs defaultValue={'preview'} variant="line">
                     <TabList>
@@ -100,7 +99,7 @@ export default function SwitchPage() {
             <div className="grid gap-3">
                 <h5 className="text-lg xl:text-xl font-medium pb-1">Custom</h5>
                 <p className="text-sm">
-                    Customize the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">{'<Switch />'}</code> component with custom icons by passing children to the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200">{'<SwitchThumb />'}</code> component. Personalize its appearance and behavior to suit your needs.
+                    Customize the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">{'<Switch />'}</code> component with custom icons by passing children to the <code className="rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">{'<SwitchThumb />'}</code> component. Personalize its appearance and behavior to suit your needs.
                 </p>
                 <Tabs defaultValue={'preview'} variant="line">
                     <TabList>
@@ -128,7 +127,7 @@ export default function SwitchPage() {
                 <h4 className="text-xl xl:text-2xl font-medium pb-2">Component API</h4>
                 <h5 className="text-lg xl:text-xl font-medium">Switch</h5>
                 <p className="text-sm pb-1">
-                    The <span className="text-[13px] rounded-sm px-1.5 py-0.5 bg-gray-200">Switch</span> component allows users to toggle between two states, like on/off or enabled/disabled.
+                    The <span className="text-[13px] rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">Switch</span> component allows users to toggle between two states, like on/off or enabled/disabled.
                 </p>
                 <PropsTable data={switchPropsData} className="mb-5" />
                 <AttributeTable data={switchAttribute} />
@@ -136,7 +135,7 @@ export default function SwitchPage() {
             <div className="grid gap-3">
                 <h5 className="text-lg xl:text-xl font-medium">SwitchThumb</h5>
                 <p className="text-sm pb-1">
-                    The <span className="text-[13px] rounded-sm px-1.5 py-0.5 bg-gray-200">SwitchThumb</span> component lets you customize the switch’s appearance by passing icons for the "on" and "off" states.
+                    The <span className="text-[13px] rounded-sm px-1.5 py-0.5 bg-gray-200 dark:bg-zinc-700/80">SwitchThumb</span> component lets you customize the switch’s appearance by passing icons for the "on" and "off" states.
                 </p>
                 <AttributeTable data={switchAttribute} />
             </div>
