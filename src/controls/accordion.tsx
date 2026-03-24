@@ -6,88 +6,86 @@ import { cn } from '@/lib/utils';
 import { ChevronDown } from 'lucide-react';
 
 interface AccordionContextProps {
-    checkIsOpen: (value: AccordionValue) => boolean;
-    toggleItem: (openItem: AccordionValue) => void;
+    checkIsOpen: (value: string) => boolean;
+    toggleItem: (openItem: string) => void;
 }
 
 interface AccordionItemContextProps {
     isOpen: boolean;
-    value: AccordionValue;
+    value: string;
     triggerId: string;
     contentId: string;
 }
 
 type ControlledAccordion = {
-    value: AccordionValue | null;
+    value: string | null;
     defaultValue?: never;
 };
 
 type UncontrolledAccordion = {
-    defaultValue?: AccordionValue;
+    defaultValue?: string;
     value?: never;
 };
 
 type ControlledMultipleAccordion = {
-    value: AccordionValue[];
+    value: string[];
     defaultValue?: never;
 };
 
 type UncontrolledMultipleAccordion = {
-    defaultValue?: AccordionValue[];
+    defaultValue?: string[];
     value?: never;
 };
 
 type SingleAccordionProps = {
     type: "single";
-    onValueChange?: (value: AccordionValue | null) => void;
+    onValueChange?: (value: string | null) => void;
 } & (ControlledAccordion | UncontrolledAccordion);
 
 type MultipleAccordionProps = {
     type: "multiple";
-    onValueChange?: (value: AccordionValue[]) => void;
+    onValueChange?: (value: string[]) => void;
 } & (ControlledMultipleAccordion | UncontrolledMultipleAccordion);
 
 type AccordionProps = ComponentProps<"div"> & (SingleAccordionProps | MultipleAccordionProps);
 
 type AccordionItemProps = {
-    value: AccordionValue;
+    value: string;
 } & ComponentProps<"div">
-
-type AccordionValue = string | number;
 
 const [AccordionProvider, useAccordionContext] = createSafeContext<AccordionContextProps>("Accordion");
 const [AccordionItemProvider, useAccordionItemContext] = createSafeContext<AccordionItemContextProps>("Accordion Item");
 
 export function Accordion({ children, className, type, defaultValue, value: controlledValue, onValueChange, ...props }: AccordionProps) {
-    const [internalValue, setInternalValue] = useState<AccordionValue | AccordionValue[] | null>(() => {
+    const [internalValue, setInternalValue] = useState<string | string[] | null>(() => {
         if (type === 'multiple') {
-            return (defaultValue as AccordionValue[]) ?? [];
+            return (defaultValue as string[]) ?? [];
         }
-        return (defaultValue as AccordionValue | null) ?? null;
+        return (defaultValue as string | null) ?? null;
     });
 
     const isControlled = controlledValue !== undefined;
     const openItem = isControlled ? controlledValue : internalValue;
 
-    const toggleItem = (itemValue: AccordionValue) => {
-        let activeValue: AccordionValue | AccordionValue[] | null;
+    const toggleItem = (itemValue: string) => {
+        let activeValue: string | string[] | null;
 
         if (type === "multiple") {
             const currentArray = Array.isArray(openItem) ? openItem : (openItem ? [openItem] : []);
             activeValue = currentArray.includes(itemValue)
                 ? currentArray.filter((i) => i !== itemValue)
                 : [...currentArray, itemValue];
-            onValueChange?.(activeValue as AccordionValue[]);
+            onValueChange?.(activeValue as string[]);
         } else {
             activeValue = openItem === itemValue ? null : itemValue;
-            onValueChange?.(activeValue as AccordionValue | null);
+            onValueChange?.(activeValue as string | null);
         }
         if (!isControlled) {
             setInternalValue(activeValue);
         }
     };
 
-    const checkIsOpen = (itemValue: AccordionValue) => {
+    const checkIsOpen = (itemValue: string) => {
         return Array.isArray(openItem) ? openItem.includes(itemValue) : openItem === itemValue;
     };
 
