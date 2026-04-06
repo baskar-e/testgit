@@ -39,20 +39,21 @@ export function CardHeader({ children, className, ...props }: ComponentProps<"di
     );
 };
 
-export function CardFooter({ children, className, ...props }: ComponentProps<"div">) {
+export function CardTitle({ children, className, ...props }: ComponentProps<"h3">) {
     useCardContext();
 
     return (
-        <div
-            className={cn(
-                "flex items-center gap-2.5 px-5 pt-1 mb-4",
-                className
-            )}
-            {...props}>
-            {children}
-        </div>
-    );
-};
+        <h3 className={cn("text-lg font-medium text-slate-800 drop-shadow-sm dark:text-slate-200", className)} {...props}>{children}</h3>
+    )
+}
+
+export function CardDescription({ children, className, ...props }: ComponentProps<"p">) {
+    useCardContext();
+
+    return (
+        <p className={cn("text-sm leading-relaxed text-gray-600 dark:text-gray-400", className)} {...props}>{children}</p>
+    )
+}
 
 export function CardContent({ children, className, ...props }: ComponentProps<"div">) {
     useCardContext();
@@ -70,22 +71,6 @@ export function CardImage({ src, alt = '', className, ...props }: ComponentProps
     )
 }
 
-export function CardTitle({ children, className, ...props }: ComponentProps<"h3">) {
-    useCardContext();
-
-    return (
-        <h3 className={cn("text-lg font-medium text-slate-800 drop-shadow-sm dark:text-slate-200", className)} {...props}>{children}</h3>
-    )
-}
-
-export function CardDescription({ children, className, ...props }: ComponentProps<"p">) {
-    useCardContext();
-
-    return (
-        <p className={cn("text-sm leading-relaxed text-gray-600 dark:text-gray-400", className)} {...props}>{children}</p>
-    )
-}
-
 export function CardAction({ children, className, ...props }: ComponentProps<"button">) {
     useCardContext();
 
@@ -99,3 +84,18 @@ export function CardAction({ children, className, ...props }: ComponentProps<"bu
         </button>
     )
 }
+
+export function CardFooter({ children, className, ...props }: ComponentProps<"div">) {
+    useCardContext();
+
+    return (
+        <div
+            className={cn(
+                "flex items-center gap-2.5 px-5 pt-1 mb-4",
+                className
+            )}
+            {...props}>
+            {children}
+        </div>
+    );
+};

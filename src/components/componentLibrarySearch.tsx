@@ -214,20 +214,20 @@ function renderMarkdown(text: string): React.ReactNode {
         // inline code
         const inlined = line.split(/(`[^`]+`)/).map((seg, j) =>
             seg.startsWith("`") && seg.endsWith("`")
-                ? <code key={j} style={{ background: "#0a0c13", border: "1px solid #1e2132", borderRadius: 3, padding: "1px 5px", fontSize: "0.9em", color: "#7ecfb3", fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}>{seg.slice(1, -1)}</code>
+                ? <code key={j} className="bg-[#ededed] text-[#147c40] border border-[#d8d8d8] dark:text-[#7ecfb3] dark:bg-[#0a0c13] dark:border-[#1e2132]" style={{ borderRadius: 3, padding: "1px 5px", fontSize: "0.9em", fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}>{seg.slice(1, -1)}</code>
                 : seg
         );
 
         if (line.startsWith("### ")) {
-            nodes.push(<p key={key++} style={{ fontWeight: 600, fontSize: 13, color: "#e2e4ef", margin: "10px 0 4px" }}>{inlined}</p>);
+            nodes.push(<p key={key++} className="text-[#40455a] dark:text-[#e2e4ef]" style={{ fontWeight: 600, fontSize: 13, margin: "10px 0 4px" }}>{inlined}</p>);
         } else if (line.startsWith("## ")) {
-            nodes.push(<p key={key++} style={{ fontWeight: 600, fontSize: 14, color: "#e2e4ef", margin: "12px 0 4px" }}>{inlined}</p>);
+            nodes.push(<p key={key++} className="text-[#40455a] dark:text-[#e2e4ef]" style={{ fontWeight: 600, fontSize: 14, margin: "12px 0 4px" }}>{inlined}</p>);
         } else if (line.startsWith("- ") || line.startsWith("* ")) {
-            nodes.push(<div key={key++} style={{ display: "flex", gap: 6, fontSize: 13, color: "#9198b8", lineHeight: 1.6 }}><span style={{ color: "#4f6ef7", flexShrink: 0 }}>›</span><span>{inlined.slice(1)}</span></div>);
+            nodes.push(<div key={key++} className="text-[#4e536d] dark:text-[#9198b8]" style={{ display: "flex", gap: 6, fontSize: 13, lineHeight: 1.6 }}><span style={{ color: "#4f6ef7", flexShrink: 0 }}>›</span><span>{inlined.slice(1)}</span></div>);
         } else if (/^\d+\./.test(line)) {
-            nodes.push(<div key={key++} style={{ display: "flex", gap: 6, fontSize: 13, color: "#9198b8", lineHeight: 1.6 }}><span style={{ color: "#4f6ef7", minWidth: 16, flexShrink: 0 }}>{line.match(/^\d+/)?.[0]}.</span><span>{inlined.slice(1)}</span></div>);
+            nodes.push(<div key={key++} className="text-[#4e536d] dark:text-[#9198b8]" style={{ display: "flex", gap: 6, fontSize: 13, lineHeight: 1.6 }}><span style={{ color: "#4f6ef7", minWidth: 16, flexShrink: 0 }}>{line.match(/^\d+/)?.[0]}.</span><span>{inlined.slice(1)}</span></div>);
         } else {
-            nodes.push(<p key={key++} style={{ fontSize: 13, color: "#9198b8", margin: "2px 0", lineHeight: 1.7 }}>{inlined}</p>);
+            nodes.push(<p key={key++} className="text-[#4e536d] dark:text-[#9198b8]" style={{ fontSize: 13, margin: "2px 0", lineHeight: 1.7 }}>{inlined}</p>);
         }
     }
     return <>{nodes}</>;
@@ -384,10 +384,10 @@ export function ComponentLibrarySearch({ components, onNavigate }: Props) {
                 {/* ── Search bar ── */}
                 <div className="relative w-full max-w-170" ref={containerRef}>
                     <div className="flex items-center gap-2 bg-white dark:bg-zinc-900 border border-violet-700/15 rounded-lg pl-2.5 pr-0.75 transition-[border-color,box-shadow] duration-150 focus-within:border-violet-500 focus-within:shadow-[0_0_0_3px_rgba(79,110,247,.15)]">
-                        <SearchCode size={16} className="text-slate-200 dark:text-[#ab98d730]" color={''} />
+                        <SearchCode size={16} className="stroke-slate-400 dark:stroke-[#ab98d730]" />
                         <input
                             ref={inputRef}
-                            className="flex-1 bg-transparent min-w-52 border-none outline-none text-sm text-slate-200 py-1.5 caret-violet-500 placeholder:text-violet-300/15"
+                            className="flex-1 bg-transparent min-w-52 border-none outline-none text-sm text-slate-800 dark:text-slate-200 py-1.5 caret-violet-500 placeholder:text-slate-400 dark:placeholder:text-violet-300/15"
                             type="text"
                             value={query}
                             onChange={e => setQuery(e.target.value)}
@@ -401,10 +401,10 @@ export function ComponentLibrarySearch({ components, onNavigate }: Props) {
                             spellCheck={false}
                         />
                         {query && (
-                            <button className="absolute right-21 bg-none border-none text-[#4a4f6a] text-xl cursor-pointer outline-none hover:text-[#8b90aa]" onClick={() => { setQuery(""); inputRef.current?.focus(); }}>×</button>
+                            <button className="absolute right-21 bg-none border-none text-slate-500 dark:text-[#4a4f6a] text-xl cursor-pointer outline-none hover:text-slate-600 dark:hover:text-[#8b90aa]" onClick={() => { setQuery(""); inputRef.current?.focus(); }}>×</button>
                         )}
                         <button
-                            className={`flex items-center gap-1.25 border rounded-[7px] text-violet-500 text-xs whitespace-nowrap px-1.5 py-1 ml-5 cursor-pointer transition-all duration-150 hover:bg-violet-800/15 hover:border-violet-500 ${chatOpen ? "bg-violet-800/20 border-violet-500" : "bg-violet-800/5 border-violet-600/15"}`}
+                            className={`flex items-center gap-1.25 border rounded-[7px] text-violet-500 text-xs whitespace-nowrap px-1.5 py-1 ml-5 cursor-pointer transition-all duration-150 hover:bg-violet-600/15 dark:hover:bg-violet-800/15 hover:border-violet-400/80 dark:hover:border-violet-500 ${chatOpen ? "bg-violet-600/15 dark:bg-violet-800/20 border-violet-400/80 dark:border-violet-500" : "bg-violet-800/5 border-violet-600/15"}`}
                             onClick={() => { setDropOpen(false); setChatOpen(o => !o); setQuery(""); setTimeout(() => chatInputRef.current?.focus(), 100); }}
                             title="AI assistant"
                         >
@@ -415,7 +415,7 @@ export function ComponentLibrarySearch({ components, onNavigate }: Props) {
 
                     {/* ── Dropdown ── */}
                     {dropOpen && (
-                        <div className="absolute top-[calc(100%+6px)] left-0 right-0 bg-zinc-900 border border-violet-700/15 rounded-[14px] overflow-hidden overscroll-contain z-999 shadow-[0_20px_50px_rgba(0,0,0,.6)] animate-[clsFadeIn_.12s_ease]">
+                        <div className="absolute top-[calc(100%+6px)] left-0 right-0 bg-zinc-50 dark:bg-zinc-900 border border-violet-700/15 rounded-[14px] overflow-hidden overscroll-contain z-999 shadow-[0_20px_50px_rgba(0,0,0,.6)] animate-[clsFadeIn_.12s_ease]">
                             {noResults ? (
                                 <div className="flex flex-col items-center gap-3 text-center text-xs text-[#3a3f57] font-[-apple-system,sans-serif] px-4 py-5">
                                     No results for <strong className="text-[#555d80] w-full text-ellipsis overflow-hidden">"{query}"</strong>
@@ -435,19 +435,19 @@ export function ComponentLibrarySearch({ components, onNavigate }: Props) {
                                     {results.map((r, i) => (
                                         <li
                                             key={r.id}
-                                            className={`px-3 p-2.5 rounded-[9px] cursor-pointer transition-[background] duration-100 hover:bg-violet-900/10 ${i === activeIdx ? "bg-violet-900/10" : ""}`}
+                                            className={`px-3 p-2.5 rounded-[9px] cursor-pointer transition-[background] duration-100 hover:bg-violet-400/15 dark:hover:bg-violet-900/10 ${i === activeIdx ? "bg-violet-400/15 dark:bg-violet-900/10" : ""}`}
                                             onMouseEnter={() => setActiveIdx(i)}
                                             onMouseDown={e => { e.preventDefault(); selectResult(r); }}
                                         >
                                             <div className="flex items-center justify-between gap-2 mb-0.75">
-                                                <span className="text-[13px] font-semibold text-slate-200">{highlight(r.name, query)}</span>
+                                                <span className="text-[13px] font-semibold text-slate-700 dark:text-slate-200">{highlight(r.name, query)}</span>
                                                 <span className="text-[10px] text-violet-500 bg-violet-600/10 border border-violet-600/18 rounded-[4px] px-1.75 py-0.5">{r.category}</span>
                                             </div>
                                             <p className="text-[11px] text-[#555d80] mb-1.5 font-[-apple-system,sans-serif]">{highlight(r.description, query)}</p>
                                             <div className="flex items-center justify-between gap-2">
                                                 <div className="flex flex-wrap gap-0.75">
                                                     {r.tags.slice(0, 4).map(t => (
-                                                        <span key={t} className="text-[10px] text-[#3fcf8e] bg-[rgba(63,207,142,.08)] border border-[rgba(63,207,142,.15)] rounded-[3px] px-1.25 py-px">{highlight(t, query)}</span>
+                                                        <span key={t} className="text-[10px] text-emerald-600 dark:text-[#3fcf8e] bg-[rgba(63,207,142,.12)] dark:bg-[rgba(63,207,142,.08)] border border-[rgba(63,207,142,.18)] dark:border-[rgba(63,207,142,.15)] rounded-[3px] px-1.25 py-px">{highlight(t, query)}</span>
                                                     ))}
                                                 </div>
                                                 <button
@@ -461,7 +461,7 @@ export function ComponentLibrarySearch({ components, onNavigate }: Props) {
                                     ))}
                                 </ul>
                             )}
-                            <div className="flex gap-4 px-3.5 py-1.75 text-[10px] text-[#3e3b42] border-t border-t-violet-800/15">
+                            <div className="flex gap-4 px-3.5 py-1.75 text-[10px] text-slate-400 dark:text-[#3e3b42] border-t border-t-violet-800/7 dark:border-t-violet-800/15">
                                 <span>↑↓ navigate</span><span>↵ open</span><span>esc close</span>
                             </div>
                         </div>
@@ -470,14 +470,14 @@ export function ComponentLibrarySearch({ components, onNavigate }: Props) {
 
                 {/* ── Chat panel ── */}
                 {chatOpen && (
-                    <div className={`absolute top-10 flex flex-col bg-zinc-900 border border-violet-700/15 rounded-[16px] h-130 mt-2.5 overflow-hidden overscroll-contain animate-[clsFadeIn_.15s_ease] ${messages.length <=1 ? "max-w-87" : "right-5 max-w-[95vw]"}`}>
+                    <div className={`absolute top-10 flex flex-col bg-zinc-50 dark:bg-zinc-900 border border-violet-700/15 rounded-[16px] h-130 mt-2.5 overflow-hidden overscroll-contain animate-[clsFadeIn_.15s_ease] ${messages.length <=1 ? "max-w-87" : "right-5 max-w-[95vw]"}`}>
                         {/* Chat header */}
                         <div className="flex items-center justify-between px-4 py-3 border-b border-b-violet-800/15">
-                            <div className="flex items-center gap-2 text-[13px] font-semibold text-slate-200">
+                            <div className="flex items-center gap-2 text-[13px] font-semibold text-slate-600 dark:text-slate-200">
                                 <SparkleIcon />
                                 <span>Component AI</span>
                                 {contextComponent && (
-                                    <span className="flex items-center gap-1.25 bg-violet-800/12 border border-violet-600/20 rounded-2xl text-violet-500 text-[11px] px-2 py-0.75">
+                                    <span className="flex items-center gap-1.25 bg-violet-800/8 dark:bg-violet-800/12 border border-violet-600/20 rounded-2xl text-violet-500 text-[11px] px-2 py-0.75">
                                         <span className="leading-none">{contextComponent.name}</span>
                                         {/* <button className="text-violet-500 text-sm leading-none pl-0.5 cursor-pointer" onClick={() => setContextComponent(null)}>×</button> */}
                                     </span>
@@ -485,11 +485,11 @@ export function ComponentLibrarySearch({ components, onNavigate }: Props) {
                             </div>
                             <div className="flex items-center gap-2">
                                 {messages.length > 0 && (
-                                    <button className="border border-violet-700/15 rounded-[6px] text-[#3a3f57] text-[11px] px-2.5 py-1 cursor-pointer transition-all duration-100 hover:border-violet-600/15 hover:text-[#555d80]" onClick={() => { setMessages([]); setContextComponent(null) }}>
+                                    <button className="border border-violet-700/15 rounded-[6px] text-[#566087] dark:text-[#3a3f57] text-[11px] px-2.5 py-1 cursor-pointer transition-all duration-100 hover:border-violet-700/25 dark:hover:border-violet-600/15 hover:text-[#2d3144] dark:hover:text-[#555d80]" onClick={() => { setMessages([]); setContextComponent(null) }}>
                                         Clear
                                     </button>
                                 )}
-                                <button className="text-[#3a3f57] text-xl leading-none px-0.5 cursor-pointer transition-colors duration-100 hover:text-[#8b90aa]" onClick={() => setChatOpen(false)}>×</button>
+                                <button className="text-[#566087] dark:text-[#3a3f57] text-xl leading-none px-0.5 cursor-pointer transition-colors duration-100 hover:text-[#3f445a] dark:hover:text-[#8b90aa]" onClick={() => setChatOpen(false)}>×</button>
                             </div>
                         </div>
 
@@ -506,7 +506,7 @@ export function ComponentLibrarySearch({ components, onNavigate }: Props) {
                                             "What's the difference between Toast and Modal?",
                                             "How do I build a form with validation?",
                                         ].map(s => (
-                                            <button key={s} className="bg-[#160f20] border border-violet-700/15 rounded-[8px] text-xs text-left text-[#555d80] font-[-apple-system,sans-serif] cursor-pointer px-3.5 py-2.25 transition-all duration-[.12s] hover:bg-violet-800/10 hover:border-violet-600/15 hover:text-[#8b90aa]" onClick={() => { setInput(s); chatInputRef.current?.focus(); }}>
+                                            <button key={s} className="bg-zinc-100 dark:bg-[#160f20] border border-violet-700/15 rounded-[8px] text-xs text-left text-[#555d80] font-[-apple-system,sans-serif] cursor-pointer px-3.5 py-2.25 transition-all duration-[.12s] hover:bg-violet-800/5 dark:hover:bg-violet-800/10 hover:border-violet-600/15 hover:text-[#3f445a] dark:hover:text-[#8b90aa]" onClick={() => { setInput(s); chatInputRef.current?.focus(); }}>
                                                 {s}
                                             </button>
                                         ))}
@@ -516,9 +516,9 @@ export function ComponentLibrarySearch({ components, onNavigate }: Props) {
                             {messages.map((msg, i) => (
                                 <div key={i} data-role={msg.role} className={`group flex gap-2.5 animate-[clsFadeIn_.15s_ease] data-[role=user]:flex-row-reverse`}>
                                     {msg.role === "assistant" && (
-                                        <div className="flex items-center justify-center shrink-0 size-7 rounded-[8px] bg-violet-800/20 border border-violet-600/20 text-violet-500"><SparkleIcon /></div>
+                                        <div className="flex items-center justify-center shrink-0 size-7 rounded-[8px] bg-violet-600/15 dark:bg-violet-800/20 border border-violet-600/20 text-violet-500"><SparkleIcon /></div>
                                     )}
-                                    <div className="group-data-[role=assistant]:flex-1 group-data-[role=user]:bg-violet-800/20 group-data-[role=user]:border group-data-[role=user]:border-violet-800/30 group-data-[role=user]:rounded-[12px] group-data-[role=user]:rounded-br-[2px] group-data-[role=user]:px-3.5 group-data-[role=user]:py-2.5 group-data-[role=user]:max-w-4/5">
+                                    <div className="group-data-[role=assistant]:flex-1 group-data-[role=user]:bg-violet-800/80 dark:group-data-[role=user]:bg-violet-800/20 group-data-[role=user]:border group-data-[role=user]:border-violet-800/30 group-data-[role=user]:rounded-[12px] group-data-[role=user]:rounded-br-[2px] group-data-[role=user]:px-3.5 group-data-[role=user]:py-2.5 group-data-[role=user]:max-w-4/5 min-w-0">
                                         {msg.role === "assistant"
                                             ? renderMarkdown(msg.content)
                                             : <p style={{ fontSize: 13, color: "#e2e4ef", margin: 0 }}>{msg.content}</p>
@@ -533,10 +533,10 @@ export function ComponentLibrarySearch({ components, onNavigate }: Props) {
                         </div>
 
                         {/* Chat input */}
-                        <div className="flex gap-2 px-3.5 py-3 border-t border-t-violet-800/15">
+                        <div className="flex gap-2 px-3.5 py-3 border-t border-t-violet-800/7 dark:border-t-violet-800/15">
                             <input
                                 ref={chatInputRef}
-                                className="flex-1 bg-zinc-900 border border-violet-700/30 rounded-[9px] text-slate-200 text-[13px] px-3.5 py-2 outline-none transition-colors duration-150 focus:border-violet-500 placeholder:text-violet-300/15 disabled:opacity-50"
+                                className="flex-1 bg-zinc-50 dark:bg-zinc-900 border border-violet-400/30 dark:border-violet-700/30 rounded-[9px] text-slate-600 dark:text-slate-200 text-[13px] px-3.5 py-2 outline-none transition-colors duration-150 focus:border-violet-500 placeholder:text-slate-400 dark:placeholder:text-violet-300/15 disabled:opacity-50"
                                 type="text"
                                 value={input}
                                 onChange={e => setInput(e.target.value)}

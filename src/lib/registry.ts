@@ -221,6 +221,7 @@ export const COMPONENTS: ComponentEntry[] = [
     subComponents: [
       {
         component: "Button",
+        description: "A clickable UI component used to trigger an action.",
         props: {
           variant: '"primary" | "secondary" | "outline" | "ghost" | "white"',
           size: '"xs" | "sm" | "md" | "lg"',
@@ -278,6 +279,7 @@ export const COMPONENTS: ComponentEntry[] = [
     subComponents: [
       {
         component: "Checkbox",
+        description: "A toggle input used for selecting one or multiple options in a list or form.",
         props: {
           checked: "boolean — controlled checked state.",
           defaultChecked: "boolean — uncontrolled initial state.",
@@ -313,6 +315,7 @@ export const COMPONENTS: ComponentEntry[] = [
     subComponents: [
       {
         component: "Combobox",
+        description: "wrapper component that manages the open state and shared context.",
         props: {
           items: "Items[] — An array of data objects used as selectable options.",
           open: "boolean — Controlled state to handle the visibility of the menu.",
@@ -326,8 +329,46 @@ export const COMPONENTS: ComponentEntry[] = [
           disabledKey: "string | ((item: T) => boolean | undefined) — The object key used to identify disabled items (Default: 'disabled').",
         },
       },
+      {
+        component: "ComboboxInput",
+        description: "Input field that captures user typing and triggers filtering.",
+        props: {
+          ref: "RefObject — direct access to the underlying input or trigger element.",
+          value: "string — controlled value of the input or currently selected option.",
+          onChange: "((value: string) => void) — callback triggered when typing or selecting an option.",
+          className: "string - additional CSS classes for styling."
+        },
+      },
+      {
+        component: "ComboboxContent",
+        description: "Floating dropdown container that positions and renders the combobox",
+        props: {
+          className: "string - additional CSS classes for styling.",
+        },
+      },
+      {
+        component: "ComboboxList",
+        description: "Component rendering the list of filtered items inside the dropdown.",
+        props: {}
+      },
+      {
+        component: "ComboboxItem",
+        description: "Component rendering the list of filtered items inside the dropdown.",
+        props: {
+          value: "string — Represents the data item associated with this option.",
+          onSelect: "((value: string, item: string | Record<string, any>) => void) — Callback triggered when the item is selected, returning the item’s value and the original item data.",
+          className: "string - additional CSS classes for styling."
+        }
+      },
+      {
+        component: "ComboboxEmpty",
+        description: "Component that displays a message or UI when the filtered list is empty.",
+        props: {
+          className: "string - additional CSS classes for styling."
+        }
+      },
     ],
-    href: "/components/combobox",
+    href: "/combobox",
   },
 
   {
@@ -337,38 +378,28 @@ export const COMPONENTS: ComponentEntry[] = [
     description: "Single-line text input with label, helper text, error state, character count, and optional leading/trailing icons.",
     tags: ["text", "form", "field", "textfield", "email", "password", "search", "number"],
     codeSnippet: `<Input
-  label="Email address"
   type="email"
   placeholder="you@example.com"
-  helperText="We'll never share your email."
 />
 <Input
-  label="Username"
-  error="Username is already taken"
   value={username}
   onChange={(e) => setUsername(e.target.value)}
 />`,
     subComponents: [
       {
         component: "Input",
+        description: "A field that allows users to enter and edit text or data",
         props: {
-          label: "string — visible label rendered above the input.",
-          type: '"text" | "email" | "password" | "number" | "search" | "url" | "tel"',
           placeholder: "string",
           value: "string — controlled value.",
           onChange: "(e: React.ChangeEvent<HTMLInputElement>) => void",
-          error: "string — error message shown below. Also applies red border styling.",
-          helperText: "string — helper text shown below when there is no error.",
-          leadingIcon: "ReactNode — icon inside the left edge.",
-          trailingIcon: "ReactNode — icon inside the right edge.",
           disabled: "boolean",
           required: "boolean",
-          maxLength: "number — enables character count display.",
           className: "string - additional CSS classes for styling.",
         },
       },
     ],
-    href: "/components/input",
+    href: "/input",
   },
 
   {
@@ -378,16 +409,16 @@ export const COMPONENTS: ComponentEntry[] = [
     description: "Fuses an input with prefix/suffix addons or buttons into a single control. Used for URLs, phone numbers, unit inputs, and search-with-action.",
     tags: ["addon", "prefix", "suffix", "append", "prepend", "input", "group", "url", "unit"],
     codeSnippet: `<InputGroup>
-  <InputAddon>https://</InputAddon>
-  <Input placeholder="yoursite.com" />
+  <InputGroupAddon>https://</InputGroupAddon>
+  <InputGroupInput placeholder="yoursite.com" />
 </InputGroup>
 <InputGroup>
-  <InputAddon>$</InputAddon>
-  <Input type="number" placeholder="0.00" />
-  <InputAddon>USD</InputAddon>
+  <InputGroupAddon>$</InputGroupAddon>
+  <InputGroupInput type="number" placeholder="0.00" />
+  <InputGroupAddon align="inline-end">USD</InputGroupAddon>
 </InputGroup>
 <InputGroup>
-  <Input placeholder="Enter invite code" />
+  <InputGroupInput placeholder="Enter invite code" />
   <Button variant="primary">Apply</Button>
 </InputGroup>`,
     subComponents: [
@@ -399,15 +430,24 @@ export const COMPONENTS: ComponentEntry[] = [
         },
       },
       {
-        component: "InputAddon",
-        description: "Non-interactive prefix or suffix label inside the group.",
+        component: "InputGroupAddon",
+        description: "Adds elements to the prefix or suffix inside the group.",
         props: {
-          className: "string - additional CSS classes for styling.",
-          children: "ReactNode — text or icon shown in the addon.",
+          align: "Controls the position of the addon relative to its container.",
+          onClick: "(e: MouseEvent<HTMLDivElement, MouseEvent>) => void - Callback function triggered when the element is clicked.",
+          className: "string - additional CSS classes for styling."
+        },
+      },
+      {
+        component: "InputGroupInput",
+        description: "Input field that captures user typing.",
+        props: {
+          ref: "RefObject — direct access to the underlying input element.",
+          className: "string - additional CSS classes for styling."
         },
       },
     ],
-    href: "/components/input-group",
+    href: "/input-group",
   },
 
   {
@@ -417,7 +457,6 @@ export const COMPONENTS: ComponentEntry[] = [
     description: "Mutually exclusive radio buttons — only one option selectable at a time. Supports horizontal/vertical layouts and disabled options.",
     tags: ["radio", "select", "option", "choice", "mutually exclusive", "single select", "form"],
     codeSnippet: `<RadioGroup
-  label="Notification preference"
   value={preference}
   onChange={setPreference}
 >
@@ -430,25 +469,24 @@ export const COMPONENTS: ComponentEntry[] = [
         component: "RadioGroup",
         description: "Root container — manages which option is selected.",
         props: {
-          value: "string — controlled selected value.",
-          defaultValue: "string — uncontrolled initial value.",
-          onChange: "(value: string) => void",
-          orientation: '"vertical" | "horizontal" — default vertical.',
-          label: "string — group label shown above the options.",
-          error: "string — error message shown below.",
-          disabled: "boolean — disables all options.",
           name: "string — HTML name attribute for native form submission.",
+          defaultValue: "string — uncontrolled initial value.",
+          value: "string — controlled selected value.",
+          onValueChange: "(value: string) => void",
+          orientation: '"vertical" | "horizontal" — default horizontal.',
+          disabled: "boolean — disables all options.",
+          required: "boolean — marks the input as required.",
           className: "string - additional CSS classes for styling.",
         },
       },
       {
-        component: "RadioOption",
+        component: "RadioGroupItem",
         description: "A single selectable radio item.",
         props: {
+          id: "string — unique identifier for the radio item.",
           value: "string — the value this option represents. Compared against RadioGroup value to determine if checked. Required.",
           disabled: "boolean — disables only this option.",
           className: "string - additional CSS classes for styling.",
-          children: "ReactNode — label for this option.",
         },
       },
     ],
@@ -462,27 +500,31 @@ export const COMPONENTS: ComponentEntry[] = [
     description: "On/off toggle for immediate-effect settings. Prefer Switch over Checkbox when the change applies instantly without a form submit.",
     tags: ["toggle", "on", "off", "boolean", "enable", "disable", "settings", "preference"],
     codeSnippet: `<Switch
-  label="Email notifications"
-  checked={enabled}
-  onChange={setEnabled}
+  value={enabled}
+  onValueChange={setEnabled}
 />
-<Switch
-  label="Marketing emails"
-  description="Receive updates about new features."
-  checked={marketing}
-  onChange={setMarketing}
-/>`,
+<Switch>
+  <SwitchThumb>
+    <Sun />
+    <Moon color="white" />
+  </SwitchThumb>  
+</Switch>`,
     subComponents: [
       {
         component: "Switch",
+        description: "A toggle control used to switch between on and off states.",
         props: {
-          checked: "boolean — controlled on/off state.",
-          defaultChecked: "boolean — uncontrolled initial state.",
-          onChange: "(checked: boolean) => void — note: receives the boolean directly, not an event.",
-          label: "string — visible label.",
-          description: "string — secondary descriptive text shown below the label.",
+          value: "boolean — controlled on/off state.",
+          defaultValue: "boolean — uncontrolled initial state.",
+          onValueChange: "(checked: boolean) => void — note: receives the boolean directly, not an event.",
           disabled: "boolean",
-          size: '"sm" | "md" | "lg"',
+          className: "string - additional CSS classes for styling.",
+        },
+      },
+      {
+        component: "SwitchThumb",
+        description: "The movable element inside the switch that indicates its current state.",
+        props: {
           className: "string - additional CSS classes for styling.",
         },
       },
@@ -498,14 +540,17 @@ export const COMPONENTS: ComponentEntry[] = [
     category: "Overlays",
     description: "Modal window for critical information or decisions. Includes focus trapping, scroll locking, backdrop dismiss, and escape-to-close.",
     tags: ["modal", "popup", "overlay", "confirm", "alert", "focus trap", "portal", "prompt"],
-    codeSnippet: `<Dialog open={open} onClose={() => setOpen(false)}>
+    codeSnippet: `<Dialog open={open} onOpen={() => setOpen(false)}>
   <DialogHeader>
-    <DialogTitle>Delete project</DialogTitle>
+    <DialogTitle>Save project</DialogTitle>
     <DialogDescription>This action cannot be undone.</DialogDescription>
   </DialogHeader>
+  <DialogContent>
+    <p>Content</p>
+  <DialogContent>
   <DialogFooter>
-    <Button variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
-    <Button variant="danger" onClick={handleDelete}>Delete</Button>
+    <DialogClose>Close</DialogClose>
+    <Button variant="primary" onClick={handleSave}>Save</Button>
   </DialogFooter>
 </Dialog>`,
     subComponents: [
@@ -514,36 +559,60 @@ export const COMPONENTS: ComponentEntry[] = [
         description: "Root — controls visibility and portal rendering.",
         props: {
           open: "boolean — controls whether the dialog is visible.",
-          onClose: "() => void — called when the backdrop is clicked or Escape is pressed.",
-          size: '"sm" | "md" | "lg" | "xl" | "full"',
-          closeOnBackdrop: "boolean — close when clicking the backdrop. Default true.",
-          closeOnEsc: "boolean — close on Escape key. Default true.",
-          initialFocus: "RefObject<HTMLElement> — element to focus when dialog opens.",
-          className: "string - additional CSS classes for styling.",
+          onOpen: "((open: boolean, event?: Event | undefined, reason?: OpenChangeReason | undefined) => void) — called when the modal opens or backdrop is clicked or Escape is pressed.",
         },
       },
       {
         component: "DialogHeader",
         description: "Top section — wraps title and description.",
-        props: { className: "string" },
+        props: { className: "string - additional CSS classes for styling." },
       },
       {
         component: "DialogTitle",
         description: "Primary heading of the dialog. Linked to the dialog via aria-labelledby.",
-        props: { className: "string" },
+        props: { className: "string - additional CSS classes for styling." },
       },
       {
         component: "DialogDescription",
         description: "Secondary explanatory text below the title. Linked via aria-describedby.",
-        props: { className: "string" },
+        props: { className: "string - additional CSS classes for styling." },
+      },
+      {
+        component: "DialogButton",
+        description: "Triggers the dialog to open.",
+        props: {
+          ref: "RefObject — direct access to the button element.",
+          className: "string - additional CSS classes for styling."
+        },
+      },
+      {
+        component: "DialogContent",
+        description: "Main container that holds the dialog content.",
+        props: {
+          showCloseButton: "boolean - controls whether the close button is displayed.",
+          className: "string - additional CSS classes for styling."
+        },
+      },
+      {
+        component: "DialogOverlay",
+        description: "Backdrop overlay displayed behind the dialog.",
+        props: {
+          portal: "RefObject — specifies the container where the overlay is rendered.",
+          className: "string - additional CSS classes for styling."
+        },
+      },
+      {
+        component: "DialogClose",
+        description: "Top section — wraps title and description.",
+        props: { className: "string - additional CSS classes for styling." },
       },
       {
         component: "DialogFooter",
         description: "Bottom action area — typically contains cancel and confirm buttons.",
-        props: { className: "string" },
+        props: { className: "string - additional CSS classes for styling." },
       },
     ],
-    href: "/components/dialog",
+    href: "/dialog",
   },
 
   {
@@ -552,50 +621,51 @@ export const COMPONENTS: ComponentEntry[] = [
     category: "Overlays",
     description: "Contextual floating menu triggered by a button or right-click. Supports icons, shortcuts, separators, submenus, and checkable items.",
     tags: ["menu", "context", "popup", "actions", "options", "floating", "right-click", "submenu"],
-    codeSnippet: `<DropdownMenu>
-  <DropdownMenuTrigger asChild>
-    <Button variant="outline">Options <ChevronDown /></Button>
-  </DropdownMenuTrigger>
-  <DropdownMenuContent>
-    <DropdownMenuItem onSelect={handleEdit}>
+    codeSnippet: `<Dropdown>
+  <DropdownButton variant="white">
+    Options <ChevronDown />
+  </DropdownButton>
+  <DropdownContent>
+    <DropdownItem onSelect={handleEdit}>
       <EditIcon /> Edit
-    </DropdownMenuItem>
-    <DropdownMenuSeparator />
-    <DropdownMenuItem variant="danger" onSelect={handleDelete}>
+    </DropdownItem>
+    <DropdownItem onSelect={handleDelete}>
       <TrashIcon /> Delete
-    </DropdownMenuItem>
-  </DropdownMenuContent>
-</DropdownMenu>`,
+    </DropdownItem>
+  </DropdownContent>
+</Dropdown>`,
     subComponents: [
       {
-        component: "DropdownMenu",
+        component: "Dropdown",
         description: "Root — manages open state.",
         props: {
           open: "boolean — controlled open state.",
-          onOpenChange: "(open: boolean) => void",
-          modal: "boolean — lock scroll when open. Default true.",
+          onOpen: "((open: boolean) => void) - Callback function triggered when the dropdown opens or closes.",
+          align: '"start" | "center" | "end" — alignment relative to trigger. Default center.',
+          side: '"top" | "bottom" | "left" | "right" — preferred placement. Default bottom.',
+          space: "number — gap between trigger and menu in px. Default 8.",
         },
       },
       {
-        component: "DropdownMenuTrigger",
+        component: "DropdownButton",
         description: "Element that opens the menu on click.",
         props: {
-          asChild: "boolean — render as child element instead of a wrapper <button>. Use with your own Button component.",
+          ref: "RefObject — direct access to the button element.",
           disabled: "boolean",
+          className: "string - additional CSS classes for styling."
         },
       },
       {
-        component: "DropdownMenuContent",
+        component: "DropdownContent",
         description: "The floating panel containing menu items.",
         props: {
-          side: '"top" | "bottom" | "left" | "right" — preferred placement. Default bottom.',
-          align: '"start" | "center" | "end" — alignment relative to trigger. Default start.',
-          sideOffset: "number — gap between trigger and menu in px. Default 4.",
+          portal: "RefObject — specifies the container where the overlay is rendered.",
+          modal: "boolean — determines whether the dropdown behaves as a modal, blocking interaction outside.",
           className: "string - additional CSS classes for styling.",
         },
       },
       {
-        component: "DropdownMenuItem",
+        component: "DropdownItem",
         description: "A single clickable menu item.",
         props: {
           onSelect: "(e: Event) => void — fires when item is clicked or activated by keyboard.",
@@ -603,14 +673,9 @@ export const COMPONENTS: ComponentEntry[] = [
           variant: '"default" | "danger" — danger applies destructive styling.',
           className: "string - additional CSS classes for styling.",
         },
-      },
-      {
-        component: "DropdownMenuSeparator",
-        description: "Horizontal divider between groups of items.",
-        props: { className: "string" },
-      },
+      }
     ],
-    href: "/components/dropdown-menu",
+    href: "/dropdown-menu",
   },
 
   // ─── Display ──────────────────────────────────────────────────────────────
@@ -630,7 +695,7 @@ export const COMPONENTS: ComponentEntry[] = [
     <p className="text-3xl font-bold">$48,295</p>
   </CardContent>
   <CardFooter>
-    <Button variant="outline" size="sm">View report</Button>
+    <CardAction>View report</CardAction>
   </CardFooter>
 </Card>`,
     subComponents: [
@@ -638,41 +703,51 @@ export const COMPONENTS: ComponentEntry[] = [
         component: "Card",
         description: "Root surface container.",
         props: {
-          variant: '"default" | "outline" | "ghost"',
-          padding: '"none" | "sm" | "md" | "lg"',
-          hoverable: "boolean — adds a lift effect on hover.",
           onClick: "(e: React.MouseEvent) => void — makes the whole card clickable.",
-          asChild: "boolean",
           className: "string - additional CSS classes for styling.",
         },
       },
       {
         component: "CardHeader",
         description: "Top section — typically contains CardTitle and CardDescription.",
-        props: { className: "string" },
+        props: { className: "string - additional CSS classes for styling." },
       },
       {
         component: "CardTitle",
         description: "Primary heading inside the card header.",
-        props: { className: "string - additional CSS classes for styling.", asChild: "boolean" },
+        props: { className: "string - additional CSS classes for styling." },
       },
       {
         component: "CardDescription",
         description: "Muted secondary text below the title.",
-        props: { className: "string" },
+        props: { className: "string - additional CSS classes for styling." },
       },
       {
         component: "CardContent",
         description: "Main body area of the card.",
-        props: { className: "string" },
+        props: { className: "string - additional CSS classes for styling." },
+      },
+      {
+        component: "CardImage",
+        description: "Displays an image within the card.",
+        props: {
+          src: "string — image source URL.",
+          alt: "string — alternative text for the image.",
+          className: "string - additional CSS classes for styling."
+        },
+      },
+      {
+        component: "CardAction",
+        description: "Button used to trigger actions within the card.",
+        props: { className: "string - additional CSS classes for styling." },
       },
       {
         component: "CardFooter",
         description: "Bottom section — typically contains actions.",
-        props: { className: "string" },
+        props: { className: "string - additional CSS classes for styling." },
       },
     ],
-    href: "/components/card",
+    href: "/card",
   },
 ];
 

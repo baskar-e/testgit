@@ -66,7 +66,7 @@ export default function CardPage() {
                         <TabButton value="code">Code</TabButton>
                     </TabList>
                     <TabPanel value="preview" className="flex items-center justify-center px-12 min-h-77 bg-[#edf0f3] dark:bg-zinc-900">
-                        <Card className=''>
+                        <Card>
                             <CardImage src='https://free-3dtextureshd.com/wp-content/uploads/2025/01/614.jpg.webp' alt='Card Image' />
                             <CardHeader className="flex items-center justify-between">
                                 <CardTitle>Quote</CardTitle>

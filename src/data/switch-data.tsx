@@ -206,14 +206,20 @@ export const switchCustom = [
 
 export const switchPropsData = [
     {
+        name: <span className="inline-block w-max bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">defaultValue</span>,
+        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">boolean</span>,
+        default: '-',
+        description: "The default state of the switch when initially rendered."
+    },
+    {
         name: <span className="inline-block w-max bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">value</span>,
-        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">string</span>,
+        type: <span className="inline-block bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">boolean</span>,
         default: '-',
         description: "The current state of the switch, either on or off. It is used to control the switch's selected state in a controlled component."
     },
     {
         name: <span className="inline-block w-max bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">onValueChange</span>,
-        type: <span className="inline-block w-max bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">{"(value: string) => void"}</span>,
+        type: <span className="inline-block w-max bg-gray-100 px-2 py-1 rounded-md dark:bg-zinc-800">{"(value: boolean) => void"}</span>,
         default: '-',
         description: "A callback function that is triggered when the switch's state changes. It is used to update the value prop in a controlled component."
     }

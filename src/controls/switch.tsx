@@ -8,15 +8,25 @@ interface SwitchContextProps {
     checked: boolean
 }
 
-type SwitchProps = {
-    value?: boolean;
+type UnControlledProps = {
+    defaultValue?: boolean;
+    value?: never;
     onValueChange?: (value: boolean) => void;
-} & Omit<ComponentProps<"input">, "type" | "role" | "value">;
+}
+
+type ControlledProps = {
+    defaultValue?: never;
+    value: boolean;
+    onValueChange: (value: boolean) => void;
+}
+
+type SwitchProps = {
+} & (UnControlledProps | ControlledProps) & Omit<ComponentProps<"input">, "type" | "role" | "value" | "defaultValue">;
 
 const [SwitchProvider, useSwitchContext] = createSafeContext<SwitchContextProps>("Switch");
 
-export function Switch({ children, className, value: controlledCheck, onValueChange, ...props }: SwitchProps) {
-    const [internalCheck, setInternalCheck] = useState(false);
+export function Switch({ children, className, defaultValue, value: controlledCheck, onValueChange, ...props }: SwitchProps) {
+    const [internalCheck, setInternalCheck] = useState(defaultValue ?? false);
     const checked = controlledCheck ?? internalCheck;
 
     const handleCheck = (check: boolean) => {
