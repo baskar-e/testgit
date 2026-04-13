@@ -1,5 +1,5 @@
 import { CodeBlock } from "@/components/codeBlock"
-import { TabButton, TabList, TabPanel, Tabs } from "../../controls/tabs"
+import { TabButton, TabList, TabPanel, Tabs } from "../../../controls/tabs"
 import { PropsTable } from "@/components/propsTable"
 import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardImage, CardTitle } from "@/controls/card"
 import { cardActionPropsData, cardBasic, cardCode, cardContentPropsData, cardDescriptionPropsData, cardFooterPropsData, cardHeaderPropsData, cardImage, cardImagePropsData, cardPropsData, cardTitlePropsData, cardUsage } from "@/data/card-data"

@@ -39,7 +39,8 @@
         "id": "7",
         "parentId": "1",
         "title": "File Upload",
-        "url": "/file-upload"
+        "url": "/file-upload",
+        "hide": true
     },
     {
         "id": "8",
@@ -93,7 +94,8 @@
         "id": "16",
         "parentId": "13",
         "title": "Collapsible",
-        "url": "/collapsible"
+        "url": "/collapsible",
+        "hide": true
     },
     {
         "id": "17",
@@ -123,66 +125,77 @@
         "id": "21",
         "parentId": null,
         "title": "Status",
-        "url": null
+        "url": null,
+        "hide": true
     },
     {
         "id": "22",
         "parentId": "21",
         "title": "Alert",
-        "url": "/alert"
+        "url": "/alert",
+        "hide": true
     },
     {
         "id": "23",
         "parentId": "21",
         "title": "Avatar",
-        "url": "/avatar"
+        "url": "/avatar",
+        "hide": true
     },
     {
         "id": "24",
         "parentId": "21",
         "title": "Badge",
-        "url": "/badge"
+        "url": "/badge",
+        "hide": true
     },
     {
         "id": "25",
         "parentId": "21",
         "title": "Calendar",
-        "url": "/calendar"
+        "url": "/calendar",
+        "hide": true
     },
     {
         "id": "26",
         "parentId": "21",
         "title": "Progress",
-        "url": "/progress"
+        "url": "/progress",
+        "hide": true
     },
     {
         "id": "27",
         "parentId": null,
         "title": "Data Visualization",
-        "url": null
+        "url": null,
+        "hide": true
     },
     {
         "id": "28",
         "parentId": "27",
         "title": "Chart",
-        "url": "/chart"
+        "url": "/chart",
+        "hide": true
     },
     {
         "id": "29",
         "parentId": null,
         "title": "Interactive Component",
-        "url": null
+        "url": null,
+        "hide": true
     },
     {
         "id": "30",
         "parentId": "29",
         "title": "Text Editor",
-        "url": "/text-editor"
+        "url": "/text-editor",
+        "hide": true
     },
     {
         "id": "31",
         "parentId": "29",
         "title": "Sortable List",
-        "url": "/sortable-list"
+        "url": "/sortable-list",
+        "hide": true
     }
 ]

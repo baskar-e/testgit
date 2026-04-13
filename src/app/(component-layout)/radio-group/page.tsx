@@ -1,7 +1,7 @@
 'use client'
 
 import { CodeBlock } from "@/components/codeBlock"
-import { TabButton, TabList, TabPanel, Tabs } from "../../controls/tabs"
+import { TabButton, TabList, TabPanel, Tabs } from "../../../controls/tabs"
 import { PropsTable } from "@/components/propsTable"
 import { RadioGroup, RadioGroupItem } from "@/controls/radio-group"
 import { useState } from "react"

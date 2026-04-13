@@ -1,5 +1,5 @@
 import { CodeBlock } from "@/components/codeBlock"
-import { TabButton, TabHighlight, TabList, TabPanel, Tabs } from "../../controls/tabs"
+import { TabButton, TabHighlight, TabList, TabPanel, Tabs } from "../../../controls/tabs"
 import { PropsTable } from "@/components/propsTable"
 import { AttributeTable } from "@/components/attributeTable"
 import { tabButtonAttribute, tabButtonPropsData, tabHighlightPropsData, tabListAttribute, tabPanelPropsData, tabsAttribute, tabsBasic, tabsCode, tabsHighlight, tabsLine, tabsPropsData, tabsUsage, tabsVertical } from "@/data/tabs-data"

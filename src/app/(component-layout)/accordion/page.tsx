@@ -1,6 +1,6 @@
 import { CodeBlock } from "@/components/codeBlock"
-import { TabButton, TabList, TabPanel, Tabs } from "../../controls/tabs"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../controls/accordion"
+import { TabButton, TabList, TabPanel, Tabs } from "../../../controls/tabs"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../../controls/accordion"
 import { PropsTable } from "@/components/propsTable"
 import { AttributeTable } from "@/components/attributeTable"
 import { accordionBasic, accordionCode, accordionItemAttribute, accordionItemPropsData, accordionItems, accordionMultiple, accordionPropsData, accordionUsage } from "@/data/accordion-data"

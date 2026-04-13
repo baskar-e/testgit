@@ -376,7 +376,7 @@ export function ComponentLibrarySearch({ components, onNavigate }: Props) {
     }
 
     const noResults = query.trim().length > 0 && results.length === 0;
-    console.log(contextComponent)
+
     return (
         <>
             <style>{CSS}</style>

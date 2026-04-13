@@ -1,5 +1,5 @@
 import { CodeBlock } from "@/components/codeBlock"
-import { TabButton, TabList, TabPanel, Tabs } from "../../controls/tabs"
+import { TabButton, TabList, TabPanel, Tabs } from "../../../controls/tabs"
 import { ButtonGroup } from "@/controls/button-group"
 import { Button } from "@/controls/button"
 import { Input } from "@/controls/input"

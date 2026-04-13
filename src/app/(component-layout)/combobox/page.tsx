@@ -1,7 +1,7 @@
 'use client'
 
 import { CodeBlock } from "@/components/codeBlock"
-import { TabButton, TabList, TabPanel, Tabs } from "../../controls/tabs"
+import { TabButton, TabList, TabPanel, Tabs } from "../../../controls/tabs"
 import { PropsTable } from "@/components/propsTable"
 import { Combobox, ComboboxContent, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList } from "@/controls/combobox"
 import { comboboxAutoHighlight, comboboxBasic, comboboxCode, comboboxContentAttribute, comboboxDisabled, comboboxDisabledFn, comboboxEmptyPropsData, comboboxInputAttribute, comboboxInputPropsData, comboboxItemAttribute, comboboxItemPropsData, comboboxLabel, comboboxLabelFn, comboboxPropsData, comboboxUsage, comboboxValue, comboboxValueFn } from "@/data/combobox-data"

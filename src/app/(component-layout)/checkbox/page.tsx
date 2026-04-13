@@ -1,5 +1,5 @@
 import { CodeBlock } from "@/components/codeBlock"
-import { TabButton, TabList, TabPanel, Tabs } from "../../controls/tabs"
+import { TabButton, TabList, TabPanel, Tabs } from "../../../controls/tabs"
 import { PropsTable } from "@/components/propsTable"
 import { Checkbox } from "@/controls/checkbox"
 import { checkboxBasic, checkboxCode, checkboxDisabled, checkboxLabel, checkboxPropsData, checkboxUsage } from "@/data/checkbox-data"

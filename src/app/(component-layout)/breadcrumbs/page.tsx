@@ -1,5 +1,5 @@
 import { CodeBlock } from "@/components/codeBlock"
-import { TabButton, TabList, TabPanel, Tabs } from "../../controls/tabs"
+import { TabButton, TabList, TabPanel, Tabs } from "../../../controls/tabs"
 import { PropsTable } from "@/components/propsTable"
 import { AttributeTable } from "@/components/attributeTable"
 import { breadcrumbBasic, breadcrumbCode, breadcrumbCustomSeparator, breadcrumbEllipsis, breadcrumbEllipsisPropsData, breadcrumbItemPropsData, breadcrumbLinkPropsData, breadcrumbPageAttribute, breadcrumbPagePropsData, breadcrumbPropsData, breadcrumbSeparatorPropsData, breadcrumbUsage } from "@/data/breadcrumb-data"

@@ -1,7 +1,7 @@
 'use client'
 
 import { CodeBlock } from "@/components/codeBlock"
-import { TabButton, TabList, TabPanel, Tabs } from "../../controls/tabs"
+import { TabButton, TabList, TabPanel, Tabs } from "../../../controls/tabs"
 import { PropsTable } from "@/components/propsTable"
 import { useState } from "react"
 import { AttributeTable } from "@/components/attributeTable"
