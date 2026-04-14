@@ -2,12 +2,10 @@
 
 import LightRays from '@/components/LightRays'
 import ShinyText from '@/components/ShinyText';
-import { FloatingShapes } from './floatingShapes';
 
 export function HeroBanner() {
   return (
     <section className="relative w-full h-screen flex items-center justify-center overflow-hidden">
-      <FloatingShapes />
       <div className="absolute inset-0 bg-[hsl(240,10%,4%)]">
         <LightRays
           raysOrigin="top-center"
