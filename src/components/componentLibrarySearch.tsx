@@ -266,7 +266,7 @@ export function ComponentLibrarySearch({ components, onNavigate }: Props) {
         function h(e: MouseEvent) {
             if (!containerRef.current?.contains(e.target as Node)) {
                 setDropOpen(false);
-                setChatOpen(false);
+                // setChatOpen(false);
             }
         }
         document.addEventListener("mousedown", h);
@@ -383,9 +383,9 @@ export function ComponentLibrarySearch({ components, onNavigate }: Props) {
     return (
         <>
             <style>{CSS}</style>
-            <div className="font-['JetBrains_Mono','Fira_Code',ui-monospace,monospace] ml-auto">
+            <div ref={containerRef} className="font-['JetBrains_Mono','Fira_Code',ui-monospace,monospace] ml-auto">
                 {/* ── Search bar ── */}
-                <div className="relative w-full max-w-170" ref={containerRef}>
+                <div className="relative w-full max-w-170">
                     <div className="flex items-center gap-2 bg-white dark:bg-zinc-900 border border-violet-700/15 rounded-lg pl-2.5 pr-0.75 transition-[border-color,box-shadow] duration-150 focus-within:border-violet-500 focus-within:shadow-[0_0_0_3px_rgba(79,110,247,.15)]">
                         <SearchCode size={16} className="stroke-slate-400 dark:stroke-[#ab98d730]" />
                         <input
