@@ -264,9 +264,10 @@ export function ComponentLibrarySearch({ components, onNavigate }: Props) {
     // Close dropdown on outside click
     useEffect(() => {
         function h(e: MouseEvent) {
+            console.log(!containerRef.current?.contains(e.target as Node))
             if (!containerRef.current?.contains(e.target as Node)) {
                 setDropOpen(false);
-                // setChatOpen(false);
+                setChatOpen(false);
             }
         }
         document.addEventListener("mousedown", h);
@@ -303,7 +304,6 @@ export function ComponentLibrarySearch({ components, onNavigate }: Props) {
 
     function selectResult(entry: ComponentEntry) {
         setQuery("");
-        setDropOpen(false);
         if (onNavigate) { onNavigate(entry); return; }
         // Open chat with this component as context
         setContextComponent(entry);
@@ -370,7 +370,6 @@ export function ComponentLibrarySearch({ components, onNavigate }: Props) {
 
     function explainComponent(entry: ComponentEntry) {
         setQuery("");
-        setDropOpen(false);
         setContextComponent(entry);
         setChatOpen(true);
         setInput(`Explain the ${entry.name} component and show me a practical usage example.`);
@@ -408,7 +407,7 @@ export function ComponentLibrarySearch({ components, onNavigate }: Props) {
                         )}
                         <button
                             className={`flex items-center gap-1.25 border rounded-[7px] text-violet-500 text-xs whitespace-nowrap px-1.5 py-1 ml-5 cursor-pointer transition-all duration-150 hover:bg-violet-600/15 dark:hover:bg-violet-800/15 hover:border-violet-400/80 dark:hover:border-violet-500 ${chatOpen ? "bg-violet-600/15 dark:bg-violet-800/20 border-violet-400/80 dark:border-violet-500" : "bg-violet-800/5 border-violet-600/15"}`}
-                            onClick={() => { setDropOpen(false); setChatOpen(o => !o); setQuery(""); setTimeout(() => chatInputRef.current?.focus(), 100); }}
+                            onClick={() => { setChatOpen(o => !o); setQuery(""); setInput(""); if (messages.length === 0) setContextComponent(null); setTimeout(() => chatInputRef.current?.focus(), 100); }}
                             title="AI assistant"
                         >
                             <SparkleIcon />
@@ -418,19 +417,20 @@ export function ComponentLibrarySearch({ components, onNavigate }: Props) {
 
                     {/* ── Dropdown ── */}
                     {dropOpen && (
-                        <div className="absolute top-[calc(100%+6px)] left-0 right-0 bg-zinc-50 dark:bg-zinc-900 border border-violet-700/15 rounded-[14px] overflow-hidden overscroll-contain z-999 shadow-[0_20px_50px_rgba(0,0,0,.6)] animate-[clsFadeIn_.12s_ease]">
+                        <div className="absolute top-[calc(100%+6px)] left-0 right-0 bg-zinc-50 dark:bg-zinc-900 border border-violet-700/15 rounded-[14px] overflow-hidden overscroll-contain z-999 shadow-2xl dark:shadow-[0_20px_50px_rgba(0,0,0,.6)] animate-[clsFadeIn_.12s_ease]">
                             {noResults ? (
                                 <div className="flex flex-col items-center gap-3 text-center text-xs text-[#3a3f57] font-[-apple-system,sans-serif] px-4 py-5">
                                     No results for <strong className="text-[#555d80] w-full text-ellipsis overflow-hidden">"{query}"</strong>
-                                    <button className="flex items-center gap-1.5 bg-violet-800/12 border border-violet-800/25 rounded-md text-violet-500 text-xs whitespace-nowrap w-full px-3.5 py-2 cursor-pointer transition-all duration-150 hover:bg-violet-800/22" onClick={() => {
-                                        setQuery(""); 
-                                        setDropOpen(false);
-                                        setChatOpen(true);
-                                        setInput(`How do I ${query}?`);
-                                        setTimeout(() => chatInputRef.current?.focus(), 100);
-                                    }}>
-                                        <SparkleIcon /> 
-                                        Ask AI about 
+                                    <button className="flex items-center gap-1.5 bg-violet-800/12 border border-violet-800/25 rounded-md text-violet-500 text-xs whitespace-nowrap w-full px-3.5 py-2 cursor-pointer transition-all duration-150 hover:bg-violet-800/22"
+                                        onClick={() => {
+                                            setQuery("");
+                                            setChatOpen(true);
+                                            setInput(`How do I ${query}?`);
+                                            setTimeout(() => chatInputRef.current?.focus(), 100);
+                                        }}
+                                    >
+                                        <SparkleIcon />
+                                        Ask AI about
                                         <span className="text-ellipsis overflow-hidden">{query}</span>
                                     </button>
                                 </div>
@@ -474,7 +474,7 @@ export function ComponentLibrarySearch({ components, onNavigate }: Props) {
 
                 {/* ── Chat panel ── */}
                 {chatOpen && (
-                    <div className={`absolute top-10 flex flex-col bg-zinc-50 dark:bg-zinc-900 border border-violet-700/15 rounded-[16px] h-130 mt-2.5 overflow-hidden overscroll-contain animate-[clsFadeIn_.15s_ease] ${messages.length <=1 ? "max-w-87 mr-2" : "right-5 max-w-[95vw]"}`}>
+                    <div className={`absolute top-10 flex flex-col bg-zinc-50 dark:bg-zinc-900 border border-violet-700/15 rounded-[16px] h-130 mt-2.5 overflow-hidden overscroll-contain shadow-2xl dark:shadow-[0_20px_50px_rgba(0,0,0,.6)] animate-[clsFadeIn_.15s_ease] ${messages.length <= 1 ? "max-w-87 mr-2" : "right-5 max-w-[95vw]"}`}>
                         {/* Chat header */}
                         <div className="flex items-center justify-between px-4 py-3 border-b border-b-violet-800/15">
                             <div className="flex items-center gap-2 text-[13px] font-semibold text-slate-600 dark:text-slate-200">
@@ -483,7 +483,6 @@ export function ComponentLibrarySearch({ components, onNavigate }: Props) {
                                 {contextComponent && (
                                     <span className="flex items-center gap-1.25 bg-violet-800/8 dark:bg-violet-800/12 border border-violet-600/20 rounded-2xl text-violet-500 text-[11px] px-2 py-0.75">
                                         <span className="leading-none">{contextComponent.name}</span>
-                                        {/* <button className="text-violet-500 text-sm leading-none pl-0.5 cursor-pointer" onClick={() => setContextComponent(null)}>×</button> */}
                                     </span>
                                 )}
                             </div>
