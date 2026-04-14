@@ -387,7 +387,7 @@ export function ComponentLibrarySearch({ components, onNavigate }: Props) {
                         <SearchCode size={16} className="stroke-slate-400 dark:stroke-[#ab98d730]" />
                         <input
                             ref={inputRef}
-                            className="flex-1 bg-transparent min-w-52 border-none outline-none text-sm text-slate-800 dark:text-slate-200 py-1.5 caret-violet-500 placeholder:text-slate-400 dark:placeholder:text-violet-300/15"
+                            className="flex-1 bg-transparent w-full sm:min-w-52 border-none outline-none text-sm text-slate-800 dark:text-slate-200 py-1.5 caret-violet-500 placeholder:text-slate-400 dark:placeholder:text-violet-300/15"
                             type="text"
                             value={query}
                             onChange={e => setQuery(e.target.value)}

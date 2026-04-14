@@ -2,7 +2,7 @@ import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/s
 import { AppSidebar } from "@/components/app-sidebar";
 import { Separator } from "@/components/ui/separator";
 
-import { ThemeProvider } from "next-themes"
+import { ThemeProvider } from "next-themes";
 import { ThemeToggle } from "@/components/themeToggle";
 import { ComponentLibrarySearch } from "@/components/componentLibrarySearch";
 import { COMPONENTS } from "@/lib/registry";
